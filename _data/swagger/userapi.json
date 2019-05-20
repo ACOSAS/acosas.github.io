@@ -1,0 +1,1364 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "UserAPI",
+    "description": "User API - For creating and updating users.",
+    "contact": {
+      "name": "Acos AS",
+      "url": "http://wwww.acos.no/",
+      "email": "utvikling@acos.no"
+    },
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/AccessGroups": {
+      "get": {
+        "tags": [
+          "AccessGroups"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Departments": {
+      "get": {
+        "tags": [
+          "Departments"
+        ],
+        "summary": "",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Departments"
+        ],
+        "summary": "Create a new Department from JSON object provided.Returns JSON object representing created department.",
+        "requestBody": {
+          "content": {
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/DepartmentRequest"
+              }
+            },
+            "text/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/DepartmentRequest"
+              }
+            },
+            "application/*+xml": {
+              "schema": {
+                "$ref": "#/components/schemas/DepartmentRequest"
+              }
+            },
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DepartmentRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DepartmentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DepartmentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DepartmentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Department"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Department"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Department"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Department"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Department"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Departments/{id}": {
+      "get": {
+        "tags": [
+          "Departments"
+        ],
+        "summary": "Returns single department",
+        "operationId": "department",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Department"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Department"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Department"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Departments"
+        ],
+        "summary": "Updates department with data from JSON object provided.\r\nAll values from JSON object updates stored object.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/DepartmentRequest"
+              }
+            },
+            "text/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/DepartmentRequest"
+              }
+            },
+            "application/*+xml": {
+              "schema": {
+                "$ref": "#/components/schemas/DepartmentRequest"
+              }
+            },
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DepartmentRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DepartmentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DepartmentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DepartmentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Department"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Department"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Department"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Department"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Department"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Departments/{id}/deactivate": {
+      "get": {
+        "tags": [
+          "Departments"
+        ],
+        "summary": "set final date for department",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Departments/{id}/activate": {
+      "get": {
+        "tags": [
+          "Departments"
+        ],
+        "summary": "Activates department by setting final date to [null]",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Gets all users defined in the system",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WebsakUser"
+                  }
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WebsakUser"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error fetching data"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Create a new WebsakUser from JSON object provided.Returns JSON object representing created user.",
+        "description": "Creates a Websak user based on the JSON data provided in the request.\r\nEksternAvdelingID – External department id, this value will be matched against DIV1 for lookup value.  <br />\r\nTilgangsOppsettID – ID for template for the user being created, the user gets access and roles based on this template. <br />\r\nLookupField - Name of field that is used to lookup existing user.<br />\r\nParameters: JSON Data object <br />",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created json object with new/updated user, and the GET url to user api/user/{NyId}. <br />",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebsakUser"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebsakUser"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error with message."
+          }
+        }
+      }
+    },
+    "/api/Users/changes/{fromDate}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Returns a list of websak users changed after supplied date",
+        "parameters": [
+          {
+            "name": "fromDate",
+            "in": "path",
+            "description": "Returns users changed after this date, format YYYY-MM-DD",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Changed users since {fromDate}",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WebsakUser"
+                  }
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WebsakUser"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No changes since {fromDate}"
+          },
+          "400": {
+            "description": "{fromDate} is incorrectly formatted"
+          }
+        }
+      }
+    },
+    "/api/Users/{id}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Returns a single websak user",
+        "description": "Gets one singe user. <br /><p>Parameter {id}: Value can be of gid id or username.</p>\r\nReturn values: One JSON object containing data for requested user.",
+        "operationId": "users",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User AD string identifier or login id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Requested user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebsakUser"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebsakUser"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Updates websak user with data from JSON object provided.\r\nAll values from JSON object updates stored object.",
+        "description": "Endrer en eksisterende bruker basert på JSON objekt i request. Verdiene fra JSON objekt settes på den aktuelle websak brukeren. <br />\r\nVerdier som ikke sendes med i JSON objekt vil settes til «» eller [null] på websak bruker. <br />\r\nDersom Eksternavdeling og eller Tilgangsoppsett er endret, så resettes tilganger og brukerroller, og settes på nytt ut i fra ny tilgangsprofil. <br />\r\nRetur verdier : 200 OK ved oppdatert bruker. <br />\r\n404 ved ukjent bruker.<br />\r\n500 + error message ved feil. <br />",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebsakUser"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebsakUser"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Users/{id}/Deactivate": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Deactivate websak user by setting expiration date to todays date - 1",
+        "description": "Aktiverer eller deaktiverer en bruker i Websak. <br /><p>Bruker deaktiveres ved at «gyldig til dato» settes til dagens dato – 1, slik at bruker er deaktivert med umiddelbar virkning. Aktivering av bruker setter «gyldig til dato» til [null].</p>\r\nParametere {id} : ADBrukernavn <br />\r\n   Retur verdier : http response OK/NotFound med statusmessage, evt internalserver error + exception <br />",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User AD string identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Blah",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Users/{id}/Activate": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Activates websak user by setting expiration date to [null]",
+        "description": "Activates a user in Websak.<br /><p>Bruker deaktiveres ved at «gyldig til dato» settes til dagens dato – 1, slik at bruker er deaktivert med umiddelbar virkning. Aktivering av bruker setter «gyldig til dato» til [null].</p>\r\nParametere {id} : ADBrukernavn <br />\r\n   Retur verdier : http response OK/NotFound med statusmessage, evt internalserver error + exception <br />",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User AD string identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Users/{id}/AddUserToAccessGroup/{accessGroupId}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Add user to access group provided.",
+        "description": "Legger en bruker fra angitt tilgangsgruppe i Websak. Forutsatt at tilgangsgruppe ID fra websak er kjent. <br />\r\nParameter {id} – ADBrukernavn <br />\r\n   Parameter {accessGroupId} – Websak tilgangsgruppe ID <br />\r\n   Retur verdier : 200 OK, 500 + error message. <br />",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User AD string identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "name": "accessGroupId",
+            "in": "path",
+            "description": "Access group id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Users/{id}/RemoveUserFromAccessGroup/{accessGroupId}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Removes user from access group",
+        "description": "Fjerner en bruker fra angitt tilgangsgruppe i Websak. Forutsatt at tilgangsgruppe ID fra websak er kjent. <br />\r\nParameter {id} – ADBrukernavn <br />\r\n   Parameter {accessGroupId} – Websak tilgangsgruppe ID <br />\r\n   Retur verdier : 200 OK, 500 + error message. <br />",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User AD string identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "name": "accessGroupId",
+            "in": "path",
+            "description": "Access group id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Users/{id}/AddUserAsPostDistributor/{orgEnhetId}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Add user to departement mail distribute group if it exists.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User AD string identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "name": "orgEnhetId",
+            "in": "path",
+            "description": "departement id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Users/{id}/RemoveUserAsPostDistributor": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Remove user from departement mail distribute group",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User AD string identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "name": "orgEnhetId",
+            "in": "query",
+            "description": "departement id",
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Zones": {
+      "get": {
+        "tags": [
+          "Zones"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "DepartmentRequest": {
+        "type": "object",
+        "properties": {
+          "departmentName": {
+            "type": "string"
+          },
+          "departmentShortName": {
+            "type": "string"
+          },
+          "departmentId": {
+            "type": "string"
+          },
+          "departmentParentId": {
+            "type": "string"
+          },
+          "departmentHeadId": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "description": ""
+      },
+      "Department": {
+        "type": "object",
+        "properties": {
+          "avdelingId": {
+            "type": "string"
+          },
+          "avdelingKode": {
+            "type": "string"
+          },
+          "farAvdelingId": {
+            "type": "string"
+          },
+          "admKort": {
+            "type": "string"
+          },
+          "navn": {
+            "type": "string"
+          },
+          "enhet": {
+            "type": "string"
+          },
+          "rpGruppe": {
+            "type": "string"
+          },
+          "fraDato": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "tilDato": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "journalEnhetId": {
+            "type": "string"
+          },
+          "arkDel": {
+            "type": "string"
+          },
+          "lederGidId": {
+            "type": "string"
+          },
+          "lnr": {
+            "type": "string"
+          },
+          "level": {
+            "type": "string"
+          },
+          "soaAvdeling": {
+            "type": "string"
+          },
+          "alnType": {
+            "type": "string"
+          },
+          "gidId": {
+            "type": "string"
+          },
+          "overskrGidId": {
+            "type": "string"
+          },
+          "postFordelerGruppe": {
+            "type": "string"
+          },
+          "intralink": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AccessFunction": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "kode": {
+            "type": "string"
+          },
+          "navn": {
+            "type": "string"
+          },
+          "beskrivelse": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserRole": {
+        "type": "object",
+        "properties": {
+          "roleId": {
+            "type": "string",
+            "description": ""
+          },
+          "roleUserId": {
+            "type": "string",
+            "description": ""
+          },
+          "avdelingsliste": {
+            "type": "string",
+            "description": ""
+          },
+          "arkDelListe": {
+            "type": "string",
+            "description": ""
+          },
+          "journalEnhetListe": {
+            "type": "string",
+            "description": ""
+          },
+          "graderingListe": {
+            "type": "string",
+            "description": ""
+          },
+          "grmId": {
+            "type": "string",
+            "description": ""
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Is not returned today."
+      },
+      "WebsakUser": {
+        "type": "object",
+        "properties": {
+          "gidId": {
+            "type": "string",
+            "description": ""
+          },
+          "externalUsername": {
+            "type": "string",
+            "description": "På vei ut. Må erstattes med noe lurt til websak 8  her bruker vi jo glm_loginmapping. Feltet må også skifte navn. ExternalUserId?"
+          },
+          "active": {
+            "type": "boolean",
+            "description": ""
+          },
+          "orgEnhetId": {
+            "type": "string",
+            "description": ""
+          },
+          "offentligNr": {
+            "type": "string",
+            "description": ""
+          },
+          "gidKode": {
+            "type": "string",
+            "description": ""
+          },
+          "navn": {
+            "type": "string",
+            "description": ""
+          },
+          "tittel": {
+            "type": "string",
+            "description": ""
+          },
+          "landId": {
+            "type": "string",
+            "description": ""
+          },
+          "postNr": {
+            "type": "string",
+            "description": ""
+          },
+          "kontakt": {
+            "type": "string",
+            "description": ""
+          },
+          "adr": {
+            "type": "string",
+            "description": ""
+          },
+          "adr2": {
+            "type": "string",
+            "description": ""
+          },
+          "tlf": {
+            "type": "string",
+            "description": ""
+          },
+          "tlf2": {
+            "type": "string",
+            "description": ""
+          },
+          "mobil": {
+            "type": "string",
+            "description": ""
+          },
+          "emailAdr": {
+            "type": "string",
+            "description": "Denne er obsolete - hentes fra emailadr i gia."
+          },
+          "emailAdr2": {
+            "type": "string",
+            "description": "Redundant - se over."
+          },
+          "spraakId": {
+            "type": "string",
+            "description": ""
+          },
+          "avdelingId": {
+            "type": "string",
+            "description": ""
+          },
+          "kontonr": {
+            "type": "string",
+            "description": ""
+          },
+          "merknad": {
+            "type": "string",
+            "description": ""
+          },
+          "poststed": {
+            "type": "string",
+            "description": ""
+          },
+          "kommnr": {
+            "type": "string",
+            "description": ""
+          },
+          "besoeksadr": {
+            "type": "string",
+            "description": ""
+          },
+          "div1": {
+            "type": "string",
+            "description": ""
+          },
+          "div2": {
+            "type": "string",
+            "description": ""
+          },
+          "div3": {
+            "type": "string",
+            "description": ""
+          },
+          "div4": {
+            "type": "string",
+            "description": ""
+          },
+          "div5": {
+            "type": "string",
+            "description": ""
+          },
+          "adr3": {
+            "type": "string",
+            "description": ""
+          },
+          "adr4": {
+            "type": "string",
+            "description": ""
+          },
+          "permisjonfra": {
+            "type": "string",
+            "description": "",
+            "format": "date-time",
+            "nullable": true
+          },
+          "permisjontil": {
+            "type": "string",
+            "description": "",
+            "format": "date-time",
+            "nullable": true
+          },
+          "kategoriId": {
+            "type": "string",
+            "description": ""
+          },
+          "userAccessCodes": {
+            "type": "string"
+          },
+          "userAccessFunctions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccessFunction"
+            }
+          },
+          "userRoles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserRole"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "description": ""
+      },
+      "UserAccess": {
+        "type": "object",
+        "properties": {
+          "domain": {
+            "type": "string",
+            "description": "User domain for login =&gt; used for 8.x versions"
+          },
+          "provider": {
+            "type": "string",
+            "description": "Used to set provider for login details."
+          },
+          "key": {
+            "type": "string"
+          },
+          "isPrimary": {
+            "type": "boolean",
+            "description": "defines if users login detail is primary\r\nDefaults to true if not set."
+          },
+          "id": {
+            "type": "integer",
+            "description": "The users given Id",
+            "format": "int32",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": ""
+          },
+          "externalDepartmentId": {
+            "type": "string",
+            "description": "Avdelingsnavn som mappes mot gid_div1 from soa_Avdeling join gid_identitet on soa_gidid = gid_gidid"
+          },
+          "accessTemplateId": {
+            "type": "string",
+            "description": "Dette er profilen til brukeren - gid_gidid/sbr_brukerid"
+          },
+          "mailAddresses": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": ""
+          },
+          "id": {
+            "type": "string",
+            "description": "gid_gidid"
+          },
+          "lookupField": {
+            "type": "string",
+            "description": "Man kan bruke dette for å gjenfinne en bruker gitt angitt felt i gid"
+          },
+          "userType": {
+            "type": "string",
+            "description": "B dersom bruker, P dersom profil"
+          },
+          "userAccesses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserAccess"
+            }
+          },
+          "accessToZones": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "Zones for User. set to null or empty to use default zone from db.\r\nAvailable zones can be fetched from [get]://api/zones"
+          },
+          "offentligNr": {
+            "type": "string",
+            "description": ""
+          },
+          "gidKode": {
+            "type": "string",
+            "description": ""
+          },
+          "navn": {
+            "type": "string",
+            "description": ""
+          },
+          "tittel": {
+            "type": "string",
+            "description": ""
+          },
+          "landId": {
+            "type": "string",
+            "description": ""
+          },
+          "postNr": {
+            "type": "string",
+            "description": ""
+          },
+          "kontakt": {
+            "type": "string",
+            "description": ""
+          },
+          "adr": {
+            "type": "string",
+            "description": ""
+          },
+          "adr2": {
+            "type": "string",
+            "description": ""
+          },
+          "tlf": {
+            "type": "string",
+            "description": ""
+          },
+          "tlf2": {
+            "type": "string",
+            "description": ""
+          },
+          "mobil": {
+            "type": "string",
+            "description": ""
+          },
+          "emailAdr": {
+            "type": "string",
+            "description": "Denne er obsolete - hentes fra emailadr i gia."
+          },
+          "emailAdr2": {
+            "type": "string",
+            "description": "Redundant - se over."
+          },
+          "spraakId": {
+            "type": "string",
+            "description": ""
+          },
+          "avdelingId": {
+            "type": "string",
+            "description": ""
+          },
+          "kontonr": {
+            "type": "string",
+            "description": ""
+          },
+          "merknad": {
+            "type": "string",
+            "description": ""
+          },
+          "poststed": {
+            "type": "string",
+            "description": ""
+          },
+          "kommnr": {
+            "type": "string",
+            "description": ""
+          },
+          "besoeksadr": {
+            "type": "string",
+            "description": ""
+          },
+          "div1": {
+            "type": "string",
+            "description": ""
+          },
+          "div2": {
+            "type": "string",
+            "description": ""
+          },
+          "div3": {
+            "type": "string",
+            "description": ""
+          },
+          "div4": {
+            "type": "string",
+            "description": ""
+          },
+          "div5": {
+            "type": "string",
+            "description": ""
+          },
+          "adr3": {
+            "type": "string",
+            "description": ""
+          },
+          "adr4": {
+            "type": "string",
+            "description": ""
+          },
+          "permisjonfra": {
+            "type": "string",
+            "description": "",
+            "format": "date-time",
+            "nullable": true
+          },
+          "permisjontil": {
+            "type": "string",
+            "description": "",
+            "format": "date-time",
+            "nullable": true
+          },
+          "kategoriId": {
+            "type": "string",
+            "description": ""
+          },
+          "userAccessCodes": {
+            "type": "string"
+          },
+          "userAccessFunctions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccessFunction"
+            }
+          },
+          "userRoles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserRole"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "description": ""
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string"
+          },
+          "instance": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "description": "Please enter JWT with Bearer into field",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  },
+  "security": [
+    { }
+  ]
+}
