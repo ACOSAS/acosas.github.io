@@ -1,0 +1,145 @@
+[
+
+
+{
+"title": "",
+"tags": "",
+"keywords": "",
+"url": "404.html",
+"summary": ""
+}
+,
+
+
+
+
+
+{
+"title": "About",
+"tags": "",
+"keywords": "",
+"url": "about",
+"summary": ""
+}
+,
+
+
+
+
+
+{
+"title": "ACOS API Documentation",
+"tags": "",
+"keywords": "homepage",
+"url": "index.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "News",
+"tags": "",
+"keywords": "news, blog, updates, release notes, announcements",
+"url": "news.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "News",
+"tags": "",
+"keywords": "news, blog, updates, release notes, announcements",
+"url": "news_archive.html",
+"summary": ""
+}
+,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{
+"title": "User API /api/accessgroups",
+"tags": "",
+"keywords": "json, openapi, userapi, accessgroups",
+"url": "userapi_accessgroups.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "User API models",
+"tags": "",
+"keywords": "",
+"url": "userapi_components.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "User API /api/department/{id}",
+"tags": "",
+"keywords": "json, openapi, userapi",
+"url": "userapi_department.html",
+"summary": ""
+}
+,
+
+
+
+{
+"title": "User API /api/departments",
+"tags": "",
+"keywords": "json, openapi, userapi",
+"url": "userapi_departments.html",
+"summary": ""
+}
+
+
+
+
+
+
+]
