@@ -2,7 +2,7 @@
 title: User API /api/Departments/{id}/deactivate
 keywords: json, openapi
 # summary: test med json fil
-sidebar: documentation_sidebar
+sidebar: UserAPI_sidebar
 permalink: userapi__api_departments__id__deactivate.html
 folder: swagger
 toc: false

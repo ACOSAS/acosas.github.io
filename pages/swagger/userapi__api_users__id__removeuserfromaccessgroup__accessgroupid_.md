@@ -2,7 +2,7 @@
 title: User API /api/Users/{id}/RemoveUserFromAccessGroup/{accessGroupId}
 keywords: json, openapi
 # summary: test med json fil
-sidebar: documentation_sidebar
+sidebar: UserAPI_sidebar
 permalink: userapi__api_users__id__removeuserfromaccessgroup__accessgroupid_.html
 folder: swagger
 toc: false

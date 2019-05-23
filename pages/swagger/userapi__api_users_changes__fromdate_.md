@@ -2,7 +2,7 @@
 title: User API /api/Users/changes/{fromDate}
 keywords: json, openapi
 # summary: test med json fil
-sidebar: documentation_sidebar
+sidebar: UserAPI_sidebar
 permalink: userapi__api_users_changes__fromdate_.html
 folder: swagger
 toc: false

@@ -4,7 +4,7 @@ entries:
   # product: Documentation
   # version: 1.0
   folders:
-  - title: User API
+  - title: UserAPI
     output: web
     type: frontmatter
     folderitems: 
