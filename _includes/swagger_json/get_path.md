@@ -6,7 +6,15 @@
    <h2>{{ _method[_midx] | upcase }} {{ page.swaggerkey | downcase }}</h2>
    {% assign _methodname = _method[_midx] %}
     {% if _methods[_methodname]["summary"] != "" %} 
-        <p>{{_methods[_methodname]["summary"]}}</p>       
+        <p>{{_methods[_methodname]["summary"]}}</p>               
+    {% endif %}
+    {% if _methods[_methodname]["description"] %} 
+        <h4>Description</h4>
+        <p>{{_methods[_methodname]["description"]}}</p>               
+    {% endif %}
+    {% if _methods[_methodname]["parameters"] %}
+        <h4>Parameters</h4>
+         {% include swagger_json/get_parameters.md pagemethod=_methodname %}
     {% endif %}
          <h4>Responses</h4>       
         {% include swagger_json/get_responses.md pagemethod=_methodname %}
