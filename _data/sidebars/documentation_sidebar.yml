@@ -1,5 +1,4 @@
 # This is your sidebar TOC. The sidebar code loops through sections here and provides the appropriate formatting.
-
 entries:
 - title: sidebar
   # product: Documentation
@@ -9,55 +8,51 @@ entries:
     output: web
     type: frontmatter
     folderitems: 
-      - title: /api/AccessGroups
-        url: /userapi_accessgroups.html
-        output: web, pdf
-      - title: /api/departments
-        url: /userapi_departments.html
-        output: web, pdf
-      - title: /api/department/{id}
-        url: /userapi_department.html
-        output: web, pdf
-      - title: Models
-        url: /userapi_components.html
-        output: web, pdf  
-  # - title:
-  #   output: pdf
-  #   type: frontmatter
-  #   folderitems:
-  #   - title:
-  #     url: /titlepage.html
-  #     output: pdf
-  #     type: frontmatter
-  #   - title:
-  #     url: /tocpage.html
-  #     output: pdf
-  #     type: frontmatter
-
-  # - title: Overview
-  #   output: web, pdf
-  #   folderitems:
-
-  #   - title: Get started
-  #     url: /index.html
-  #     output: web, pdf
-  #     type: homepage
-
-  #   - title: Introduction
-  #     url: /mydoc_introduction.html
-  #     output: web, pdf
-
-  #   - title: Supported features
-  #     url: /mydoc_supported_features.html
-  #     output: web, pdf
-
-  #   - title: About the theme author
-  #     url: /mydoc_about.html
-  #     output: web, pdf
-
-  #   - title: Support
-  #     url: /mydoc_support.html
-  #     output: web, pdf
-
-  
-    
+    - title: /api/AccessGroups
+      url: /userapi__api_accessgroups.html
+      output: web, pdf
+    - title: /api/Departments
+      url: /userapi__api_departments.html
+      output: web, pdf
+    - title: /api/Departments/{id}
+      url: /userapi__api_departments__id_.html
+      output: web, pdf
+    - title: /api/Departments/{id}/deactivate
+      url: /userapi__api_departments__id__deactivate.html
+      output: web, pdf
+    - title: /api/Departments/{id}/activate
+      url: /userapi__api_departments__id__activate.html
+      output: web, pdf
+    - title: /api/Users
+      url: /userapi__api_users.html
+      output: web, pdf
+    - title: /api/Users/changes/{fromDate}
+      url: /userapi__api_users_changes__fromdate_.html
+      output: web, pdf
+    - title: /api/Users/{id}
+      url: /userapi__api_users__id_.html
+      output: web, pdf
+    - title: /api/Users/{id}/Deactivate
+      url: /userapi__api_users__id__deactivate.html
+      output: web, pdf
+    - title: /api/Users/{id}/Activate
+      url: /userapi__api_users__id__activate.html
+      output: web, pdf
+    - title: /api/Users/{id}/AddUserToAccessGroup/{accessGroupId}
+      url: /userapi__api_users__id__addusertoaccessgroup__accessgroupid_.html
+      output: web, pdf
+    - title: /api/Users/{id}/RemoveUserFromAccessGroup/{accessGroupId}
+      url: /userapi__api_users__id__removeuserfromaccessgroup__accessgroupid_.html
+      output: web, pdf
+    - title: /api/Users/{id}/AddUserAsPostDistributor/{orgEnhetId}
+      url: /userapi__api_users__id__adduseraspostdistributor__orgenhetid_.html
+      output: web, pdf
+    - title: /api/Users/{id}/RemoveUserAsPostDistributor
+      url: /userapi__api_users__id__removeuseraspostdistributor.html
+      output: web, pdf
+    - title: /api/Zones
+      url: /userapi__api_zones.html
+      output: web, pdf
+    - title: Models
+      url: /userapi_components.html
+      output: web, pdf
