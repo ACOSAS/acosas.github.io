@@ -2,7 +2,8 @@
 title: User API /api/Users/{id}/RemoveUserAsPostDistributor
 keywords: json, openapi
 # summary: test med json fil
-sidebar: UserAPI_sidebar
+sidebars: 
+ - name: UserAPI_sidebar
 permalink: userapi__api_users__id__removeuseraspostdistributor.html
 folder: swagger
 toc: false

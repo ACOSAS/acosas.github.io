@@ -2,7 +2,8 @@
 title: User API /api/Users
 keywords: json, openapi
 # summary: test med json fil
-sidebar: UserAPI_sidebar
+sidebars: 
+ - name: UserAPI_sidebar
 permalink: userapi__api_users.html
 folder: swagger
 toc: false

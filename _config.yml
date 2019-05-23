@@ -102,7 +102,8 @@ defaults:
 
 sidebars:
   - documentation_sidebar
-  - org_documentation_sidebar
+  - UserAPI_sidebar
+  
 
 # - product1_sidebar
 # - product2_sidebar

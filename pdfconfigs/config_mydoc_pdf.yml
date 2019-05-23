@@ -17,4 +17,4 @@ defaults:
       comments: true
       search: true
 
-pdf_sidebar: documentation_sidebar
+pdf_sidebar: UserAPI_sidebar

@@ -2,7 +2,8 @@
 title: User API /api/Users/{id}/AddUserToAccessGroup/{accessGroupId}
 keywords: json, openapi
 # summary: test med json fil
-sidebar: UserAPI_sidebar
+sidebars: 
+ - name: UserAPI_sidebar
 permalink: userapi__api_users__id__addusertoaccessgroup__accessgroupid_.html
 folder: swagger
 toc: false
