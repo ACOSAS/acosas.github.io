@@ -1,5 +1,5 @@
 ---
-title: "ACOS API Documentation"
+title: "ACOS API Documentations"
 keywords: homepage
 # tags: [index]
 sidebar:  UserAPI_sidebar
