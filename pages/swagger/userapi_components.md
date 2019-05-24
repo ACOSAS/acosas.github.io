@@ -1,7 +1,8 @@
 ---
 title: User API models
 keyword: json, openapi, models, components
-sidebar: UserAPI_sidebar
+sidebars:
+ - name: UserAPI_sidebar
 folder: swagger
 toc: false
 swaggerfile: userapi
