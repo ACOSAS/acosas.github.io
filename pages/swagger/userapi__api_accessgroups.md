@@ -4,7 +4,7 @@ title: User API /api/AccessGroups
 keywords: json, openapi
 # summary: test med json fil
 sidebars: 
- - name: UserAPI_sidebar
+ - name: user_api_sidebar
 permalink: userapi__api_accessgroups.html
 folder: swagger
 toc: false
