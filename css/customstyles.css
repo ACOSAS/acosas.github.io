@@ -1,4 +1,10 @@
+
+html{
+    font-family: "Varela Round", sans-serif;
+}
+
 body {
+    font-family: "Varela Round", sans-serif;
     font-size:15px;
 }
 
@@ -422,7 +428,7 @@ ul#mysidebar {
 }
 
 span.projectTitle {
-    font-family: Helvetica;
+    font-family: "Varela Round", Helvetica;
     font-weight: bold;
 }
 
