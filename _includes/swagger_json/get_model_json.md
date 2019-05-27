@@ -16,14 +16,12 @@
                 "{{- _props[_hIdx] -}}"
         {%- endif -%}
                     : "{{- _typeJson["properties"].[_name].["type"] -}}"
-
         {%- if _typeJson["properties"].[_name].["description"] != null and _typeJson["properties"].[_name].["description"] != "" -%}
-            //&nbsp;{{- _typeJson["properties"].[_name].["description"] -}}             
+            // {{ _typeJson["properties"].[_name].["description"] }}             
             {%- unless forloop.last -%},{%- endunless -%}
         {%- else -%}
             {%- unless forloop.last -%},{%- endunless -%}    
         {%- endif -%}
-
         {%- assign _hIdx = _hIdx + 1 -%}
     {%- endfor -%}
     {% if _jsonType == "array" %}
