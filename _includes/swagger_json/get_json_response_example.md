@@ -7,5 +7,5 @@
 {% assign _responseJsonType = schemas[_responseName]  %}
 {% if _responseJsonType %}
 <h5>Response Example</h5>
-{% endif %}
-{% include swagger_json/get_model_highlight.md componentName=_responseName componentPath='components' componentType=_responseType %}
+{%- endif -%}
+{%- include swagger_json/get_model_highlight.md componentName=_responseName componentPath='components' componentType=_responseType -%}

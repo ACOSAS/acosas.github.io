@@ -40,5 +40,4 @@
         {% endfor %}      
     </tbody>
 </table>
-{% include swagger_json/get_json_response_example.md componentName=_componentRef componentPath='components' componentType=_type %}
-{{ _type["type"] }}
+{%- include swagger_json/get_json_response_example.md componentName=_componentRef componentPath='components' componentType=_type -%}

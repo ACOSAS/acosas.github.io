@@ -7,15 +7,15 @@
 {%- assign _typeHightlight = schemas[_highlightName]  -%}
 {%- if _typeHightlight -%}
 {%- highlight json -%}
-{% if _highlightType == "array" %}
+{%- if _highlightType == "array" -%}
 [{ 
-{% else %} 
+{%- else -%} 
 { 
 {% endif %}
-
 {%- for _props in _typeHightlight["properties"] -%}
     {%- assign _name = _props[_mIdx] -%}
-    {% if forloop.first %}    "{{- _props[_mIdx] -}}"
+    {% if forloop.first %}        
+        "{{- _props[_mIdx] -}}"
     {%- else -%}
         "{{- _props[_mIdx] -}}"
     {%- endif -%}
@@ -30,16 +30,21 @@
         {{- _subType -}}
         {%- include swagger_json/get_model_json.md componentName=_subName2 componentPath=_highlighPath componentType=_subType2 -%}
     {%- else -%}
-        "{{- _typeHightlight["properties"].[_name].["type"] -}}"
+        "{{- _typeHightlight["properties"].[_name].["type"] -}}"       
+    {%- endif -%}   
+    {% if _typeHightlight["properties"].[_name].["description"] != null and _typeHightlight["properties"].[_name].["description"] != "" %} // {{- _typeHightlight["properties"].[_name].["description"] -}}
+        {% unless forloop.last %},
+        {% endunless %}
+    {%- else -%}             
+        {% unless forloop.last %},
+        {% endunless %}
     {%- endif -%}
-    {%- unless forloop.last -%},
-    {% endunless %}
     {%- assign _mIdx = (_mIdx + 1) -%}
 {%- endfor -%}
 {% if _highlightType == "array" %}
 }]
-{%- else -%}
+{% else %}
 }
-{%- endif -%}
+{% endif %}
 {%- endhighlight -%}
 {%- endif -%}
