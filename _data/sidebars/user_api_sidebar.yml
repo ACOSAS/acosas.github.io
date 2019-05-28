@@ -54,6 +54,6 @@ entries:
     - title: /api/Zones
       url: /userapi__api_zones.html
       output: web, pdf
-    - title: Models
-      url: /userapi_components.html
+    - title: User API Models
+      url: /user_api_components.html
       output: web, pdf

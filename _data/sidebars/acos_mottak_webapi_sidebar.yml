@@ -1,0 +1,23 @@
+# THIS PAGE IS GENERATED. ANY CHANGES TO PAGE WILL POTENTIALLY BE OVERWRITTEN.
+# This is your sidebar TOC. The sidebar code loops through sections here and provides the appropriate formatting.
+entries:
+- title: sidebar
+  # product: Documentation
+  # version: 1.0
+  folders:
+  - title: Acos Mottak WebApi
+    output: web
+    type: frontmatter
+    folderitems: 
+    - title: /api/{tenant}/test
+      url: /arkivmelding__api__tenant__test.html
+      output: web, pdf
+    - title: /api/{tenant}/arkivmelding
+      url: /arkivmelding__api__tenant__arkivmelding.html
+      output: web, pdf
+    - title: /api/{tenant}/arkivmelding/arkiverdokument
+      url: /arkivmelding__api__tenant__arkivmelding_arkiverdokument.html
+      output: web, pdf
+    - title: Acos Mottak WebApi Models
+      url: /acos_mottak_webapi_components.html
+      output: web, pdf

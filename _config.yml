@@ -61,10 +61,14 @@ kramdown:
 
 # filter used to process markdown. note that kramdown differs from github-flavored markdown in some subtle ways
 
+# collections are declared here
 collections:
+  # this renders the content in _tooltips and processes it, but doesn't output it as actual files in the output unless you change output to true
   tooltips:
     output: false
-# collections are declared here. this renders the content in _tooltips and processes it, but doesn't output it as actual files in the output unless you change output to true
+  # site_sidebars:
+  #   output: true
+
 
 defaults:
   -
@@ -99,15 +103,19 @@ defaults:
       topnav: topnav
 
 # these are defaults used for the frontmatter for these file types
-
+# Used for old implementation.
 sidebars:
-  - documentation_sidebar
-  - UserAPI_sidebar
-  
-
+  # - name: documentation_sidebar
+  - user_api_sidebar
+  - acos_mottak_webapi_sidebar
 # - product1_sidebar
 # - product2_sidebar
 # - other
+
+# add site wide sidebar here.
+site_sidebars: 
+  - name : user_api_sidebar
+  - name : acos_mottak_webapi_sidebar
 
 description: "Acos AS documentation is a collection of documentation of API documentations which Acos offers. "
 # the description is used in the feed.xml file

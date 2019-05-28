@@ -1,0 +1,225 @@
+
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "v1",
+      "title": "Acos Mottak WebApi",
+      "description": "WebApi for Acos Mottak for mottak av arkivdata.",
+      "termsOfService": "\r\n                                        Ingen deler av dette programmet skal benyttes av andre enn ansatte internt i din organisasjon. \r\n                                        Programmet skal nyttes for det formål programmet lages for. \r\n                                        Annen bruk må avklares skriftlig med Acos AS.\r\n                            ",
+      "contact": {
+        "name": "Acos AS",
+        "url": "http://www.acos.no/",
+        "email": "utvikling@acos.no"
+      }
+    },
+    "host": "localhost:9005",
+    "schemes": [
+      "http",
+      "https"
+    ],
+    "paths": {
+      "/api/{tenant}/test": {
+        "get": {
+          "tags": [
+            "Arkivmelding"
+          ],
+          "summary": "",
+          "operationId": "Arkivmelding_Get",
+          "consumes": [],
+          "produces": [
+            "application/json",
+            "text/json",
+            "application/xml",
+            "text/xml"
+          ],
+          "parameters": [
+            {
+              "name": "tenant",
+              "in": "path",
+              "description": "ApiKey. Ny nøkkel tildeles i produksjon.",
+              "required": true,
+              "type": "string",
+              "default": "6CF63C7F-B738-4B0E-BB50-08080B0360F1"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      },
+      "/api/{tenant}/arkivmelding": {
+        "post": {
+          "tags": [
+            "Arkivmelding"
+          ],
+          "summary": "",
+          "operationId": "Arkivmelding_Post",
+          "consumes": [],
+          "produces": [
+            "application/json",
+            "text/json",
+            "application/xml",
+            "text/xml"
+          ],
+          "parameters": [
+            {
+              "name": "tenant",
+              "in": "path",
+              "description": "ApiKey. Ny nøkkel tildeles i produksjon.",
+              "required": true,
+              "type": "string",
+              "default": "6CF63C7F-B738-4B0E-BB50-08080B0360F1"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      },
+      "/api/{tenant}/arkivmelding/arkiverdokument": {
+        "post": {
+          "tags": [
+            "Arkivmelding"
+          ],
+          "summary": "",
+          "operationId": "Arkivmelding_AkriverDokument",
+          "consumes": [],
+          "produces": [
+            "application/json",
+            "text/json",
+            "application/xml",
+            "text/xml"
+          ],
+          "parameters": [
+            {
+              "name": "tenant",
+              "in": "path",
+              "description": "ApiKey. Ny nøkkel tildeles i produksjon.",
+              "required": true,
+              "type": "string",
+              "default": "6CF63C7F-B738-4B0E-BB50-08080B0360F1"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "type": "object"
+              }
+            },
+            "201": {
+              "description": "Created",
+              "schema": {
+                "$ref": "#/definitions/Manifest"
+              },
+              "examples": {
+                "application/json": {
+                  "type": "elevmelding",
+                  "files": [
+                    {
+                      "contentid": "content1",
+                      "filename": "tmpA54E.tmp.zip",
+                      "hash": "FC3003DDAF437771C7EFBB6AFF068678C0DD31FF8D9F70E2ECD37514B5569D0A",
+                      "alg": "SHA256",
+                      "metadata": false
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Manifest": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "type": {
+            "description": "",
+            "type": "string"
+          },
+          "files": {
+            "description": "",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/File"
+            }
+          }
+        }
+      },
+      "File": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "contentid": {
+            "description": "",
+            "type": "string"
+          },
+          "filename": {
+            "description": "",
+            "type": "string"
+          },
+          "hash": {
+            "description": "",
+            "type": "string"
+          },
+          "alg": {
+            "description": "",
+            "type": "string"
+          },
+          "metadata": {
+            "description": "",
+            "type": "boolean"
+          }
+        }
+      },
+      "HttpContent": {
+        "type": "object",
+        "properties": {
+          "headers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/KeyValuePair[String,IEnumerable[String]]"
+            },
+            "readOnly": true
+          }
+        }
+      },
+      "KeyValuePair[String,IEnumerable[String]]": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "readOnly": true
+          },
+          "value": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "readOnly": true
+          }
+        }
+      }
+    },
+    "securityDefinitions": {
+      "tenant": {
+        "type": "apiKey",
+        "description": "API nøkkel",
+        "name": "tenant",
+        "in": "url"
+      }
+    }
+  }

@@ -1,5 +1,8 @@
-
+{% if page.swaggerkey == "components" %}
 {% assign schemas = site.data.swagger[page.swaggerfile].[page.swaggerkey].["schemas"] %}
+{% else %}
+{% assign schemas = site.data.swagger[page.swaggerfile].[page.swaggerkey] %}
+{% endif %}
 {% assign _cIdx = 0 %}
 
 <div>

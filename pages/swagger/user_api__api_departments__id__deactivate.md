@@ -1,15 +1,15 @@
 ---
 # THIS PAGE IS GENERATED. ANY CHANGES TO PAGE WILL POTENTIALLY BE OVERWRITTEN.
-title: User API /api/Users/{id}/Activate
+title: /api/Departments/{id}/deactivate
 keywords: json, openapi
 # summary: test med json fil
-sidebars: 
- - name: user_api_sidebar
-permalink: userapi__api_users__id__activate.html
+ #sidebars: 
+ # - name: user_api_sidebar
+permalink: userapi__api_departments__id__deactivate.html
 folder: swagger
 toc: false
 swaggerfile: userapi
 swaggerpath: paths
-swaggerkey: /api/Users/{id}/Activate
+swaggerkey: /api/Departments/{id}/deactivate
 ---
 {% include swagger_json/get_path.md %}

@@ -1,15 +1,15 @@
 ---
 # THIS PAGE IS GENERATED. ANY CHANGES TO PAGE WILL POTENTIALLY BE OVERWRITTEN.
-title: User API /api/Departments/{id}/activate
+title: /api/{tenant}/test
 keywords: json, openapi
 # summary: test med json fil
-sidebars: 
- - name: user_api_sidebar
-permalink: userapi__api_departments__id__activate.html
+ #sidebars: 
+ # - name: acos_mottak_webapi_sidebar
+permalink: arkivmelding__api__tenant__test.html
 folder: swagger
 toc: false
-swaggerfile: userapi
+swaggerfile: arkivmelding
 swaggerpath: paths
-swaggerkey: /api/Departments/{id}/activate
+swaggerkey: /api/{tenant}/test
 ---
 {% include swagger_json/get_path.md %}
