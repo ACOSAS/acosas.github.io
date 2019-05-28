@@ -597,7 +597,7 @@
           "Users"
         ],
         "summary": "Updates websak user with data from JSON object provided.\r\nAll values from JSON object updates stored object.",
-        "description": "Endrer en eksisterende bruker basert på JSON objekt i request. Verdiene fra JSON objekt settes på den aktuelle websak brukeren. <br />\r\nVerdier som ikke sendes med i JSON objekt vil settes til «» eller [null] på websak bruker. <br />\r\nDersom Eksternavdeling og eller Tilgangsoppsett er endret, så resettes tilganger og brukerroller, og settes på nytt ut i fra ny tilgangsprofil. <br />\r\nRetur verdier : 200 OK ved oppdatert bruker. <br />\r\n404 ved ukjent bruker.<br />\r\n500 + error message ved feil. <br />",
+        "description": "Updates user based on values in JSON object in request. Values in the request will be mapped to Websak user.<br />\r\nValues not included in JSON will be translated either to \"\" (empty string) or [null].\r\nSide effect: Not included properties will *cause* date to be deleted/overwritten.\r\nInclude all data always. \r\nIf eksternal department and/or access is changed, then current access are reset to new access profile.\r\nReturn values : 200 OK - User Created/Updated. <br />\r\n404 - Unknown user<br />\r\n500 - Error message contains more details<br />",
         "parameters": [
           {
             "name": "id",
@@ -647,6 +647,51 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       }
@@ -656,8 +701,8 @@
         "tags": [
           "Users"
         ],
-        "summary": "Deactivate websak user by setting expiration date to todays date - 1",
-        "description": "Aktiverer eller deaktiverer en bruker i Websak. <br /><p>Bruker deaktiveres ved at «gyldig til dato» settes til dagens dato – 1, slik at bruker er deaktivert med umiddelbar virkning. Aktivering av bruker setter «gyldig til dato» til [null].</p>\r\nParametere {id} : ADBrukernavn <br />\r\n   Retur verdier : http response OK/NotFound med statusmessage, evt internalserver error + exception <br />",
+        "summary": "Deactivate websak user by setting expiration date to yesterday",
+        "description": "Activates or deactivates a user<br /><p>User will be deactivated immedate by setting profile date to yesterday.</p>\r\nParameter {id} : Username <br />\r\n   Return values : http response OK/NotFound with status message, or internalserver error + exception <br />",
         "parameters": [
           {
             "name": "id",
@@ -672,7 +717,37 @@
         ],
         "responses": {
           "200": {
-            "description": "Blah",
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
             "content": {
               "application/json": {
                 "schema": {
@@ -695,7 +770,7 @@
           "Users"
         ],
         "summary": "Activates websak user by setting expiration date to [null]",
-        "description": "Activates a user in Websak.<br /><p>Bruker deaktiveres ved at «gyldig til dato» settes til dagens dato – 1, slik at bruker er deaktivert med umiddelbar virkning. Aktivering av bruker setter «gyldig til dato» til [null].</p>\r\nParametere {id} : ADBrukernavn <br />\r\n   Retur verdier : http response OK/NotFound med statusmessage, evt internalserver error + exception <br />",
+        "description": "Activates a user.<br /><p>User is immedately activated by removing expiration date from profile.</p>\r\nParametere {id} : ADBrukernavn <br />\r\n   Return verdier : http response OK/NotFound with status message, or internalserver error + exception <br />",
         "parameters": [
           {
             "name": "id",
@@ -710,7 +785,49 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       }
@@ -720,8 +837,8 @@
         "tags": [
           "Users"
         ],
-        "summary": "Add user to access group provided.",
-        "description": "Legger en bruker fra angitt tilgangsgruppe i Websak. Forutsatt at tilgangsgruppe ID fra websak er kjent. <br />\r\nParameter {id} – ADBrukernavn <br />\r\n   Parameter {accessGroupId} – Websak tilgangsgruppe ID <br />\r\n   Retur verdier : 200 OK, 500 + error message. <br />",
+        "summary": "Add user to provided access group.",
+        "description": "Adds the user to provided access group. Access group id must already be defined in system.<br />\r\nParameter {id} – ADBrukernavn <br />\r\n   Parameter {accessGroupId} – Websak access group ID <br />\r\n   Return values : 200 OK, 500 + error message. <br />",
         "parameters": [
           {
             "name": "id",
@@ -746,7 +863,34 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       }
@@ -757,7 +901,7 @@
           "Users"
         ],
         "summary": "Removes user from access group",
-        "description": "Fjerner en bruker fra angitt tilgangsgruppe i Websak. Forutsatt at tilgangsgruppe ID fra websak er kjent. <br />\r\nParameter {id} – ADBrukernavn <br />\r\n   Parameter {accessGroupId} – Websak tilgangsgruppe ID <br />\r\n   Retur verdier : 200 OK, 500 + error message. <br />",
+        "description": "Removes a user from provided access group. Access group id must be defined in the system.\r\nParameter {id} – AD Username <br />\r\n   Parameter {accessGroupId} – Websak access group ID <br />\r\n   Return values: 200 OK, 500 + error message. <br />",
         "parameters": [
           {
             "name": "id",
@@ -782,12 +926,39 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       }
     },
-    "/api/Users/{id}/AddUserAsPostDistributor/{orgEnhetId}": {
+    "/api/Users/{id}/AddUserAsPostDistributor/{orgUnitId}": {
       "get": {
         "tags": [
           "Users"
@@ -805,7 +976,7 @@
             }
           },
           {
-            "name": "orgEnhetId",
+            "name": "orgUnitId",
             "in": "path",
             "description": "departement id",
             "required": true,
@@ -817,12 +988,39 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       }
     },
-    "/api/Users/{id}/RemoveUserAsPostDistributor": {
+    "/api/Users/{id}/RemoveUserAsPostDistributor/{orgUnitId}": {
       "get": {
         "tags": [
           "Users"
@@ -840,9 +1038,10 @@
             }
           },
           {
-            "name": "orgEnhetId",
-            "in": "query",
+            "name": "orgUnitId",
+            "in": "path",
             "description": "departement id",
+            "required": true,
             "schema": {
               "type": "string",
               "default": ""
@@ -851,7 +1050,34 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       }
@@ -917,24 +1143,24 @@
       "AccessGroup": {
         "type": "object",
         "properties": {
-          "gruppeId": {
+          "groupId": {
             "type": "string"
           },
-          "gruppeNavn": {
+          "groupName": {
             "type": "string"
           },
-          "generell": {
+          "general": {
             "type": "string"
           },
-          "opprettetAvGidId": {
+          "createdById": {
             "type": "string"
           },
-          "fraDato": {
+          "fromDate": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "tilDato": {
+          "toDate": {
             "type": "string",
             "format": "date-time",
             "nullable": true
@@ -945,65 +1171,53 @@
       "Department": {
         "type": "object",
         "properties": {
-          "avdelingId": {
+          "id": {
             "type": "string"
           },
-          "avdelingKode": {
+          "code": {
             "type": "string"
           },
-          "farAvdelingId": {
+          "parentDepartmentId": {
             "type": "string"
           },
-          "admKort": {
+          "abbreviation": {
             "type": "string"
           },
-          "navn": {
+          "name": {
             "type": "string"
           },
-          "enhet": {
+          "unit": {
             "type": "string"
           },
-          "rpGruppe": {
+          "group": {
             "type": "string"
           },
-          "fraDato": {
+          "validFromDate": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "tilDato": {
+          "validToDate": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "journalEnhetId": {
+          "journalUnitId": {
             "type": "string"
           },
-          "arkDel": {
+          "archiveUnit": {
             "type": "string"
           },
-          "lederGidId": {
-            "type": "string"
-          },
-          "lnr": {
+          "managerUserId": {
             "type": "string"
           },
           "level": {
             "type": "string"
           },
-          "soaAvdeling": {
-            "type": "string"
-          },
-          "alnType": {
-            "type": "string"
-          },
           "gidId": {
             "type": "string"
           },
-          "overskrGidId": {
-            "type": "string"
-          },
-          "postFordelerGruppe": {
+          "mailDistributionGroup": {
             "type": "string"
           },
           "intralink": {
@@ -1041,13 +1255,13 @@
             "type": "integer",
             "format": "int32"
           },
-          "kode": {
+          "code": {
             "type": "string"
           },
-          "navn": {
+          "name": {
             "type": "string"
           },
-          "beskrivelse": {
+          "description": {
             "type": "string"
           }
         },
@@ -1064,23 +1278,23 @@
             "type": "string",
             "description": ""
           },
-          "avdelingsliste": {
+          "departmentList": {
             "type": "string",
             "description": ""
           },
-          "arkDelListe": {
+          "archiveList": {
             "type": "string",
             "description": ""
           },
-          "journalEnhetListe": {
+          "journalUnitList": {
             "type": "string",
             "description": ""
           },
-          "graderingListe": {
+          "gradeList": {
             "type": "string",
             "description": ""
           },
-          "grmId": {
+          "id": {
             "type": "string",
             "description": ""
           },
@@ -1106,135 +1320,135 @@
             "type": "boolean",
             "description": ""
           },
-          "orgEnhetId": {
+          "orgUnitId": {
             "type": "string",
             "description": ""
           },
-          "offentligNr": {
+          "nationalNo": {
             "type": "string",
             "description": ""
           },
-          "gidKode": {
+          "code": {
             "type": "string",
             "description": ""
           },
-          "navn": {
+          "name": {
             "type": "string",
             "description": ""
           },
-          "tittel": {
+          "title": {
             "type": "string",
             "description": ""
           },
-          "landId": {
+          "countryId": {
             "type": "string",
             "description": ""
           },
-          "postNr": {
+          "postalNo": {
             "type": "string",
             "description": ""
           },
-          "kontakt": {
+          "contact": {
             "type": "string",
             "description": ""
           },
-          "adr": {
+          "addr": {
             "type": "string",
             "description": ""
           },
-          "adr2": {
+          "addr2": {
             "type": "string",
             "description": ""
           },
-          "tlf": {
+          "phone": {
             "type": "string",
             "description": ""
           },
-          "tlf2": {
+          "phone2": {
             "type": "string",
             "description": ""
           },
-          "mobil": {
+          "mobile": {
             "type": "string",
             "description": ""
           },
-          "emailAdr": {
+          "emailAddr": {
             "type": "string",
             "description": "Denne er obsolete - hentes fra emailadr i gia."
           },
-          "emailAdr2": {
+          "emailAddr2": {
             "type": "string",
             "description": "Redundant - se over."
           },
-          "spraakId": {
+          "languageId": {
             "type": "string",
             "description": ""
           },
-          "avdelingId": {
+          "departmentId": {
             "type": "string",
             "description": ""
           },
-          "kontonr": {
+          "accountNumber": {
             "type": "string",
             "description": ""
           },
-          "merknad": {
+          "note": {
             "type": "string",
             "description": ""
           },
-          "poststed": {
+          "place": {
             "type": "string",
             "description": ""
           },
-          "kommnr": {
+          "municipalityNo": {
             "type": "string",
             "description": ""
           },
-          "besoeksadr": {
+          "visitingAddress": {
             "type": "string",
             "description": ""
           },
-          "div1": {
+          "misc1": {
             "type": "string",
             "description": ""
           },
-          "div2": {
+          "misc2": {
             "type": "string",
             "description": ""
           },
-          "div3": {
+          "misc3": {
             "type": "string",
             "description": ""
           },
-          "div4": {
+          "misc4": {
             "type": "string",
             "description": ""
           },
-          "div5": {
+          "misc5": {
             "type": "string",
             "description": ""
           },
-          "adr3": {
+          "addr3": {
             "type": "string",
             "description": ""
           },
-          "adr4": {
+          "addr4": {
             "type": "string",
             "description": ""
           },
-          "permisjonfra": {
+          "leaveFrom": {
             "type": "string",
             "description": "",
             "format": "date-time",
             "nullable": true
           },
-          "permisjontil": {
+          "leaveTo": {
             "type": "string",
             "description": "",
             "format": "date-time",
             "nullable": true
           },
-          "kategoriId": {
+          "categoryId": {
             "type": "string",
             "description": ""
           },
@@ -1332,131 +1546,131 @@
             },
             "description": "Zones for User. set to null or empty to use default zone from db.\r\nAvailable zones can be fetched from [get]://api/zones"
           },
-          "offentligNr": {
+          "nationalNo": {
             "type": "string",
             "description": ""
           },
-          "gidKode": {
+          "code": {
             "type": "string",
             "description": ""
           },
-          "navn": {
+          "name": {
             "type": "string",
             "description": ""
           },
-          "tittel": {
+          "title": {
             "type": "string",
             "description": ""
           },
-          "landId": {
+          "countryId": {
             "type": "string",
             "description": ""
           },
-          "postNr": {
+          "postalNo": {
             "type": "string",
             "description": ""
           },
-          "kontakt": {
+          "contact": {
             "type": "string",
             "description": ""
           },
-          "adr": {
+          "addr": {
             "type": "string",
             "description": ""
           },
-          "adr2": {
+          "addr2": {
             "type": "string",
             "description": ""
           },
-          "tlf": {
+          "phone": {
             "type": "string",
             "description": ""
           },
-          "tlf2": {
+          "phone2": {
             "type": "string",
             "description": ""
           },
-          "mobil": {
+          "mobile": {
             "type": "string",
             "description": ""
           },
-          "emailAdr": {
+          "emailAddr": {
             "type": "string",
             "description": "Denne er obsolete - hentes fra emailadr i gia."
           },
-          "emailAdr2": {
+          "emailAddr2": {
             "type": "string",
             "description": "Redundant - se over."
           },
-          "spraakId": {
+          "languageId": {
             "type": "string",
             "description": ""
           },
-          "avdelingId": {
+          "departmentId": {
             "type": "string",
             "description": ""
           },
-          "kontonr": {
+          "accountNumber": {
             "type": "string",
             "description": ""
           },
-          "merknad": {
+          "note": {
             "type": "string",
             "description": ""
           },
-          "poststed": {
+          "place": {
             "type": "string",
             "description": ""
           },
-          "kommnr": {
+          "municipalityNo": {
             "type": "string",
             "description": ""
           },
-          "besoeksadr": {
+          "visitingAddress": {
             "type": "string",
             "description": ""
           },
-          "div1": {
+          "misc1": {
             "type": "string",
             "description": ""
           },
-          "div2": {
+          "misc2": {
             "type": "string",
             "description": ""
           },
-          "div3": {
+          "misc3": {
             "type": "string",
             "description": ""
           },
-          "div4": {
+          "misc4": {
             "type": "string",
             "description": ""
           },
-          "div5": {
+          "misc5": {
             "type": "string",
             "description": ""
           },
-          "adr3": {
+          "addr3": {
             "type": "string",
             "description": ""
           },
-          "adr4": {
+          "addr4": {
             "type": "string",
             "description": ""
           },
-          "permisjonfra": {
+          "leaveFrom": {
             "type": "string",
             "description": "",
             "format": "date-time",
             "nullable": true
           },
-          "permisjontil": {
+          "leaveTo": {
             "type": "string",
             "description": "",
             "format": "date-time",
             "nullable": true
           },
-          "kategoriId": {
+          "categoryId": {
             "type": "string",
             "description": ""
           },

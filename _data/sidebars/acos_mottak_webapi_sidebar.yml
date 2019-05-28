@@ -9,9 +9,9 @@ entries:
     output: web
     type: frontmatter
     folderitems: 
-    - title: Overview
-      url: /arkivmelding_index.html
-      output: web, pdf  
+    - title: Overview Acos Mottak WebApi 
+      url: /acos_mottak_webapi_index.html
+      output: web, pdf
     - title: /api/{tenant}/test
       url: /arkivmelding__api__tenant__test.html
       output: web, pdf

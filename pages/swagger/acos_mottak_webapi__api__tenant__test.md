@@ -11,5 +11,7 @@ toc: false
 swaggerfile: arkivmelding
 swaggerpath: paths
 swaggerkey: /api/{tenant}/test
+swagger_components: definitions
+components_file: acos_mottak_webapi
 ---
 {% include swagger_json/get_path.md %}

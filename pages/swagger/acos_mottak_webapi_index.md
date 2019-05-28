@@ -1,7 +1,7 @@
 ---
 title: Acos Mottak WebApi overview
 keywords: json, mottak, schemas
-permalink: arkivmelding_index.html
+permalink: acos_mottak_webapi_index.html
 ---
 # Code Examples
 

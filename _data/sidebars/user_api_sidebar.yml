@@ -45,11 +45,11 @@ entries:
     - title: /api/Users/{id}/RemoveUserFromAccessGroup/{accessGroupId}
       url: /userapi__api_users__id__removeuserfromaccessgroup__accessgroupid_.html
       output: web, pdf
-    - title: /api/Users/{id}/AddUserAsPostDistributor/{orgEnhetId}
-      url: /userapi__api_users__id__adduseraspostdistributor__orgenhetid_.html
+    - title: /api/Users/{id}/AddUserAsPostDistributor/{orgUnitId}
+      url: /userapi__api_users__id__adduseraspostdistributor__orgunitid_.html
       output: web, pdf
-    - title: /api/Users/{id}/RemoveUserAsPostDistributor
-      url: /userapi__api_users__id__removeuseraspostdistributor.html
+    - title: /api/Users/{id}/RemoveUserAsPostDistributor/{orgUnitId}
+      url: /userapi__api_users__id__removeuseraspostdistributor__orgunitid_.html
       output: web, pdf
     - title: /api/Zones
       url: /userapi__api_zones.html

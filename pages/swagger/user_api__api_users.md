@@ -11,5 +11,7 @@ toc: false
 swaggerfile: userapi
 swaggerpath: paths
 swaggerkey: /api/Users
+swagger_components: components
+components_file: user_api
 ---
 {% include swagger_json/get_path.md %}

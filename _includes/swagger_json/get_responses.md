@@ -33,11 +33,11 @@
                 {% assign linkText = componentRef  %}
             {% endif %}
             <td>
-                <a href="userapi_components.html#{{ componentRef | downcase }}" >{{ linkText }}</a>
+                <a href="{{ page.components_file }}_components.html#{{ componentRef | downcase }}" >{{ linkText }}</a>
             </td>
             </tr>
             {% assign _rcIdx = (_rcIdx + 1) %}        
         {% endfor %}      
     </tbody>
 </table>
-{%- include swagger_json/get_json_response_example.md componentName=_componentRef componentPath='components' componentType=_type -%}
+{%- include swagger_json/get_json_response_example.md componentName=_componentRef componentPath=page.swagger_components componentType=_type -%}
