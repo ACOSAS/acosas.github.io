@@ -17,7 +17,7 @@
         {%- endif -%}
                     : "{{- _typeJson["properties"].[_name].["type"] -}}"
         {%- if _typeJson["properties"].[_name].["description"] != null and _typeJson["properties"].[_name].["description"] != "" -%}
-            // {{ _typeJson["properties"].[_name].["description"] }}             
+             {{ <!--- // _typeJson["properties"].[_name].["description"] ---> }}             
             {%- unless forloop.last -%},{%- endunless -%}
         {%- else -%}
             {%- unless forloop.last -%},{%- endunless -%}    

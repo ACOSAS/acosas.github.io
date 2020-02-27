@@ -31,8 +31,9 @@
         {%- include swagger_json/get_model_json.md componentName=_subName2 componentPath=_highlighPath componentType=_subType2 -%}
     {%- else -%}
         "{{- _typeHightlight["properties"].[_name].["type"] -}}"       
-    {%- endif -%}   
-    {% if _typeHightlight["properties"].[_name].["description"] != null and _typeHightlight["properties"].[_name].["description"] != "" %} // {{- _typeHightlight["properties"].[_name].["description"] -}}
+    {%- endif -%}  
+    {% if _typeHightlight["properties"].[_name].["description"] != null and _typeHightlight["properties"].[_name].["description"] != "" %}  {{-  <!--- // _typeHightlight["properties"].[_name].["description"] ---> -}}
+       
         {% unless forloop.last %},
         {% endunless %}
     {%- else -%}             
