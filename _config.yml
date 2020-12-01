@@ -108,7 +108,7 @@ sidebars:
   # - name: documentation_sidebar
   - user_api_sidebar
   - acos_mottak_webapi_sidebar
-  - websak_integration_api_sidebar
+  - websak__integration_api_sidebar
 # - product1_sidebar
 # - product2_sidebar
 # - other
@@ -117,7 +117,7 @@ sidebars:
 site_sidebars: 
   - name : user_api_sidebar
   - name : acos_mottak_webapi_sidebar
-  - name : websak_integration_api_sidebar
+  - name : websak__integration_api_sidebar
 
 description: "Acos AS documentation is a collection of documentation of API documentations which Acos offers. "
 # the description is used in the feed.xml file

@@ -70,5 +70,5 @@ entries:
       url: /integration__api_integration_tilleggsdata_update.html
       output: web, pdf
     - title: Websak+ Integration API Models
-      url: /websak+_integration_api_components.html
+      url: /websak__integration_api_components.html
       output: web, pdf
