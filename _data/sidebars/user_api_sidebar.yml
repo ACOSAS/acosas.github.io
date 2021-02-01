@@ -9,6 +9,9 @@ entries:
     output: web
     type: frontmatter
     folderitems: 
+    - title: Overview User API 
+      url: /user_api_index.html
+      output: web, pdf
     - title: /api/AccessGroups
       url: /userapi__api_accessgroups.html
       output: web, pdf
