@@ -15,6 +15,9 @@ entries:
     - title: /api/AccessGroups
       url: /userapi__api_accessgroups.html
       output: web, pdf
+    - title: /api/AccessGroups/{id}
+      url: /userapi__api_accessgroups__id_.html
+      output: web, pdf
     - title: /api/Departments
       url: /userapi__api_departments.html
       output: web, pdf
@@ -45,8 +48,14 @@ entries:
     - title: /api/Users/{id}/AddUserToAccessGroup/{accessGroupId}
       url: /userapi__api_users__id__addusertoaccessgroup__accessgroupid_.html
       output: web, pdf
+    - title: /api/Users/{id}/AddUserToAccessGroupByGroupName/{accessGroupName}
+      url: /userapi__api_users__id__addusertoaccessgroupbygroupname__accessgroupname_.html
+      output: web, pdf
     - title: /api/Users/{id}/RemoveUserFromAccessGroup/{accessGroupId}
       url: /userapi__api_users__id__removeuserfromaccessgroup__accessgroupid_.html
+      output: web, pdf
+    - title: /api/Users/{id}/RemoveUserFromAccessGroupName/{accessGroupName}
+      url: /userapi__api_users__id__removeuserfromaccessgroupname__accessgroupname_.html
       output: web, pdf
     - title: /api/Users/{id}/AddUserAsPostDistributor/{orgUnitId}
       url: /userapi__api_users__id__adduseraspostdistributor__orgunitid_.html
