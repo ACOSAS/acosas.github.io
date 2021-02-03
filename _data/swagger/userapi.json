@@ -8,7 +8,7 @@
       "url": "http://wwww.acos.no/",
       "email": "utvikling@acos.no"
     },
-    "version": "1.0.0"
+    "version": "3.0.0"
   },
   "paths": {
     "/api/AccessGroups": {
@@ -21,7 +21,7 @@
           "200": {
             "description": "Success",
             "content": {
-              "text/plain": {
+              "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
@@ -44,7 +44,135 @@
                     "$ref": "#/components/schemas/AccessGroup"
                   }
                 }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
               },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "AccessGroups"
+        ],
+        "summary": "Create a new Access Group from JSON object provided.Returns JSON object representing created Access Group.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccessGroupRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccessGroupRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccessGroupRequest"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/AccessGroupRequest"
+              }
+            },
+            "text/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/AccessGroupRequest"
+              }
+            },
+            "application/*+xml": {
+              "schema": {
+                "$ref": "#/components/schemas/AccessGroupRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessGroup"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessGroup"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessGroup"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/AccessGroups/{id}": {
+      "get": {
+        "tags": [
+          "AccessGroups"
+        ],
+        "operationId": "accessgroups",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
@@ -53,12 +181,40 @@
                   }
                 }
               },
-              "text/json": {
+              "application/xml": {
                 "schema": {
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/AccessGroup"
                   }
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AccessGroup"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -76,7 +232,7 @@
           "200": {
             "description": "Success",
             "content": {
-              "text/plain": {
+              "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
@@ -99,21 +255,25 @@
                     "$ref": "#/components/schemas/Department"
                   }
                 }
-              },
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Department"
-                  }
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               },
-              "text/json": {
+              "application/xml": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Department"
-                  }
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -127,26 +287,6 @@
         "summary": "Create a new Department from JSON object provided.Returns JSON object representing created department.",
         "requestBody": {
           "content": {
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/DepartmentRequest"
-              }
-            },
-            "text/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/DepartmentRequest"
-              }
-            },
-            "application/*+xml": {
-              "schema": {
-                "$ref": "#/components/schemas/DepartmentRequest"
-              }
-            },
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/DepartmentRequest"
-              }
-            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/DepartmentRequest"
@@ -161,6 +301,21 @@
               "schema": {
                 "$ref": "#/components/schemas/DepartmentRequest"
               }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/DepartmentRequest"
+              }
+            },
+            "text/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/DepartmentRequest"
+              }
+            },
+            "application/*+xml": {
+              "schema": {
+                "$ref": "#/components/schemas/DepartmentRequest"
+              }
             }
           }
         },
@@ -168,7 +323,7 @@
           "201": {
             "description": "Success",
             "content": {
-              "text/plain": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Department"
                 }
@@ -182,15 +337,25 @@
                 "schema": {
                   "$ref": "#/components/schemas/Department"
                 }
-              },
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Department"
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               },
-              "text/json": {
+              "application/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/Department"
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -212,7 +377,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "default": ""
+              "nullable": true
             }
           }
         ],
@@ -233,6 +398,36 @@
               "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/Department"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Department"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -256,26 +451,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/DepartmentRequest"
-              }
-            },
-            "text/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/DepartmentRequest"
-              }
-            },
-            "application/*+xml": {
-              "schema": {
-                "$ref": "#/components/schemas/DepartmentRequest"
-              }
-            },
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/DepartmentRequest"
-              }
-            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/DepartmentRequest"
@@ -290,6 +465,21 @@
               "schema": {
                 "$ref": "#/components/schemas/DepartmentRequest"
               }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/DepartmentRequest"
+              }
+            },
+            "text/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/DepartmentRequest"
+              }
+            },
+            "application/*+xml": {
+              "schema": {
+                "$ref": "#/components/schemas/DepartmentRequest"
+              }
             }
           }
         },
@@ -297,7 +487,7 @@
           "200": {
             "description": "Success",
             "content": {
-              "text/plain": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Department"
                 }
@@ -311,15 +501,25 @@
                 "schema": {
                   "$ref": "#/components/schemas/Department"
                 }
-              },
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Department"
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               },
-              "text/json": {
+              "application/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/Department"
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -340,7 +540,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "default": ""
+              "nullable": true
             }
           }
         ],
@@ -348,7 +548,7 @@
           "200": {
             "description": "Success",
             "content": {
-              "text/plain": {
+              "application/json": {
                 "schema": {
                   "type": "string"
                 }
@@ -362,15 +562,25 @@
                 "schema": {
                   "type": "string"
                 }
-              },
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
               "application/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               },
-              "text/json": {
+              "application/xml": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -391,13 +601,30 @@
             "required": true,
             "schema": {
               "type": "string",
-              "default": ""
+              "nullable": true
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       }
@@ -420,12 +647,40 @@
                   }
                 }
               },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WebsakUser"
+                  }
+                }
+              },
               "text/xml": {
                 "schema": {
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/WebsakUser"
                   }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -440,14 +695,9 @@
           "Users"
         ],
         "summary": "Create a new WebsakUser from JSON object provided.Returns JSON object representing created user.",
-        "description": "Creates a Websak user based on the JSON data provided in the request.\r\nEksternAvdelingID – External department id, this value will be matched against DIV1 for lookup value.  <br />\r\nTilgangsOppsettID – ID for template for the user being created, the user gets access and roles based on this template. <br />\r\nLookupField - Name of field that is used to lookup existing user.<br />\r\nParameters: JSON Data object <br />",
+        "description": "Creates a Websak user based on the JSON data provided in the request.<br />\r\nExternalDepartmentID – External department id, this value will be matched against misc1 for lookup value. <br />\r\nTilgangsOppsettID – ID for template for the user being created, the user gets access and roles based on this template. <br />\r\nLookupField - Name of field that is used to lookup existing user.<br />\r\nParameters: JSON Data object Acos.Websak.UserAPI.Core.Models.UserRequest<br />",
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/UserRequest"
-              }
-            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/UserRequest"
@@ -467,9 +717,14 @@
         },
         "responses": {
           "201": {
-            "description": "Created json object with new/updated user, and the GET url to user api/user/{NyId}. <br />",
+            "description": "Created json object with new/updated user, and the GET url to user api/user/{newId}. <br />",
             "content": {
               "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebsakUser"
+                }
+              },
+              "application/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/WebsakUser"
                 }
@@ -477,6 +732,46 @@
               "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/WebsakUser"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Object with updated user, and the GET url to user api/user/{newId}. <br />",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebsakUser"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebsakUser"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebsakUser"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -501,7 +796,8 @@
             "required": true,
             "schema": {
               "type": "string",
-              "default": ""
+              "description": "Returns users changed after this date, format YYYY-MM-DD",
+              "nullable": true
             }
           }
         ],
@@ -517,12 +813,40 @@
                   }
                 }
               },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WebsakUser"
+                  }
+                }
+              },
               "text/xml": {
                 "schema": {
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/WebsakUser"
                   }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -552,7 +876,8 @@
             "required": true,
             "schema": {
               "type": "string",
-              "default": ""
+              "description": "User AD string identifier or login id",
+              "nullable": true
             }
           }
         ],
@@ -565,9 +890,34 @@
                   "$ref": "#/components/schemas/WebsakUser"
                 }
               },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebsakUser"
+                }
+              },
               "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/WebsakUser"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -576,6 +926,11 @@
             "description": "User not found",
             "content": {
               "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
@@ -596,8 +951,8 @@
         "tags": [
           "Users"
         ],
-        "summary": "Updates websak user with data from JSON object provided.\r\nAll values from JSON object updates stored object.",
-        "description": "Updates user based on values in JSON object in request. Values in the request will be mapped to Websak user.<br />\r\nValues not included in JSON will be translated either to \"\" (empty string) or [null].\r\nSide effect: Not included properties will *cause* date to be deleted/overwritten.\r\nInclude all data always. \r\nIf eksternal department and/or access is changed, then current access are reset to new access profile.\r\nReturn values : 200 OK - User Created/Updated. <br />\r\n404 - Unknown user<br />\r\n500 - Error message contains more details<br />",
+        "summary": "Updates websak user with data from JSON object provided.<br />\r\nAll values from JSON object updates stored object.<br />",
+        "description": "Updates user based on values in JSON object in request. Values in the request will be mapped to Websak user.<br />\r\nValues not included in JSON will be translated either to \"\" (empty string) or [null].<br />\r\nSide effect: Not included properties will <strong>cause</strong> date to be deleted/overwritten.<br />\r\nInclude all data always. <br />\r\nIf external department and/or access is changed, then current access are reset to new access profile.<br />\r\nReturn values : 200 OK - User Created/Updated. <br />\r\n404 - Unknown user<br />\r\n500 - Error message contains more details<br />",
         "parameters": [
           {
             "name": "id",
@@ -610,11 +965,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/UserRequest"
-              }
-            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/UserRequest"
@@ -641,6 +991,11 @@
                   "$ref": "#/components/schemas/WebsakUser"
                 }
               },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebsakUser"
+                }
+              },
               "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/WebsakUser"
@@ -656,9 +1011,34 @@
                   "type": "string"
                 }
               },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
               "text/xml": {
                 "schema": {
                   "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -667,6 +1047,11 @@
             "description": "Not Found",
             "content": {
               "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
                 "schema": {
                   "type": "string"
                 }
@@ -682,6 +1067,11 @@
             "description": "Server Error",
             "content": {
               "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
                 "schema": {
                   "type": "string"
                 }
@@ -702,7 +1092,7 @@
           "Users"
         ],
         "summary": "Deactivate websak user by setting expiration date to yesterday",
-        "description": "Activates or deactivates a user<br /><p>User will be deactivated immedate by setting profile date to yesterday.</p>\r\nParameter {id} : Username <br />\r\n   Return values : http response OK/NotFound with status message, or internalserver error + exception <br />",
+        "description": "Activates or deactivates a user<br /><p>User will be deactivated immedately by setting profile date to yesterday.</p>\r\nParameter {id} : Username <br />\r\n   Return values : http response OK/NotFound with status message, or internalserver error + exception <br />",
         "parameters": [
           {
             "name": "id",
@@ -711,7 +1101,8 @@
             "required": true,
             "schema": {
               "type": "string",
-              "default": ""
+              "description": "User AD string identifier",
+              "nullable": true
             }
           }
         ],
@@ -720,6 +1111,11 @@
             "description": "Success",
             "content": {
               "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
                 "schema": {
                   "type": "string"
                 }
@@ -739,9 +1135,34 @@
                   "type": "string"
                 }
               },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
               "text/xml": {
                 "schema": {
                   "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -750,6 +1171,11 @@
             "description": "Not Found",
             "content": {
               "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
                 "schema": {
                   "type": "string"
                 }
@@ -770,7 +1196,7 @@
           "Users"
         ],
         "summary": "Activates websak user by setting expiration date to [null]",
-        "description": "Activates a user.<br /><p>User is immedately activated by removing expiration date from profile.</p>\r\nParametere {id} : ADBrukernavn <br />\r\n   Return verdier : http response OK/NotFound with status message, or internalserver error + exception <br />",
+        "description": "Activates a user.<br /><p>User is immedately activated by removing expiration date from profile.</p>\r\nParametere {id} : ADBrukernavn <br />\r\n   Return values : http response OK/NotFound with status message, or internalserver error + exception <br />",
         "parameters": [
           {
             "name": "id",
@@ -779,7 +1205,8 @@
             "required": true,
             "schema": {
               "type": "string",
-              "default": ""
+              "description": "User AD string identifier",
+              "nullable": true
             }
           }
         ],
@@ -788,6 +1215,11 @@
             "description": "Success",
             "content": {
               "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
                 "schema": {
                   "type": "string"
                 }
@@ -807,9 +1239,34 @@
                   "type": "string"
                 }
               },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
               "text/xml": {
                 "schema": {
                   "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -818,6 +1275,11 @@
             "description": "Not Found",
             "content": {
               "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
                 "schema": {
                   "type": "string"
                 }
@@ -847,7 +1309,8 @@
             "required": true,
             "schema": {
               "type": "string",
-              "default": ""
+              "description": "User AD string identifier",
+              "nullable": true
             }
           },
           {
@@ -857,7 +1320,8 @@
             "required": true,
             "schema": {
               "type": "string",
-              "default": ""
+              "description": "Access group id",
+              "nullable": true
             }
           }
         ],
@@ -870,9 +1334,34 @@
                   "type": "string"
                 }
               },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
               "text/xml": {
                 "schema": {
                   "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -881,6 +1370,106 @@
             "description": "Server Error",
             "content": {
               "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Users/{id}/AddUserToAccessGroupByGroupName/{accessGroupName}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Add user to provided access group.",
+        "description": "Adds the user to provided access group. Access group name must already be defined in system.<br />\r\nParameter {id} – ADBrukernavn <br />\r\n   Parameter {accessGroupName} – Websak access group name <br />\r\n   Return values : 200 OK, 500 + error message. <br />",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User AD string identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "User AD string identifier",
+              "nullable": true
+            }
+          },
+          {
+            "name": "accessGroupName",
+            "in": "path",
+            "description": "Access group id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Access group id",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
                 "schema": {
                   "type": "string"
                 }
@@ -901,7 +1490,7 @@
           "Users"
         ],
         "summary": "Removes user from access group",
-        "description": "Removes a user from provided access group. Access group id must be defined in the system.\r\nParameter {id} – AD Username <br />\r\n   Parameter {accessGroupId} – Websak access group ID <br />\r\n   Return values: 200 OK, 500 + error message. <br />",
+        "description": "Removes a user from provided access group. Access group id must be defined in the system.<br />\r\nParameter {id} – AD Username <br />\r\n   Parameter {accessGroupId} – Websak access group ID <br />\r\n   Return values: 200 OK, 500 + error message. <br />",
         "parameters": [
           {
             "name": "id",
@@ -910,7 +1499,8 @@
             "required": true,
             "schema": {
               "type": "string",
-              "default": ""
+              "description": "User AD string identifier",
+              "nullable": true
             }
           },
           {
@@ -920,7 +1510,8 @@
             "required": true,
             "schema": {
               "type": "string",
-              "default": ""
+              "description": "Access group id",
+              "nullable": true
             }
           }
         ],
@@ -933,9 +1524,34 @@
                   "type": "string"
                 }
               },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
               "text/xml": {
                 "schema": {
                   "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -944,6 +1560,106 @@
             "description": "Server Error",
             "content": {
               "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Users/{id}/RemoveUserFromAccessGroupName/{accessGroupName}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Removes user from access group",
+        "description": "Removes a user from provided access group. Access group id must be defined in the system.<br />\r\nParameter {id} – AD Username <br />\r\n   Parameter {accessGroupName} – Websak access group name <br />\r\n   Return values: 200 OK, 500 + error message. <br />",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User AD string identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "User AD string identifier",
+              "nullable": true
+            }
+          },
+          {
+            "name": "accessGroupName",
+            "in": "path",
+            "description": "Access group id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Access group id",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
                 "schema": {
                   "type": "string"
                 }
@@ -972,7 +1688,8 @@
             "required": true,
             "schema": {
               "type": "string",
-              "default": ""
+              "description": "User AD string identifier",
+              "nullable": true
             }
           },
           {
@@ -982,7 +1699,8 @@
             "required": true,
             "schema": {
               "type": "string",
-              "default": ""
+              "description": "departement id",
+              "nullable": true
             }
           }
         ],
@@ -995,9 +1713,34 @@
                   "type": "string"
                 }
               },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
               "text/xml": {
                 "schema": {
                   "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -1006,6 +1749,11 @@
             "description": "Server Error",
             "content": {
               "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
                 "schema": {
                   "type": "string"
                 }
@@ -1034,7 +1782,8 @@
             "required": true,
             "schema": {
               "type": "string",
-              "default": ""
+              "description": "User AD string identifier",
+              "nullable": true
             }
           },
           {
@@ -1044,7 +1793,8 @@
             "required": true,
             "schema": {
               "type": "string",
-              "default": ""
+              "description": "departement id",
+              "nullable": true
             }
           }
         ],
@@ -1057,9 +1807,34 @@
                   "type": "string"
                 }
               },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
               "text/xml": {
                 "schema": {
                   "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -1068,6 +1843,11 @@
             "description": "Server Error",
             "content": {
               "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
                 "schema": {
                   "type": "string"
                 }
@@ -1092,7 +1872,7 @@
           "200": {
             "description": "Success",
             "content": {
-              "text/plain": {
+              "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
@@ -1115,21 +1895,25 @@
                     "$ref": "#/components/schemas/WebsakEnvironment"
                   }
                 }
-              },
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WebsakEnvironment"
-                  }
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               },
-              "text/json": {
+              "application/xml": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WebsakEnvironment"
-                  }
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -1144,16 +1928,20 @@
         "type": "object",
         "properties": {
           "groupId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "groupName": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "general": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "createdById": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "fromDate": {
             "type": "string",
@@ -1165,32 +1953,77 @@
             "format": "date-time",
             "nullable": true
           }
+        }
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
         },
-        "additionalProperties": false
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
+      "AccessGroupRequest": {
+        "type": "object",
+        "properties": {
+          "groupName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "description": ""
       },
       "Department": {
         "type": "object",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "code": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "parentDepartmentId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "abbreviation": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "unit": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "group": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "validFromDate": {
             "type": "string",
@@ -1203,49 +2036,59 @@
             "nullable": true
           },
           "journalUnitId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "archiveUnit": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "managerUserId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "level": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "gidId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "mailDistributionGroup": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "intralink": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "DepartmentRequest": {
         "type": "object",
         "properties": {
           "departmentName": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "departmentShortName": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "departmentId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "departmentParentId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "departmentHeadId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         },
-        "additionalProperties": false,
         "description": ""
       },
       "AccessFunction": {
@@ -1256,53 +2099,62 @@
             "format": "int32"
           },
           "code": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "description": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "UserRole": {
         "type": "object",
         "properties": {
           "roleId": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "roleUserId": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "departmentList": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "archiveList": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "journalUnitList": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "gradeList": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "id": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "description": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         },
-        "additionalProperties": false,
         "description": "Is not returned today."
       },
       "WebsakUser": {
@@ -1310,11 +2162,13 @@
         "properties": {
           "gidId": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "externalUsername": {
             "type": "string",
-            "description": "På vei ut. Må erstattes med noe lurt til websak 8  her bruker vi jo glm_loginmapping. Feltet må også skifte navn. ExternalUserId?"
+            "description": "[Obsolete]",
+            "nullable": true
           },
           "active": {
             "type": "boolean",
@@ -1322,119 +2176,148 @@
           },
           "orgUnitId": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "nationalNo": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "code": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "name": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "title": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "countryId": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "postalNo": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "contact": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "addr": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "addr2": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "phone": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "phone2": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "mobile": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "emailAddr": {
             "type": "string",
-            "description": "Denne er obsolete - hentes fra emailadr i gia."
+            "description": "This is obsolete - collected from emailaddr in gia.",
+            "nullable": true
           },
           "emailAddr2": {
             "type": "string",
-            "description": "Redundant - se over."
+            "description": "Redunant - see Acos.Websak.UserAPI.Core.Models.WebsakUserBase.EmailAddr.",
+            "nullable": true
           },
           "languageId": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "departmentId": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "accountNumber": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "note": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "place": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "municipalityNo": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "visitingAddress": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "misc1": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "misc2": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "misc3": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "misc4": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "misc5": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "addr3": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "addr4": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "leaveFrom": {
             "type": "string",
@@ -1450,25 +2333,28 @@
           },
           "categoryId": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "userAccessCodes": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "userAccessFunctions": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AccessFunction"
-            }
+            },
+            "nullable": true
           },
           "userRoles": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/UserRole"
-            }
+            },
+            "nullable": true
           }
         },
-        "additionalProperties": false,
         "description": ""
       },
       "UserAccess": {
@@ -1476,14 +2362,17 @@
         "properties": {
           "domain": {
             "type": "string",
-            "description": "User domain for login =&gt; used for 8.x versions"
+            "description": "User domain for login => used for 8.x versions",
+            "nullable": true
           },
           "provider": {
             "type": "string",
-            "description": "Used to set provider for login details."
+            "description": "Used to set provider for login details.",
+            "nullable": true
           },
           "key": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "isPrimary": {
             "type": "boolean",
@@ -1495,48 +2384,55 @@
             "format": "int32",
             "readOnly": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "UserRequest": {
         "type": "object",
         "properties": {
           "username": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "externalDepartmentId": {
             "type": "string",
-            "description": "Avdelingsnavn som mappes mot gid_div1 from soa_Avdeling join gid_identitet on soa_gidid = gid_gidid"
+            "description": "Departmentname: Mapped agains misc1",
+            "nullable": true
           },
           "accessTemplateId": {
             "type": "string",
-            "description": "Dette er profilen til brukeren - gid_gidid/sbr_brukerid"
+            "description": "This is user profile",
+            "nullable": true
           },
           "mailAddresses": {
             "type": "array",
             "items": {
               "type": "string"
             },
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "id": {
             "type": "string",
-            "description": "gid_gidid"
+            "description": "gid_gidid",
+            "nullable": true
           },
           "lookupField": {
             "type": "string",
-            "description": "Man kan bruke dette for å gjenfinne en bruker gitt angitt felt i gid"
+            "description": "Use this to set lookup field in user",
+            "nullable": true
           },
           "userType": {
             "type": "string",
-            "description": "B dersom bruker, P dersom profil"
+            "description": "B=>User,  P => Profile",
+            "nullable": true
           },
           "userAccesses": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/UserAccess"
-            }
+            },
+            "nullable": true
           },
           "accessToZones": {
             "type": "array",
@@ -1544,119 +2440,148 @@
               "type": "integer",
               "format": "int32"
             },
-            "description": "Zones for User. set to null or empty to use default zone from db.\r\nAvailable zones can be fetched from [get]://api/zones"
+            "description": "Zones for User. set to null or empty to use default zone from db.\r\nAvailable zones can be fetched from [get]://api/zones",
+            "nullable": true
           },
           "nationalNo": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "code": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "name": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "title": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "countryId": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "postalNo": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "contact": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "addr": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "addr2": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "phone": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "phone2": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "mobile": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "emailAddr": {
             "type": "string",
-            "description": "Denne er obsolete - hentes fra emailadr i gia."
+            "description": "This is obsolete - collected from emailaddr in gia.",
+            "nullable": true
           },
           "emailAddr2": {
             "type": "string",
-            "description": "Redundant - se over."
+            "description": "Redunant - see Acos.Websak.UserAPI.Core.Models.WebsakUserBase.EmailAddr.",
+            "nullable": true
           },
           "languageId": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "departmentId": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "accountNumber": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "note": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "place": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "municipalityNo": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "visitingAddress": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "misc1": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "misc2": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "misc3": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "misc4": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "misc5": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "addr3": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "addr4": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "leaveFrom": {
             "type": "string",
@@ -1672,51 +2597,29 @@
           },
           "categoryId": {
             "type": "string",
-            "description": ""
+            "description": "",
+            "nullable": true
           },
           "userAccessCodes": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "userAccessFunctions": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AccessFunction"
-            }
+            },
+            "nullable": true
           },
           "userRoles": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/UserRole"
-            }
-          }
-        },
-        "additionalProperties": false,
-        "description": ""
-      },
-      "ProblemDetails": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string"
-          },
-          "title": {
-            "type": "string"
-          },
-          "status": {
-            "type": "integer",
-            "format": "int32",
+            },
             "nullable": true
-          },
-          "detail": {
-            "type": "string"
-          },
-          "instance": {
-            "type": "string"
           }
         },
-        "additionalProperties": {
-          "type": "object"
-        }
+        "description": ""
       },
       "Zone": {
         "type": "object",
@@ -1726,10 +2629,12 @@
             "format": "int32"
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "description": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "writeProtected": {
             "type": "boolean"
@@ -1741,8 +2646,7 @@
             "type": "integer",
             "format": "int32"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "WebsakEnvironment": {
         "type": "object",
@@ -1752,28 +2656,44 @@
             "format": "int32"
           },
           "referenceId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "zone": {
             "$ref": "#/components/schemas/Zone"
           }
-        },
-        "additionalProperties": false
+        }
       }
     },
     "securitySchemes": {
-      "Bearer": {
-        "type": "apiKey",
-        "description": "Please enter JWT with Bearer into field",
-        "name": "Authorization",
-        "in": "header"
+      "oauth2": {
+        "type": "oauth2",
+        "flows": {
+          "clientCredentials": {
+            "authorizationUrl": "https://gaular.intern.acos.no:5007/",
+            "tokenUrl": "https://gaular.intern.acos.no:5007/connect/token",
+            "scopes": {
+              "userapi": "User API"
+            }
+          }
+        }
+      },
+      "bearer": {
+        "type": "http",
+        "description": "Please enter JWT into field",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   },
   "security": [
-    { }
+    {
+      "bearer": [ ],
+      "oauth2": [ ]
+    }
   ]
 }
