@@ -70,7 +70,7 @@ A user must be defined in WebSak and given role access and concrete permissions.
     "lookupField": "Code",
     "userType": "B",
     "userAccesses": [{
-        "domain": " pit-test.no ",
+        "domain": " domene.no ",
         "provider": "adfs",
         "key": "navn@domene.no"
     }],
@@ -104,7 +104,7 @@ To update a user use http put to /api/users/{id}. Send a complete user object. T
     "lookupField": "Code",
     "userType": "B",
     "userAccesses": [{
-        "domain": " pit-test.no ",
+        "domain": " domene.no ",
         "provider": "adfs",
         "key": "navn@domene.no"
     }],
