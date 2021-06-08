@@ -87,3 +87,11 @@ footer {
         height: 70%;
     }
 }
+
+@media (min-width:1300px) {
+    .container {
+        width: 80% !important;
+        min-width: 80%;
+        max-width: 80%;
+    }
+}

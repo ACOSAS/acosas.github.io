@@ -1863,7 +1863,7 @@ blockquote.pull-right {
     padding-left: 0;
     text-align: right;
     border-right: 5px solid #eee;
-    border-left: 0
+    border-left: 0;
 }
 
 .blockquote-reverse .small:before,
@@ -1887,14 +1887,14 @@ blockquote.pull-right small:after {
 address {
     margin-bottom: 20px;
     font-style: normal;
-    line-height: 1.42857143
+    line-height: 1.42857143;
 }
 
 code,
 kbd,
 pre,
 samp {
-    font-family: Menlo, Monaco, Consolas, "Courier New", monospace
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace ;
 }
 
 code {
@@ -1902,7 +1902,7 @@ code {
     font-size: 90%;
     color: #c7254e;
     background-color: #f9f2f4;
-    border-radius: 4px
+    border-radius: 4px;
 }
 
 kbd {
@@ -1930,7 +1930,7 @@ pre {
     word-wrap: break-word;
     background-color: #f5f5f5;
     border: 1px solid #ccc;
-    border-radius: 4px
+    border-radius: 4px;
 }
 
 pre code {
@@ -1939,36 +1939,38 @@ pre code {
     color: inherit;
     white-space: pre-wrap;
     background-color: transparent;
-    border-radius: 0
+    border-radius: 0;
 }
 
 .pre-scrollable {
     max-height: 340px;
-    overflow-y: scroll
+    overflow-y: scroll;
 }
 
 .container {
     padding-right: 15px;
     padding-left: 15px;
     margin-right: auto;
-    margin-left: auto
+    margin-left: auto;
 }
 
 @media (min-width:768px) {
     .container {
-        width: 750px
+        width: 750px;
     }
 }
 
 @media (min-width:992px) {
     .container {
-        width: 970px
+        width: 970px;
     }
 }
 
 @media (min-width:1200px) {
     .container {
-        width: 1170px
+        width: 80%;
+        min-width: 80%;
+        max-width: 80%;
     }
 }
 
@@ -1981,7 +1983,7 @@ pre code {
 
 .row {
     margin-right: -15px;
-    margin-left: -15px
+    margin-left: -15px;
 }
 
 .col-lg-1,
@@ -6892,8 +6894,7 @@ button.close {
         width: 600px;
         margin: 30px auto
     }
-    .modal-content {
-    }
+    /* .modal-content {} */
     .modal-sm {
         width: 300px
     }

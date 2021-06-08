@@ -634,7 +634,61 @@
         "tags": [
           "Users"
         ],
-        "summary": "Gets all users defined in the system",
+        "summary": "Gets all users defined in the system user limit=x&offset=n to paginate\r\nTo include email,access and roles, use following parameters\r\n&includeEmailAddresses=true&includeUserAccess=true&includeRoles=true",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limit reponse to x rows",
+            "schema": {
+              "type": "integer",
+              "description": "Limit reponse to x rows",
+              "format": "int32",
+              "default": 10000
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "offset reponse rows",
+            "schema": {
+              "type": "integer",
+              "description": "offset reponse rows",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "includeEmailAddresses",
+            "in": "query",
+            "description": "bool to include or exclude user email addresses",
+            "schema": {
+              "type": "boolean",
+              "description": "bool to include or exclude user email addresses",
+              "default": false
+            }
+          },
+          {
+            "name": "includeUserAccess",
+            "in": "query",
+            "description": "bool to include or exclude user access information",
+            "schema": {
+              "type": "boolean",
+              "description": "bool to include or exclude user access information",
+              "default": false
+            }
+          },
+          {
+            "name": "includeRoles",
+            "in": "query",
+            "description": "bool to include or exclude roles assigned to user",
+            "schema": {
+              "type": "boolean",
+              "description": "bool to include or exclude roles assigned to user",
+              "default": false
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Ok",
@@ -695,7 +749,7 @@
           "Users"
         ],
         "summary": "Create a new WebsakUser from JSON object provided.Returns JSON object representing created user.",
-        "description": "Creates a Websak user based on the JSON data provided in the request.<br />\r\nExternalDepartmentID – External department id, this value will be matched against misc1 for lookup value. <br />\r\nTilgangsOppsettID – ID for template for the user being created, the user gets access and roles based on this template. <br />\r\nLookupField - Name of field that is used to lookup existing user.<br />\r\nParameters: JSON Data object Acos.Websak.UserAPI.Core.Models.UserRequest<br />",
+        "description": "Creates a Websak user based on the JSON data provided in the request.<br />\r\nExternalDepartmentID – External department id, this value will be matched against misc1 for lookup value. <br />\r\nDepartmentCode - Department code => value will be matched against Department unit code. ExternalDepartmentID is then disregarded.\r\nTilgangsOppsettID – ID for template for the user being created, the user gets access and roles based on this template. <br />\r\nLookupField - Name of field that is used to lookup existing user.<br />\r\nParameters: JSON Data object Acos.Websak.UserAPI.Core.Models.UserRequest<br />",
         "requestBody": {
           "content": {
             "application/json": {
@@ -2179,6 +2233,11 @@
             "description": "",
             "nullable": true
           },
+          "accessTemplateId": {
+            "type": "string",
+            "description": "This is user profile",
+            "nullable": true
+          },
           "nationalNo": {
             "type": "string",
             "description": "",
@@ -2257,6 +2316,10 @@
           "departmentId": {
             "type": "string",
             "description": "",
+            "nullable": true
+          },
+          "departmentCode": {
+            "type": "string",
             "nullable": true
           },
           "accountNumber": {
@@ -2399,9 +2462,9 @@
             "description": "Departmentname: Mapped agains misc1",
             "nullable": true
           },
-          "accessTemplateId": {
+          "departmentCode": {
             "type": "string",
-            "description": "This is user profile",
+            "description": "Assign user to department by using department code (SOA_AdmKort) \r\nCode will be used to find department in which new user is assigned.",
             "nullable": true
           },
           "mailAddresses": {
@@ -2441,6 +2504,11 @@
               "format": "int32"
             },
             "description": "Zones for User. set to null or empty to use default zone from db.\r\nAvailable zones can be fetched from [get]://api/zones",
+            "nullable": true
+          },
+          "accessTemplateId": {
+            "type": "string",
+            "description": "This is user profile",
             "nullable": true
           },
           "nationalNo": {
