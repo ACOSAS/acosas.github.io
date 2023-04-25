@@ -110,7 +110,7 @@
         },
         "responses": {
           "201": {
-            "description": "Success",
+            "description": "Created",
             "content": {
               "application/json": {
                 "schema": {
@@ -157,15 +157,81 @@
         "tags": [
           "AccessGroups"
         ],
-        "operationId": "accessgroups",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "nullable": true
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AccessGroup"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AccessGroup"
+                  }
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AccessGroup"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/AccessGroups/members/{id}": {
+      "get": {
+        "tags": [
+          "AccessGroups"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -321,7 +387,7 @@
         },
         "responses": {
           "201": {
-            "description": "Success",
+            "description": "Created",
             "content": {
               "application/json": {
                 "schema": {
@@ -376,8 +442,7 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "nullable": true
+              "type": "string"
             }
           }
         ],
@@ -539,8 +604,7 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "nullable": true
+              "type": "string"
             }
           }
         ],
@@ -600,8 +664,7 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "nullable": true
+              "type": "string"
             }
           }
         ],
@@ -642,7 +705,6 @@
             "description": "Limit reponse to x rows",
             "schema": {
               "type": "integer",
-              "description": "Limit reponse to x rows",
               "format": "int32",
               "default": 10000
             }
@@ -653,7 +715,6 @@
             "description": "offset reponse rows",
             "schema": {
               "type": "integer",
-              "description": "offset reponse rows",
               "format": "int32",
               "default": 0
             }
@@ -664,7 +725,6 @@
             "description": "bool to include or exclude user email addresses",
             "schema": {
               "type": "boolean",
-              "description": "bool to include or exclude user email addresses",
               "default": false
             }
           },
@@ -674,7 +734,6 @@
             "description": "bool to include or exclude user access information",
             "schema": {
               "type": "boolean",
-              "description": "bool to include or exclude user access information",
               "default": false
             }
           },
@@ -684,7 +743,6 @@
             "description": "bool to include or exclude roles assigned to user",
             "schema": {
               "type": "boolean",
-              "description": "bool to include or exclude roles assigned to user",
               "default": false
             }
           }
@@ -849,9 +907,7 @@
             "description": "Returns users changed after this date, format YYYY-MM-DD",
             "required": true,
             "schema": {
-              "type": "string",
-              "description": "Returns users changed after this date, format YYYY-MM-DD",
-              "nullable": true
+              "type": "string"
             }
           }
         ],
@@ -929,9 +985,7 @@
             "description": "User AD string identifier or login id",
             "required": true,
             "schema": {
-              "type": "string",
-              "description": "User AD string identifier or login id",
-              "nullable": true
+              "type": "string"
             }
           }
         ],
@@ -1154,9 +1208,7 @@
             "description": "User AD string identifier",
             "required": true,
             "schema": {
-              "type": "string",
-              "description": "User AD string identifier",
-              "nullable": true
+              "type": "string"
             }
           }
         ],
@@ -1258,9 +1310,7 @@
             "description": "User AD string identifier",
             "required": true,
             "schema": {
-              "type": "string",
-              "description": "User AD string identifier",
-              "nullable": true
+              "type": "string"
             }
           }
         ],
@@ -1362,9 +1412,7 @@
             "description": "User AD string identifier",
             "required": true,
             "schema": {
-              "type": "string",
-              "description": "User AD string identifier",
-              "nullable": true
+              "type": "string"
             }
           },
           {
@@ -1373,9 +1421,7 @@
             "description": "Access group id",
             "required": true,
             "schema": {
-              "type": "string",
-              "description": "Access group id",
-              "nullable": true
+              "type": "string"
             }
           }
         ],
@@ -1443,6 +1489,96 @@
         }
       }
     },
+    "/api/Users/{id}/AccessGroupMembership": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "List the named accessgroups a user is member of.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "GidID for the User",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AccessGroup"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AccessGroup"
+                  }
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AccessGroup"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Users/{id}/AddUserToAccessGroupByGroupName/{accessGroupName}": {
       "get": {
         "tags": [
@@ -1457,9 +1593,7 @@
             "description": "User AD string identifier",
             "required": true,
             "schema": {
-              "type": "string",
-              "description": "User AD string identifier",
-              "nullable": true
+              "type": "string"
             }
           },
           {
@@ -1468,9 +1602,7 @@
             "description": "Access group id",
             "required": true,
             "schema": {
-              "type": "string",
-              "description": "Access group id",
-              "nullable": true
+              "type": "string"
             }
           }
         ],
@@ -1552,9 +1684,7 @@
             "description": "User AD string identifier",
             "required": true,
             "schema": {
-              "type": "string",
-              "description": "User AD string identifier",
-              "nullable": true
+              "type": "string"
             }
           },
           {
@@ -1563,9 +1693,7 @@
             "description": "Access group id",
             "required": true,
             "schema": {
-              "type": "string",
-              "description": "Access group id",
-              "nullable": true
+              "type": "string"
             }
           }
         ],
@@ -1647,9 +1775,7 @@
             "description": "User AD string identifier",
             "required": true,
             "schema": {
-              "type": "string",
-              "description": "User AD string identifier",
-              "nullable": true
+              "type": "string"
             }
           },
           {
@@ -1658,9 +1784,7 @@
             "description": "Access group id",
             "required": true,
             "schema": {
-              "type": "string",
-              "description": "Access group id",
-              "nullable": true
+              "type": "string"
             }
           }
         ],
@@ -1741,9 +1865,7 @@
             "description": "User AD string identifier",
             "required": true,
             "schema": {
-              "type": "string",
-              "description": "User AD string identifier",
-              "nullable": true
+              "type": "string"
             }
           },
           {
@@ -1752,9 +1874,7 @@
             "description": "departement id",
             "required": true,
             "schema": {
-              "type": "string",
-              "description": "departement id",
-              "nullable": true
+              "type": "string"
             }
           }
         ],
@@ -1835,9 +1955,7 @@
             "description": "User AD string identifier",
             "required": true,
             "schema": {
-              "type": "string",
-              "description": "User AD string identifier",
-              "nullable": true
+              "type": "string"
             }
           },
           {
@@ -1846,9 +1964,7 @@
             "description": "departement id",
             "required": true,
             "schema": {
-              "type": "string",
-              "description": "departement id",
-              "nullable": true
+              "type": "string"
             }
           }
         ],
@@ -1978,6 +2094,28 @@
   },
   "components": {
     "schemas": {
+      "AccessFunction": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "AccessGroup": {
         "type": "object",
         "properties": {
@@ -2007,36 +2145,8 @@
             "format": "date-time",
             "nullable": true
           }
-        }
-      },
-      "ProblemDetails": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "nullable": true
-          },
-          "title": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "detail": {
-            "type": "string",
-            "nullable": true
-          },
-          "instance": {
-            "type": "string",
-            "nullable": true
-          }
         },
-        "additionalProperties": {
-          "type": "object"
-        }
+        "additionalProperties": false
       },
       "AccessGroupRequest": {
         "type": "object",
@@ -2046,12 +2156,17 @@
             "nullable": true
           }
         },
+        "additionalProperties": false,
         "description": ""
       },
       "Department": {
         "type": "object",
         "properties": {
           "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "externalId": {
             "type": "string",
             "nullable": true
           },
@@ -2117,7 +2232,8 @@
             "type": "string",
             "nullable": true
           }
-        }
+        },
+        "additionalProperties": false
       },
       "DepartmentRequest": {
         "type": "object",
@@ -2141,98 +2257,75 @@
           "departmentHeadId": {
             "type": "string",
             "nullable": true
+          },
+          "externalID": {
+            "type": "string",
+            "nullable": true
           }
         },
+        "additionalProperties": false,
         "description": ""
       },
-      "AccessFunction": {
+      "ProblemDetails": {
         "type": "object",
         "properties": {
-          "id": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
-          "code": {
+          "detail": {
             "type": "string",
             "nullable": true
           },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "UserRole": {
-        "type": "object",
-        "properties": {
-          "roleId": {
-            "type": "string",
-            "description": "",
-            "nullable": true
-          },
-          "roleUserId": {
-            "type": "string",
-            "description": "",
-            "nullable": true
-          },
-          "departmentList": {
-            "type": "string",
-            "description": "",
-            "nullable": true
-          },
-          "archiveList": {
-            "type": "string",
-            "description": "",
-            "nullable": true
-          },
-          "journalUnitList": {
-            "type": "string",
-            "description": "",
-            "nullable": true
-          },
-          "gradeList": {
-            "type": "string",
-            "description": "",
-            "nullable": true
-          },
-          "id": {
-            "type": "string",
-            "description": "",
-            "nullable": true
-          },
-          "description": {
+          "instance": {
             "type": "string",
             "nullable": true
           }
         },
-        "description": "Is not returned today."
+        "additionalProperties": { }
       },
-      "WebsakUser": {
+      "UserAccess": {
         "type": "object",
         "properties": {
-          "gidId": {
+          "domain": {
             "type": "string",
-            "description": "",
+            "description": "User domain for login => used for 8.x versions",
             "nullable": true
           },
-          "externalUsername": {
+          "provider": {
             "type": "string",
-            "description": "[Obsolete]",
+            "description": "Used to set provider for login details.",
             "nullable": true
           },
-          "active": {
+          "key": {
+            "type": "string",
+            "nullable": true
+          },
+          "isPrimary": {
             "type": "boolean",
-            "description": ""
+            "description": "defines if users login detail is primary\r\nDefaults to true if not set."
           },
-          "orgUnitId": {
-            "type": "string",
-            "description": "",
-            "nullable": true
-          },
+          "id": {
+            "type": "integer",
+            "description": "The users given Id",
+            "format": "int32",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserRequest": {
+        "type": "object",
+        "properties": {
           "accessTemplateId": {
             "type": "string",
             "description": "This is user profile",
@@ -2316,10 +2409,6 @@
           "departmentId": {
             "type": "string",
             "description": "",
-            "nullable": true
-          },
-          "departmentCode": {
-            "type": "string",
             "nullable": true
           },
           "accountNumber": {
@@ -2416,42 +2505,7 @@
               "$ref": "#/components/schemas/UserRole"
             },
             "nullable": true
-          }
-        },
-        "description": ""
-      },
-      "UserAccess": {
-        "type": "object",
-        "properties": {
-          "domain": {
-            "type": "string",
-            "description": "User domain for login => used for 8.x versions",
-            "nullable": true
           },
-          "provider": {
-            "type": "string",
-            "description": "Used to set provider for login details.",
-            "nullable": true
-          },
-          "key": {
-            "type": "string",
-            "nullable": true
-          },
-          "isPrimary": {
-            "type": "boolean",
-            "description": "defines if users login detail is primary\r\nDefaults to true if not set."
-          },
-          "id": {
-            "type": "integer",
-            "description": "The users given Id",
-            "format": "int32",
-            "readOnly": true
-          }
-        }
-      },
-      "UserRequest": {
-        "type": "object",
-        "properties": {
           "username": {
             "type": "string",
             "description": "",
@@ -2505,7 +2559,81 @@
             },
             "description": "Zones for User. set to null or empty to use default zone from db.\r\nAvailable zones can be fetched from [get]://api/zones",
             "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": ""
+      },
+      "UserRole": {
+        "type": "object",
+        "properties": {
+          "roleId": {
+            "type": "string",
+            "description": "",
+            "nullable": true
           },
+          "roleUserId": {
+            "type": "string",
+            "description": "",
+            "nullable": true
+          },
+          "departmentList": {
+            "type": "string",
+            "description": "",
+            "nullable": true
+          },
+          "archiveList": {
+            "type": "string",
+            "description": "",
+            "nullable": true
+          },
+          "journalUnitList": {
+            "type": "string",
+            "description": "",
+            "nullable": true
+          },
+          "gradeList": {
+            "type": "string",
+            "description": "",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "description": "",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Is not returned today."
+      },
+      "WebsakEnvironment": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "referenceId": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "zone": {
+            "$ref": "#/components/schemas/Zone"
+          }
+        },
+        "additionalProperties": false
+      },
+      "WebsakUser": {
+        "type": "object",
+        "properties": {
           "accessTemplateId": {
             "type": "string",
             "description": "This is user profile",
@@ -2589,6 +2717,10 @@
           "departmentId": {
             "type": "string",
             "description": "",
+            "nullable": true
+          },
+          "departmentCode": {
+            "type": "string",
             "nullable": true
           },
           "accountNumber": {
@@ -2685,8 +2817,28 @@
               "$ref": "#/components/schemas/UserRole"
             },
             "nullable": true
+          },
+          "gidId": {
+            "type": "string",
+            "description": "",
+            "nullable": true
+          },
+          "externalUsername": {
+            "type": "string",
+            "description": "[Obsolete]",
+            "nullable": true
+          },
+          "active": {
+            "type": "boolean",
+            "description": ""
+          },
+          "orgUnitId": {
+            "type": "string",
+            "description": "",
+            "nullable": true
           }
         },
+        "additionalProperties": false,
         "description": ""
       },
       "Zone": {
@@ -2714,27 +2866,8 @@
             "type": "integer",
             "format": "int32"
           }
-        }
-      },
-      "WebsakEnvironment": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "referenceId": {
-            "type": "string",
-            "nullable": true
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "zone": {
-            "$ref": "#/components/schemas/Zone"
-          }
-        }
+        },
+        "additionalProperties": false
       }
     },
     "securitySchemes": {
@@ -2742,8 +2875,8 @@
         "type": "oauth2",
         "flows": {
           "clientCredentials": {
-            "authorizationUrl": "https://gaular.intern.acos.no:5007/",
-            "tokenUrl": "https://gaular.intern.acos.no:5007/connect/token",
+            "authorizationUrl": "https://erlend5570.intern.acos.no:5007/",
+            "tokenUrl": "https://erlend5570.intern.acos.no:5007/connect/token",
             "scopes": {
               "userapi": "User API"
             }
