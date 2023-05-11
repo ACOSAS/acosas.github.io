@@ -99,7 +99,7 @@ public async Task SendMeldingAsync(string meldingZip)
         try
         {
 
-            var response = await http.PostAsync("api/6CF63C7F-B738-4B0E-BB50-08080B0360F1/arkiverdokument",
+            var response = await http.PostAsync("api/6CF63C7F-B738-4B0E-BB50-08080B0360F1/arkivmelding/arkiverdokument",
                 mulitipart);
 
 
