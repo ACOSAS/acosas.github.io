@@ -112,4 +112,65 @@ public async Task SendMeldingAsync(string meldingZip)
     }
 }
 ```
+
+```php
+<?php
+public function sendMeldingAsync($meldingZip)
+{
+    $client = new Client(['base_uri' => 'https://arkivmelding-api-test.azurewebsites.net']);
+
+    // calculate SHA256 hash from $meldingZip
+    $hash = strtoupper(hash_file('sha256', $meldingZip));
+
+    $filnavn = basename($meldingZip);
+    $metadata = [
+        'type' => 'arkivmelding',
+        'files' => [
+            [
+                'contentid' => 'content1',
+                'filename' => $filnavn,
+                'hash' => $hash,
+                'alg' => 'SHA256',
+                'metadata' => false
+            ]
+        ]
+    ];
+
+    $metaContent = json_encode($metadata);
+
+    // Create a boundary
+    $boundary = bin2hex(random_bytes(20));
+
+    $multipart = new MultipartStream([
+        [
+            'name'     => 'metadata',
+            'contents' => $metaContent,
+            'headers'  => ['Content-Type' => 'application/json']
+        ],
+        [
+            'name'     => 'melding',
+            'contents' => fopen($meldingZip, 'r'),
+            'filename' => $filnavn,
+            'headers'  => [
+                'Content-Type' => 'application/zip',
+                'Content-Id'   => 'content1',
+                'Content-Disposition' => 'form-data; name="arkivmelding" filename="' . $filnavn . '"'
+            ]
+        ]
+    ], $boundary);
+
+    try {
+        $response = $client->post('/api/6CF63C7F-B738-4B0E-BB50-08080B0360F1/arkivmelding/arkiverdokument', [
+            'headers' => [
+                'Accept' => 'application/json',
+                'Content-Type' => 'multipart/related; boundary=' . $boundary
+            ],
+            'body' => $multipart
+        ]);
+    } catch (Exception $e) {
+
+        echo "error: " . $e->getMessage();       
+    }
+}
+```
 {%include links.html %}
