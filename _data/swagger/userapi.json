@@ -807,7 +807,7 @@
           "Users"
         ],
         "summary": "Create a new WebsakUser from JSON object provided.Returns JSON object representing created user.",
-        "description": "Creates a Websak user based on the JSON data provided in the request.<br />\r\nExternalDepartmentID – External department id, this value will be matched against misc1 for lookup value. <br />\r\nDepartmentCode - Department code => value will be matched against Department unit code. ExternalDepartmentID is then disregarded.\r\nTilgangsOppsettID – ID for template for the user being created, the user gets access and roles based on this template. <br />\r\nLookupField - Name of field that is used to lookup existing user.<br />\r\nParameters: JSON Data object Acos.Websak.UserAPI.Core.Models.UserRequest<br />",
+        "description": "Creates a Websak user based on the JSON data provided in the request.<br />\r\nExternalDepartmentID – External department id, this value will be matched against misc1 for lookup value. <br />\r\nDepartmentCode - Department code => value will be matched against Department unit code. ExternalDepartmentID is then disregarded.\r\nTilgangsOppsettID – ID for template for the user being created, the user gets access and roles based on this template. <br />\r\nLookupField - Name of field that is used to lookup existing user. Possible values: Id (default) and Code.<br />\r\nParameters: JSON Data object Acos.Websak.UserAPI.Core.Models.UserRequest<br />",
         "requestBody": {
           "content": {
             "application/json": {
@@ -987,6 +987,15 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "lookupField",
+            "in": "query",
+            "description": "default=Id, Possible values: Id (default) and Code.",
+            "schema": {
+              "type": "string",
+              "default": "Id"
+            }
           }
         ],
         "responses": {
@@ -1060,7 +1069,7 @@
           "Users"
         ],
         "summary": "Updates websak user with data from JSON object provided.<br />\r\nAll values from JSON object updates stored object.<br />",
-        "description": "Updates user based on values in JSON object in request. Values in the request will be mapped to Websak user.<br />\r\nValues not included in JSON will be translated either to \"\" (empty string) or [null].<br />\r\nSide effect: Not included properties will <strong>cause</strong> date to be deleted/overwritten.<br />\r\nInclude all data always. <br />\r\nIf external department and/or access is changed, then current access are reset to new access profile.<br />\r\nReturn values : 200 OK - User Created/Updated. <br />\r\n404 - Unknown user<br />\r\n500 - Error message contains more details<br />",
+        "description": "Updates user based on values in JSON object in request. Values in the request will be mapped to Websak user.<br />\r\nValues not included in JSON will be translated either to \"\" (empty string) or [null].<br />\r\nSide effect: Not included properties will <strong>cause</strong> data to be deleted/overwritten.<br />\r\nInclude all data always. <br />\r\nIf external department and/or access is changed, then current access are reset to new access profile.<br />\r\nReturn values : 200 OK - User Created/Updated. <br />\r\n404 - Unknown user<br />\r\n500 - Error message contains more details<br />",
         "parameters": [
           {
             "name": "id",
@@ -1210,6 +1219,15 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "lookupField",
+            "in": "query",
+            "description": "Lookup field. Field to use when finding user. Possible values: Id (default) and Code.",
+            "schema": {
+              "type": "string",
+              "default": "Id"
+            }
           }
         ],
         "responses": {
@@ -1312,6 +1330,15 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "lookupField",
+            "in": "query",
+            "description": "Lookup field. Field to use when finding user. Possible values: Id (default) and Code.",
+            "schema": {
+              "type": "string",
+              "default": "Id"
+            }
           }
         ],
         "responses": {
@@ -1404,7 +1431,7 @@
           "Users"
         ],
         "summary": "Add user to provided access group.",
-        "description": "Adds the user to provided access group. Access group id must already be defined in system.<br />\r\nParameter {id} – ADBrukernavn <br />\r\n   Parameter {accessGroupId} – Websak access group ID <br />\r\n   Return values : 200 OK, 500 + error message. <br />",
+        "description": "Adds the user to provided access group. Access group id must already be defined in system.<br />\r\nParameter {id} – ADBrukernavn <br />\r\nParameter {accessGroupId} – Websak access group ID <br />\r\nQueryParameter {lookupField} – Lookup field. Field to use when finding user. Possible values: Id (default) and Code.<br />\r\n    If user is found by lookupField, then id is replaced with internal id . <br />\r\nReturn values : 200 OK, 500 + error message. <br />",
         "parameters": [
           {
             "name": "id",
@@ -1422,6 +1449,15 @@
             "required": true,
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "lookupField",
+            "in": "query",
+            "description": "Lookup field. Field to use when finding user. Possible values: Id (default) and Code.",
+            "schema": {
+              "type": "string",
+              "default": "Id"
             }
           }
         ],
@@ -1503,6 +1539,15 @@
             "required": true,
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "lookupField",
+            "in": "query",
+            "description": "Lookup field. Field to use when finding user. Possible values: Id (default) and Code.",
+            "schema": {
+              "type": "string",
+              "default": "Id"
             }
           }
         ],
@@ -1604,6 +1649,15 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "lookupField",
+            "in": "query",
+            "description": "Lookup field. Field to use when finding user. Possible values: Id (default) and Code.",
+            "schema": {
+              "type": "string",
+              "default": "Id"
+            }
           }
         ],
         "responses": {
@@ -1694,6 +1748,15 @@
             "required": true,
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "lookupField",
+            "in": "query",
+            "description": "Lookup field. Field to use when finding user. Possible values: Id (default) and Code.",
+            "schema": {
+              "type": "string",
+              "default": "Id"
             }
           }
         ],
@@ -1786,6 +1849,15 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "lookupField",
+            "in": "query",
+            "description": "Lookup field. Field to use when finding user. Possible values: Id (default) and Code.",
+            "schema": {
+              "type": "string",
+              "default": "Id"
+            }
           }
         ],
         "responses": {
@@ -1876,6 +1948,15 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "lookupField",
+            "in": "query",
+            "description": "Lookup field. Field to use when finding user. Possible values: Id (default) and Code.",
+            "schema": {
+              "type": "string",
+              "default": "Id"
+            }
           }
         ],
         "responses": {
@@ -1965,6 +2046,15 @@
             "required": true,
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "lookupField",
+            "in": "query",
+            "description": "Lookup field. Field to use when finding user. Possible values: Id (default) and Code.",
+            "schema": {
+              "type": "string",
+              "default": "Id"
             }
           }
         ],

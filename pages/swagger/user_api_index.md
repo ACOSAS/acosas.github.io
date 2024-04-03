@@ -74,6 +74,16 @@ Response
 
 **departmentHeadId**: Internal WebSak id for the department head. Can be found in the response from user creation - field **gidid**. 
 
+# Users
+General note on users endpoints: From version `3.1.2` it was introduced a query parameter for defining which lookup field to use then searching for users. Query parameter name is `lookupField` and is used as follow:
+```curl
+http get /api/users/ABUSER?lookupField=Code
+``` 
+The following example will return a user that has the ABUSER as Code. Default for lookup field is Id. Possible values are Id and Code.
+Using lookup field other than Id must be defined using this query parameter. 
+
+All user endpoints which requires finding a user, have this query parameter. For `POST` and `PUT` http verbs, lookup field is part of the request body. See Create User example.
+
 ## List All Users
 
 To get the stored information for all users call 
@@ -89,7 +99,6 @@ It is <em>recommended</em> to use /api/user/{id} to get full user profile.
     http get to /api/users/?limit=1000&offset=0&includeEmailAddresses=true&includeUserAccess=true&includeRoles=true
 ```
 Be warned that this may return a lot of information. Future versions of this api may restrict the number of returned users. Use limit and offset to reduce number of users returned. By default 10000 users will be returned. 
-
 
 ## Get a User
 
