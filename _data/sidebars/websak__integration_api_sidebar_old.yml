@@ -1,0 +1,74 @@
+# THIS PAGE IS GENERATED. ANY CHANGES TO PAGE WILL POTENTIALLY BE OVERWRITTEN.
+# This is your sidebar TOC. The sidebar code loops through sections here and provides the appropriate formatting.
+entries:
+- title: sidebar
+  # product: Documentation
+  # version: 1.0
+  folders:
+  - title: Websak+ Integration API
+    output: web
+    type: frontmatter
+    folderitems: 
+    - title: /api/integration/journalpost/{id}
+      url: /integration__api_integration_journalpost__id_.html
+      output: web, pdf
+    - title: /api/integration/journalpost/{id}/dokumenter
+      url: /integration__api_integration_journalpost__id__dokumenter.html
+      output: web, pdf
+    - title: /api/integration/journalpost/{id}/merknader
+      url: /integration__api_integration_journalpost__id__merknader.html
+      output: web, pdf
+    - title: /api/integration/journalpost/{id}/mottakere
+      url: /integration__api_integration_journalpost__id__mottakere.html
+      output: web, pdf
+    - title: /api/integration/journalpost/{id}/tilleggsdata
+      url: /integration__api_integration_journalpost__id__tilleggsdata.html
+      output: web, pdf
+    - title: /api/integration/klassering/update
+      url: /integration__api_integration_klassering_update.html
+      output: web, pdf
+    - title: /api/integration/sak/{id}
+      url: /integration__api_integration_sak__id_.html
+      output: web, pdf
+    - title: /api/integration/sak/{id}/journalposter
+      url: /integration__api_integration_sak__id__journalposter.html
+      output: web, pdf
+    - title: /api/integration/sak/{id}/klassering
+      url: /integration__api_integration_sak__id__klassering.html
+      output: web, pdf
+    - title: /api/integration/sak/{id}/klasseringsett
+      url: /integration__api_integration_sak__id__klasseringsett.html
+      output: web, pdf
+    - title: /api/integration/sak/{id}/merknader
+      url: /integration__api_integration_sak__id__merknader.html
+      output: web, pdf
+    - title: /api/integration/sak/{id}/tilleggsdata
+      url: /integration__api_integration_sak__id__tilleggsdata.html
+      output: web, pdf
+    - title: /api/integration/sak/ny
+      url: /integration__api_integration_sak_ny.html
+      output: web, pdf
+    - title: /api/integration/sak/nyframal
+      url: /integration__api_integration_sak_nyframal.html
+      output: web, pdf
+    - title: /api/integration/sak/sok/klassering
+      url: /integration__api_integration_sak_sok_klassering.html
+      output: web, pdf
+    - title: /api/integration/skjema/kanlese/{skjemaref}
+      url: /integration__api_integration_skjema_kanlese__skjemaref_.html
+      output: web, pdf
+    - title: /api/integration/skjema/kanskrive/{skjemaref}
+      url: /integration__api_integration_skjema_kanskrive__skjemaref_.html
+      output: web, pdf
+    - title: /api/integration/skjema/lagreskjema
+      url: /integration__api_integration_skjema_lagreskjema.html
+      output: web, pdf
+    - title: /api/integration/test
+      url: /integration__api_integration_test.html
+      output: web, pdf
+    - title: /api/integration/tilleggsdata/update
+      url: /integration__api_integration_tilleggsdata_update.html
+      output: web, pdf
+    - title: Websak+ Integration API Models
+      url: /websak__integration_api_components.html
+      output: web, pdf
