@@ -52,11 +52,12 @@ Run:
 ```
 This will produce a [name]_sidebar.yml file and files in ./pages/swagger folder named [name]_[path].md
 
-In index.md file in the root add the newly created _sidebar.yml file to the list of sidebars:
+In _config.yml file in the root add the newly created _sidebar.yml file to the list of sidebars:
 ```yml
 sidebars: 
-    - name: UserAPI_sidebar
-    # add sidebars here:
+    - name: [name]_sidebar.yml
+    ...
+site_sidebars: 
     - name: [name]_sidebar.yml
 ```
 Test and validate changes.
