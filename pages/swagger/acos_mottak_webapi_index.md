@@ -173,4 +173,66 @@ public function sendMeldingAsync($meldingZip)
     }
 }
 ```
+
+```python
+#imports
+import hashlib
+import base64
+import os
+import json
+from io import BytesIO
+import aiohttp
+from aiohttp import MultipartWriter
+
+...
+
+def generate_hash(file_content):
+    sha256_hash = hashlib.sha256()
+    sha256_hash.update(file_content)
+    return sha256_hash.hexdigest().upper()
+
+async def send_melding_async(zip_content):
+    url = "https://arkivmelding-api-test.azurewebsites.net/api/6CF63C7F-B738-4B0E-BB50-08080B0360F1/arkivmelding/arkiverdokument"
+    # Beregn SHA-256 hash av innholdet i zip-filen
+    hash_value = generate_hash(zip_content)
+
+    # Forbered metadata
+    metadata = {
+        "type": "melding",
+        "files": [
+            {
+                "contentid": "content1",
+                "filename": "arkivmelding.zip",
+                "hash": hash_value,
+                "alg": "SHA256",
+                "metadata": False
+            }
+        ]
+    }
+
+    # Opprett en unik boundary
+    boundary = os.urandom(16).hex()
+    # Opprett MultipartWriter for multipart data med spesifikk boundary
+    # Legg til metadata i multipart-forespørselen
+    form_data = MultipartWriter('related', boundary=boundary)
+    metadata_part = form_data.append_json(metadata, {
+        'Content-Type': 'application/json',
+    })
+
+    # Legg til filinnholdet (ZIP-filen) i multipart-forespørselen med korrekt Content-Id
+    file_part = form_data.append(zip_content, {
+        'Content-Type': 'application/zip',
+        'Content-Disposition': f'form-data; name="melding"; filename="arkivmelding.zip"',
+        'Content-Id': 'content1'
+    })
+
+    # Send forespørselen
+    async with aiohttp.ClientSession() as session:
+        async with session.post(url, data=form_data, headers={
+            'Accept': 'application/json',
+            'Content-Type': f'multipart/related; boundary={boundary}'
+        }, ssl=True) as response:
+            response_text = await response.text()
+            return response.status, response_text  # Returner status og respons-innhold
+```
 {%include links.html %}
