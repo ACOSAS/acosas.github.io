@@ -1,12 +1,12 @@
 {
-  "openapi": "3.0.1",
+  "openapi": "3.0.4",
   "info": {
     "title": "User API",
     "description": "User API - For creating and updating users.",
     "contact": {
-      "name": "Acos AS",
-      "url": "http://wwww.acos.no/",
-      "email": "utvikling@acos.no"
+      "name": "Acos Dokumenthåndtering",
+      "url": "https://wwww.acos.no",
+      "email": "support@acos.no"
     },
     "version": "3.0.0"
   },
@@ -19,13 +19,13 @@
         "summary": "Gets all general access groups",
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/AccessGroup"
+                    "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.AccessGroup"
                   }
                 }
               },
@@ -33,7 +33,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/AccessGroup"
+                    "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.AccessGroup"
                   }
                 }
               },
@@ -41,33 +41,24 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/AccessGroup"
+                    "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.AccessGroup"
                   }
                 }
               }
             }
           },
           "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
           }
-        }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
       },
       "post": {
         "tags": [
@@ -78,32 +69,32 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AccessGroupRequest"
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.AccessGroupRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/AccessGroupRequest"
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.AccessGroupRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/AccessGroupRequest"
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.AccessGroupRequest"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/components/schemas/AccessGroupRequest"
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.AccessGroupRequest"
               }
             },
             "text/xml": {
               "schema": {
-                "$ref": "#/components/schemas/AccessGroupRequest"
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.AccessGroupRequest"
               }
             },
             "application/*+xml": {
               "schema": {
-                "$ref": "#/components/schemas/AccessGroupRequest"
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.AccessGroupRequest"
               }
             }
           }
@@ -114,42 +105,56 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AccessGroup"
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.AccessGroup"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/AccessGroup"
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.AccessGroup"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/AccessGroup"
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.AccessGroup"
                 }
               }
             }
           },
-          "401": {
-            "description": "Unauthorized",
+          "422": {
+            "description": "Unprocessable Content",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
                 }
               }
             }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
           }
-        }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
       }
     },
     "/api/AccessGroups/{id}": {
@@ -169,13 +174,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/AccessGroup"
+                    "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.AccessGroup"
                   }
                 }
               },
@@ -183,7 +188,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/AccessGroup"
+                    "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.AccessGroup"
                   }
                 }
               },
@@ -191,33 +196,24 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/AccessGroup"
+                    "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.AccessGroup"
                   }
                 }
               }
             }
           },
           "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
           }
-        }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
       }
     },
     "/api/AccessGroups/members/{id}": {
@@ -237,13 +233,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/AccessGroup"
+                    "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.AccessGroup"
                   }
                 }
               },
@@ -251,7 +247,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/AccessGroup"
+                    "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.AccessGroup"
                   }
                 }
               },
@@ -259,31 +255,34 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/AccessGroup"
+                    "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.AccessGroup"
                   }
                 }
               }
             }
           },
           "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/api/info": {
+      "get": {
+        "tags": [
+          "Acos.Websak.UserAPI.Core"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -296,13 +295,13 @@
         "summary": "Gets all departments",
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Department"
+                    "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Department"
                   }
                 }
               },
@@ -310,7 +309,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Department"
+                    "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Department"
                   }
                 }
               },
@@ -318,33 +317,24 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Department"
+                    "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Department"
                   }
                 }
               }
             }
           },
           "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
           }
-        }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
       },
       "post": {
         "tags": [
@@ -355,32 +345,32 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/DepartmentRequest"
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.DepartmentRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/DepartmentRequest"
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.DepartmentRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/DepartmentRequest"
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.DepartmentRequest"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/components/schemas/DepartmentRequest"
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.DepartmentRequest"
               }
             },
             "text/xml": {
               "schema": {
-                "$ref": "#/components/schemas/DepartmentRequest"
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.DepartmentRequest"
               }
             },
             "application/*+xml": {
               "schema": {
-                "$ref": "#/components/schemas/DepartmentRequest"
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.DepartmentRequest"
               }
             }
           }
@@ -391,42 +381,106 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Department"
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Department"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/Department"
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Department"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/Department"
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Department"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/api/Departments/flat": {
+      "get": {
+        "tags": [
+          "Departments"
+        ],
+        "summary": "Gets all departments as a flat list (no hierarchy)",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Department"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Department"
+                  }
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Department"
+                  }
                 }
               }
             }
           },
           "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
           }
-        }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
       }
     },
     "/api/Departments/{id}": {
@@ -448,56 +502,42 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Department"
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Department"
                 }
               },
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/Department"
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Department"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/Department"
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Department"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/Department"
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Department"
                 }
               }
             }
           },
           "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
           }
-        }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
       },
       "put": {
         "tags": [
@@ -518,78 +558,126 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/DepartmentRequest"
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.DepartmentRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/DepartmentRequest"
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.DepartmentRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/DepartmentRequest"
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.DepartmentRequest"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/components/schemas/DepartmentRequest"
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.DepartmentRequest"
               }
             },
             "text/xml": {
               "schema": {
-                "$ref": "#/components/schemas/DepartmentRequest"
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.DepartmentRequest"
               }
             },
             "application/*+xml": {
               "schema": {
-                "$ref": "#/components/schemas/DepartmentRequest"
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.DepartmentRequest"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Department"
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Department"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/Department"
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Department"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/Department"
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Department"
                 }
               }
             }
           },
           "401": {
-            "description": "Unauthorized",
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/api/Departments/external/{externalId}": {
+      "get": {
+        "tags": [
+          "Departments"
+        ],
+        "summary": "Returns single department by external ID",
+        "operationId": "departmentByExternalId",
+        "parameters": [
+          {
+            "name": "externalId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Department"
                 }
               },
-              "application/xml": {
+              "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Department"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Department"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Department"
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
           }
-        }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
       }
     },
     "/api/Departments/{id}/deactivate": {
@@ -610,7 +698,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -629,27 +717,21 @@
               }
             }
           },
+          "500": {
+            "description": "Internal Server Error"
+          },
           "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
           }
-        }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
       }
     },
     "/api/Departments/{id}/activate": {
@@ -669,27 +751,21 @@
           }
         ],
         "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
           "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
           }
-        }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
       }
     },
     "/api/Users": {
@@ -702,11 +778,11 @@
           {
             "name": "limit",
             "in": "query",
-            "description": "Limit reponse to x rows",
+            "description": "Limit reponse to x rows. Default: 100",
             "schema": {
               "type": "integer",
               "format": "int32",
-              "default": 10000
+              "default": 100
             }
           },
           {
@@ -755,7 +831,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/WebsakUser"
+                    "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.WebsakUser"
                   }
                 }
               },
@@ -763,7 +839,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/WebsakUser"
+                    "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.WebsakUser"
                   }
                 }
               },
@@ -771,127 +847,112 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/WebsakUser"
+                    "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.WebsakUser"
                   }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
           },
           "500": {
             "description": "Error fetching data"
+          },
+          "204": {
+            "description": "No content, if no users are registered"
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
           }
-        }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
       },
       "post": {
         "tags": [
           "Users"
         ],
         "summary": "Create a new WebsakUser from JSON object provided.Returns JSON object representing created user.",
-        "description": "Creates a Websak user based on the JSON data provided in the request.<br />\r\nExternalDepartmentID – External department id, this value will be matched against misc1 for lookup value. <br />\r\nDepartmentCode - Department code => value will be matched against Department unit code. ExternalDepartmentID is then disregarded.\r\nTilgangsOppsettID – ID for template for the user being created, the user gets access and roles based on this template. <br />\r\nLookupField - Name of field that is used to lookup existing user. Possible values: Id (default) and Code.<br />\r\nParameters: JSON Data object Acos.Websak.UserAPI.Core.Models.UserRequest<br />",
+        "description": "Creates a Websak user based on the JSON data provided in the request.\r\n\r\nExternalDepartmentID – External department id, this value will be matched against misc1 for lookup value. \r\n\r\nDepartmentCode - Department code => value will be matched against Department unit code. ExternalDepartmentID is then disregarded.\r\nTilgangsOppsettID – ID for template for the user being created, the user gets access and roles based on this template. \r\n\r\nLookupField - Name of field that is used to lookup existing user. Possible values: Id (default) and Code.\r\n\r\nParameters: JSON Data object Acos.Websak.UserAPI.Core.Models.UserRequest\r\n",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserRequest"
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.UserRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserRequest"
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.UserRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/UserRequest"
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.UserRequest"
               }
             }
           }
         },
         "responses": {
           "201": {
-            "description": "Created json object with new/updated user, and the GET url to user api/user/{newId}. <br />",
+            "description": "Created json object with new/updated user, and the GET url to user api/user/{newId}. \r\n",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WebsakUser"
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.WebsakUser"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/WebsakUser"
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.WebsakUser"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/WebsakUser"
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.WebsakUser"
                 }
               }
             }
           },
           "200": {
-            "description": "Object with updated user, and the GET url to user api/user/{newId}. <br />",
+            "description": "Object with updated user, and the GET url to user api/user/{newId}. \r\n",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WebsakUser"
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.WebsakUser"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/WebsakUser"
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.WebsakUser"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/WebsakUser"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.WebsakUser"
                 }
               }
             }
           },
           "500": {
             "description": "Internal server error with message."
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
           }
-        }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
       }
     },
     "/api/Users/changes/{fromDate}": {
@@ -919,7 +980,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/WebsakUser"
+                    "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.WebsakUser"
                   }
                 }
               },
@@ -927,7 +988,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/WebsakUser"
+                    "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.WebsakUser"
                   }
                 }
               },
@@ -935,39 +996,33 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/WebsakUser"
+                    "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.WebsakUser"
                   }
                 }
               }
             }
           },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
+          "500": {
+            "description": "Internal Server Error"
           },
           "404": {
             "description": "No changes since {fromDate}"
           },
           "400": {
             "description": "{fromDate} is incorrectly formatted"
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
           }
-        }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
       }
     },
     "/api/Users/{id}": {
@@ -976,7 +1031,7 @@
           "Users"
         ],
         "summary": "Returns a single websak user",
-        "description": "Gets one singe user. <br /><p>Parameter {id}: Value can be of gid id or username.</p>\r\nReturn values: One JSON object containing data for requested user.",
+        "description": "Gets one singe user. \r\n<p>Parameter {id}: Value can be of gid id or username.</p>\r\nReturn values: One JSON object containing data for requested user.",
         "operationId": "users",
         "parameters": [
           {
@@ -996,6 +1051,33 @@
               "type": "string",
               "default": "Id"
             }
+          },
+          {
+            "name": "includeEmailAddresses",
+            "in": "query",
+            "description": "bool to include or exclude user email addresses",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "includeUserAccess",
+            "in": "query",
+            "description": "bool to include or exclude user access information",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "includeRoles",
+            "in": "query",
+            "description": "bool to include or exclude roles assigned to user",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
           }
         ],
         "responses": {
@@ -1004,37 +1086,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WebsakUser"
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.WebsakUser"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/WebsakUser"
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.WebsakUser"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/WebsakUser"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.WebsakUser"
                 }
               }
             }
@@ -1044,32 +1106,43 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
                 }
               }
             }
           },
           "500": {
             "description": "Server error"
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
           }
-        }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
       },
       "put": {
         "tags": [
           "Users"
         ],
-        "summary": "Updates websak user with data from JSON object provided.<br />\r\nAll values from JSON object updates stored object.<br />",
-        "description": "Updates user based on values in JSON object in request. Values in the request will be mapped to Websak user.<br />\r\nValues not included in JSON will be translated either to \"\" (empty string) or [null].<br />\r\nSide effect: Not included properties will <strong>cause</strong> data to be deleted/overwritten.<br />\r\nInclude all data always. <br />\r\nIf external department and/or access is changed, then current access are reset to new access profile.<br />\r\nReturn values : 200 OK - User Created/Updated. <br />\r\n404 - Unknown user<br />\r\n500 - Error message contains more details<br />",
+        "summary": "Updates websak user with data from JSON object provided.\r\n\r\nAll values from JSON object updates stored object.\r\n",
+        "description": "Updates user based on values in JSON object in request. Values in the request will be mapped to Websak user.\r\n\r\nValues not included in JSON will be translated either to \"\" (empty string) or [null].\r\n\r\nSide effect: Not included properties will <strong>cause</strong> data to be deleted/overwritten.\r\n\r\nInclude all data always. \r\n\r\nIf external department and/or access is changed, then current access are reset to new access profile.\r\n\r\nReturn values : 200 OK - User Created/Updated. \r\n\r\n404 - Unknown user\r\n\r\n500 - Error message contains more details\r\n",
         "parameters": [
           {
             "name": "id",
@@ -1084,38 +1157,38 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserRequest"
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.UserRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/UserRequest"
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.UserRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/UserRequest"
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.UserRequest"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WebsakUser"
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.WebsakUser"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/WebsakUser"
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.WebsakUser"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/WebsakUser"
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.WebsakUser"
                 }
               }
             }
@@ -1140,26 +1213,6 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
           "404": {
             "description": "Not Found",
             "content": {
@@ -1181,7 +1234,7 @@
             }
           },
           "500": {
-            "description": "Server Error",
+            "description": "Internal Server Error",
             "content": {
               "application/json": {
                 "schema": {
@@ -1199,8 +1252,19 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
           }
-        }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
       }
     },
     "/api/Users/{id}/Deactivate": {
@@ -1209,7 +1273,7 @@
           "Users"
         ],
         "summary": "Deactivate websak user by setting expiration date to yesterday",
-        "description": "Activates or deactivates a user<br /><p>User will be deactivated immedately by setting profile date to yesterday.</p>\r\nParameter {id} : Username <br />\r\n   Return values : http response OK/NotFound with status message, or internalserver error + exception <br />",
+        "description": "Activates or deactivates a user\r\n<p>User will be deactivated immedately by setting profile date to yesterday.</p>\r\nParameter {id} : Username \r\n\r\n   Return values : http response OK/NotFound with status message, or internalserver error + exception \r\n",
         "parameters": [
           {
             "name": "id",
@@ -1223,7 +1287,7 @@
           {
             "name": "lookupField",
             "in": "query",
-            "description": "Lookup field. Field to use when finding user. Possible values: Id (default) and Code.",
+            "description": "Lookup field. Field to use when finding user. Possible values: Id (default), gidid and Code.",
             "schema": {
               "type": "string",
               "default": "Id"
@@ -1232,7 +1296,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -1252,7 +1316,7 @@
             }
           },
           "500": {
-            "description": "Server Error",
+            "description": "Internal Server Error",
             "content": {
               "application/json": {
                 "schema": {
@@ -1267,26 +1331,6 @@
               "text/xml": {
                 "schema": {
                   "type": "string"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -1310,8 +1354,19 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
           }
-        }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
       }
     },
     "/api/Users/{id}/Activate": {
@@ -1320,7 +1375,7 @@
           "Users"
         ],
         "summary": "Activates websak user by setting expiration date to [null]",
-        "description": "Activates a user.<br /><p>User is immedately activated by removing expiration date from profile.</p>\r\nParametere {id} : ADBrukernavn <br />\r\n   Return values : http response OK/NotFound with status message, or internalserver error + exception <br />",
+        "description": "Activates a user.\r\n<p>User is immedately activated by removing expiration date from profile.</p>\r\nParametere {id} : ADBrukernavn \r\n\r\n   Return values : http response OK/NotFound with status message, or internalserver error + exception \r\n",
         "parameters": [
           {
             "name": "id",
@@ -1334,7 +1389,7 @@
           {
             "name": "lookupField",
             "in": "query",
-            "description": "Lookup field. Field to use when finding user. Possible values: Id (default) and Code.",
+            "description": "Lookup field. Field to use when finding user. Possible values: Id (default), gidid and Code.",
             "schema": {
               "type": "string",
               "default": "Id"
@@ -1343,7 +1398,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -1363,7 +1418,7 @@
             }
           },
           "500": {
-            "description": "Server Error",
+            "description": "Internal Server Error",
             "content": {
               "application/json": {
                 "schema": {
@@ -1378,26 +1433,6 @@
               "text/xml": {
                 "schema": {
                   "type": "string"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -1421,8 +1456,19 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
           }
-        }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
       }
     },
     "/api/Users/{id}/AddUserToAccessGroup/{accessGroupId}": {
@@ -1431,7 +1477,7 @@
           "Users"
         ],
         "summary": "Add user to provided access group.",
-        "description": "Adds the user to provided access group. Access group id must already be defined in system.<br />\r\nParameter {id} – ADBrukernavn <br />\r\nParameter {accessGroupId} – Websak access group ID <br />\r\nQueryParameter {lookupField} – Lookup field. Field to use when finding user. Possible values: Id (default) and Code.<br />\r\n    If user is found by lookupField, then id is replaced with internal id . <br />\r\nReturn values : 200 OK, 500 + error message. <br />",
+        "description": "Adds the user to provided access group. Access group id must already be defined in system.\r\n\r\nParameter {id} – ADBrukernavn \r\n\r\nParameter {accessGroupId} – Websak access group ID \r\n\r\nQueryParameter {lookupField} – Lookup field. Field to use when finding user. Possible values: Id (default), gidid and Code.\r\n\r\n    If user is found by lookupField, then id is replaced with internal id . \r\n\r\nReturn values : 200 OK, 500 + error message. \r\n",
         "parameters": [
           {
             "name": "id",
@@ -1454,7 +1500,7 @@
           {
             "name": "lookupField",
             "in": "query",
-            "description": "Lookup field. Field to use when finding user. Possible values: Id (default) and Code.",
+            "description": "Lookup field. Field to use when finding user. Possible values: Id (default), gidid and Code.",
             "schema": {
               "type": "string",
               "default": "Id"
@@ -1463,7 +1509,27 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
             "content": {
               "application/json": {
                 "schema": {
@@ -1483,46 +1549,17 @@
             }
           },
           "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
+            "description": "Unauthorized - Missing or invalid access token"
           },
-          "500": {
-            "description": "Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
           }
-        }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
       }
     },
     "/api/Users/{id}/AccessGroupMembership": {
@@ -1544,7 +1581,7 @@
           {
             "name": "lookupField",
             "in": "query",
-            "description": "Lookup field. Field to use when finding user. Possible values: Id (default) and Code.",
+            "description": "Lookup field. Field to use when finding user. Possible values: Id (default), gidid and Code.",
             "schema": {
               "type": "string",
               "default": "Id"
@@ -1553,13 +1590,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/AccessGroup"
+                    "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.AccessGroup"
                   }
                 }
               },
@@ -1567,7 +1604,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/AccessGroup"
+                    "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.AccessGroup"
                   }
                 }
               },
@@ -1575,34 +1612,14 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/AccessGroup"
+                    "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.AccessGroup"
                   }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
           },
           "500": {
-            "description": "Server Error",
+            "description": "Internal Server Error",
             "content": {
               "application/json": {
                 "schema": {
@@ -1620,8 +1637,19 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
           }
-        }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
       }
     },
     "/api/Users/{id}/AddUserToAccessGroupByGroupName/{accessGroupName}": {
@@ -1630,7 +1658,7 @@
           "Users"
         ],
         "summary": "Add user to provided access group.",
-        "description": "Adds the user to provided access group. Access group name must already be defined in system.<br />\r\nParameter {id} – ADBrukernavn <br />\r\n   Parameter {accessGroupName} – Websak access group name <br />\r\n   Return values : 200 OK, 500 + error message. <br />",
+        "description": "Adds the user to provided access group. Access group name must already be defined in system.\r\n\r\nParameter {id} – ADBrukernavn \r\n\r\n   Parameter {accessGroupName} – Websak access group name \r\n\r\n   Return values : 200 OK, 500 + error message. \r\n",
         "parameters": [
           {
             "name": "id",
@@ -1653,7 +1681,7 @@
           {
             "name": "lookupField",
             "in": "query",
-            "description": "Lookup field. Field to use when finding user. Possible values: Id (default) and Code.",
+            "description": "Lookup field. Field to use when finding user. Possible values: Id (default), gidid and Code.",
             "schema": {
               "type": "string",
               "default": "Id"
@@ -1662,7 +1690,27 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
             "content": {
               "application/json": {
                 "schema": {
@@ -1682,46 +1730,17 @@
             }
           },
           "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
+            "description": "Unauthorized - Missing or invalid access token"
           },
-          "500": {
-            "description": "Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
           }
-        }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
       }
     },
     "/api/Users/{id}/RemoveUserFromAccessGroup/{accessGroupId}": {
@@ -1730,7 +1749,7 @@
           "Users"
         ],
         "summary": "Removes user from access group",
-        "description": "Removes a user from provided access group. Access group id must be defined in the system.<br />\r\nParameter {id} – AD Username <br />\r\n   Parameter {accessGroupId} – Websak access group ID <br />\r\n   Return values: 200 OK, 500 + error message. <br />",
+        "description": "Removes a user from provided access group. Access group id must be defined in the system.\r\n\r\nParameter {id} – AD Username \r\n\r\n   Parameter {accessGroupId} – Websak access group ID \r\n\r\n   Return values: 200 OK, 500 + error message. \r\n",
         "parameters": [
           {
             "name": "id",
@@ -1753,7 +1772,7 @@
           {
             "name": "lookupField",
             "in": "query",
-            "description": "Lookup field. Field to use when finding user. Possible values: Id (default) and Code.",
+            "description": "Lookup field. Field to use when finding user. Possible values: Id (default), gidid and Code.",
             "schema": {
               "type": "string",
               "default": "Id"
@@ -1762,7 +1781,27 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
             "content": {
               "application/json": {
                 "schema": {
@@ -1782,27 +1821,97 @@
             }
           },
           "401": {
-            "description": "Unauthorized",
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/api/Users/{userId}/roles": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Returns all roles assigned to the specified user.",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "User identifier (GID unless lookupField provided).",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lookupField",
+            "in": "query",
+            "description": "Lookup field. Possible values: Id (default) and Code.",
+            "schema": {
+              "type": "string",
+              "default": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Controllers.UsersController+UserRoleResponse"
+                  }
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Controllers.UsersController+UserRoleResponse"
+                  }
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Controllers.UsersController+UserRoleResponse"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
                 }
               }
             }
           },
           "500": {
-            "description": "Server Error",
+            "description": "Internal Server Error",
             "content": {
               "application/json": {
                 "schema": {
@@ -1820,8 +1929,781 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
           }
-        }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Adds a role to the specified user.",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "User identifier (GID unless lookupField provided).",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lookupField",
+            "in": "query",
+            "description": "Lookup field. Possible values: Id (default) and Code.",
+            "schema": {
+              "type": "string",
+              "default": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Role request payload (roleId is server generated and must be omitted).",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.UserRoleRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.UserRoleRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.UserRoleRequest"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.UserRoleRequest"
+              }
+            },
+            "text/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.UserRoleRequest"
+              }
+            },
+            "application/*+xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.UserRoleRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Controllers.UsersController+UserRoleResponse"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Controllers.UsersController+UserRoleResponse"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Controllers.UsersController+UserRoleResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/api/Users/{userId}/accesscodes": {
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Replaces the user access codes (Sbr_TilgFunksjoner) for the specified user.",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "User identifier (GID unless lookupField provided).",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lookupField",
+            "in": "query",
+            "description": "Lookup field. Possible values: Id (default) and Code.",
+            "schema": {
+              "type": "string",
+              "default": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Access codes payload.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.UserAccessCodesRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.UserAccessCodesRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.UserAccessCodesRequest"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.UserAccessCodesRequest"
+              }
+            },
+            "text/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.UserAccessCodesRequest"
+              }
+            },
+            "application/*+xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.UserAccessCodesRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.WebsakUser"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.WebsakUser"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.WebsakUser"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Adds the provided access codes to the user (union).",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lookupField",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.UserAccessCodesRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.UserAccessCodesRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.UserAccessCodesRequest"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.UserAccessCodesRequest"
+              }
+            },
+            "text/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.UserAccessCodesRequest"
+              }
+            },
+            "application/*+xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.UserAccessCodesRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.WebsakUser"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.WebsakUser"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.WebsakUser"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Removes the provided access codes from the user (subtract).",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lookupField",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.UserAccessCodesRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.UserAccessCodesRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.UserAccessCodesRequest"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.UserAccessCodesRequest"
+              }
+            },
+            "text/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.UserAccessCodesRequest"
+              }
+            },
+            "application/*+xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.UserAccessCodesRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.WebsakUser"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.WebsakUser"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.WebsakUser"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/api/Users/{userId}/roles/{roleId}": {
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Removes a role assignment from the specified user.",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "User identifier (GID unless lookupField provided).",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "Role assignment identifier (gbr_gbrid).",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lookupField",
+            "in": "query",
+            "description": "Lookup field. Possible values: Id (default) and Code.",
+            "schema": {
+              "type": "string",
+              "default": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
       }
     },
     "/api/Users/{id}/RemoveUserFromAccessGroupName/{accessGroupName}": {
@@ -1830,7 +2712,7 @@
           "Users"
         ],
         "summary": "Removes user from access group",
-        "description": "Removes a user from provided access group. Access group id must be defined in the system.<br />\r\nParameter {id} – AD Username <br />\r\n   Parameter {accessGroupName} – Websak access group name <br />\r\n   Return values: 200 OK, 500 + error message. <br />",
+        "description": "Removes a user from provided access group. Access group id must be defined in the system.\r\n\r\nParameter {id} – AD Username \r\n\r\n   Parameter {accessGroupName} – Websak access group name \r\n\r\n   Return values: 200 OK, 500 + error message. \r\n",
         "parameters": [
           {
             "name": "id",
@@ -1853,7 +2735,7 @@
           {
             "name": "lookupField",
             "in": "query",
-            "description": "Lookup field. Field to use when finding user. Possible values: Id (default) and Code.",
+            "description": "Lookup field. Field to use when finding user. Possible values: Id (default), gidid and Code.",
             "schema": {
               "type": "string",
               "default": "Id"
@@ -1862,7 +2744,27 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
             "content": {
               "application/json": {
                 "schema": {
@@ -1882,46 +2784,17 @@
             }
           },
           "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
+            "description": "Unauthorized - Missing or invalid access token"
           },
-          "500": {
-            "description": "Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
           }
-        }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
       }
     },
     "/api/Users/{id}/AddUserAsPostDistributor/{orgUnitId}": {
@@ -1943,7 +2816,7 @@
           {
             "name": "orgUnitId",
             "in": "path",
-            "description": "departement id",
+            "description": "external id of department",
             "required": true,
             "schema": {
               "type": "string"
@@ -1952,7 +2825,7 @@
           {
             "name": "lookupField",
             "in": "query",
-            "description": "Lookup field. Field to use when finding user. Possible values: Id (default) and Code.",
+            "description": "Lookup field. Field to use when finding user. Possible values: Id (default), gidid and Code.",
             "schema": {
               "type": "string",
               "default": "Id"
@@ -1961,7 +2834,27 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
             "content": {
               "application/json": {
                 "schema": {
@@ -1981,46 +2874,17 @@
             }
           },
           "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
+            "description": "Unauthorized - Missing or invalid access token"
           },
-          "500": {
-            "description": "Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
           }
-        }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
       }
     },
     "/api/Users/{id}/RemoveUserAsPostDistributor/{orgUnitId}": {
@@ -2051,7 +2915,7 @@
           {
             "name": "lookupField",
             "in": "query",
-            "description": "Lookup field. Field to use when finding user. Possible values: Id (default) and Code.",
+            "description": "Lookup field. Field to use when finding user. Possible values: Id (default), gidid and Code.",
             "schema": {
               "type": "string",
               "default": "Id"
@@ -2060,7 +2924,27 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
             "content": {
               "application/json": {
                 "schema": {
@@ -2080,46 +2964,17 @@
             }
           },
           "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
+            "description": "Unauthorized - Missing or invalid access token"
           },
-          "500": {
-            "description": "Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
           }
-        }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
       }
     },
     "/api/Zones": {
@@ -2130,13 +2985,13 @@
         "summary": "Gets all Environments and zone",
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/WebsakEnvironment"
+                    "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.WebsakEnvironment"
                   }
                 }
               },
@@ -2144,7 +2999,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/WebsakEnvironment"
+                    "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.WebsakEnvironment"
                   }
                 }
               },
@@ -2152,39 +3007,68 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/WebsakEnvironment"
+                    "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.WebsakEnvironment"
                   }
                 }
               }
             }
           },
           "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
           }
-        }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
       }
     }
   },
   "components": {
     "schemas": {
-      "AccessFunction": {
+      "Acos.Websak.UserAPI.Core.Controllers.UsersController+UserRoleResponse": {
+        "type": "object",
+        "properties": {
+          "roleId": {
+            "type": "string",
+            "nullable": true
+          },
+          "userId": {
+            "type": "string",
+            "nullable": true
+          },
+          "departmentList": {
+            "type": "string",
+            "nullable": true
+          },
+          "archiveList": {
+            "type": "string",
+            "nullable": true
+          },
+          "journalUnitList": {
+            "type": "string",
+            "nullable": true
+          },
+          "gradeList": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Acos.Websak.UserAPI.Core.Models.AccessFunction": {
         "type": "object",
         "properties": {
           "id": {
@@ -2206,7 +3090,7 @@
         },
         "additionalProperties": false
       },
-      "AccessGroup": {
+      "Acos.Websak.UserAPI.Core.Models.AccessGroup": {
         "type": "object",
         "properties": {
           "groupId": {
@@ -2238,7 +3122,7 @@
         },
         "additionalProperties": false
       },
-      "AccessGroupRequest": {
+      "Acos.Websak.UserAPI.Core.Models.AccessGroupRequest": {
         "type": "object",
         "properties": {
           "groupName": {
@@ -2249,7 +3133,7 @@
         "additionalProperties": false,
         "description": ""
       },
-      "Department": {
+      "Acos.Websak.UserAPI.Core.Models.Department": {
         "type": "object",
         "properties": {
           "id": {
@@ -2321,11 +3205,35 @@
           "intralink": {
             "type": "string",
             "nullable": true
+          },
+          "div2": {
+            "type": "string",
+            "nullable": true
+          },
+          "postalNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "contact": {
+            "type": "string",
+            "nullable": true
+          },
+          "addr": {
+            "type": "string",
+            "nullable": true
+          },
+          "addr2": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "DepartmentRequest": {
+      "Acos.Websak.UserAPI.Core.Models.DepartmentRequest": {
         "type": "object",
         "properties": {
           "departmentName": {
@@ -2355,39 +3263,36 @@
           "enhetstype": {
             "type": "string",
             "nullable": true
+          },
+          "postalNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "contact": {
+            "type": "string",
+            "description": "",
+            "nullable": true
+          },
+          "addr": {
+            "type": "string",
+            "description": "",
+            "nullable": true
+          },
+          "addr2": {
+            "type": "string",
+            "description": "",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "description": "",
+            "nullable": true
           }
         },
         "additionalProperties": false,
         "description": ""
       },
-      "ProblemDetails": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "nullable": true
-          },
-          "title": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "detail": {
-            "type": "string",
-            "nullable": true
-          },
-          "instance": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": { }
-      },
-      "UserAccess": {
+      "Acos.Websak.UserAPI.Core.Models.UserAccess": {
         "type": "object",
         "properties": {
           "domain": {
@@ -2417,9 +3322,76 @@
         },
         "additionalProperties": false
       },
-      "UserRequest": {
+      "Acos.Websak.UserAPI.Core.Models.UserAccessCodesRequest": {
         "type": "object",
         "properties": {
+          "codes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Acos.Websak.UserAPI.Core.Models.UserRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "",
+            "nullable": true
+          },
+          "externalDepartmentId": {
+            "type": "string",
+            "description": "Departmentname: Mapped agains misc1",
+            "nullable": true
+          },
+          "departmentCode": {
+            "type": "string",
+            "description": "Assign user to department by using department code (SOA_AdmKort) \r\nCode will be used to find department in which new user is assigned.",
+            "nullable": true
+          },
+          "mailAddresses": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "description": "gid_gidid",
+            "nullable": true
+          },
+          "lookupField": {
+            "type": "string",
+            "description": "Use this to set lookup field in user",
+            "nullable": true
+          },
+          "userType": {
+            "type": "string",
+            "description": "B=>User,  P => Profile",
+            "nullable": true
+          },
+          "userAccesses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.UserAccess"
+            },
+            "nullable": true
+          },
+          "accessToZones": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "Zones for User. set to null or empty to use default zone from db.\r\nAvailable zones can be fetched from [get]://api/zones",
+            "nullable": true
+          },
           "accessTemplateId": {
             "type": "string",
             "description": "This is user profile",
@@ -2589,76 +3561,22 @@
           "userAccessFunctions": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/AccessFunction"
+              "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.AccessFunction"
             },
             "nullable": true
           },
           "userRoles": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/UserRole"
+              "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.UserRole"
             },
-            "nullable": true
-          },
-          "username": {
-            "type": "string",
-            "description": "",
-            "nullable": true
-          },
-          "externalDepartmentId": {
-            "type": "string",
-            "description": "Departmentname: Mapped agains misc1",
-            "nullable": true
-          },
-          "departmentCode": {
-            "type": "string",
-            "description": "Assign user to department by using department code (SOA_AdmKort) \r\nCode will be used to find department in which new user is assigned.",
-            "nullable": true
-          },
-          "mailAddresses": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "",
-            "nullable": true
-          },
-          "id": {
-            "type": "string",
-            "description": "gid_gidid",
-            "nullable": true
-          },
-          "lookupField": {
-            "type": "string",
-            "description": "Use this to set lookup field in user",
-            "nullable": true
-          },
-          "userType": {
-            "type": "string",
-            "description": "B=>User,  P => Profile",
-            "nullable": true
-          },
-          "userAccesses": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/UserAccess"
-            },
-            "nullable": true
-          },
-          "accessToZones": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "description": "Zones for User. set to null or empty to use default zone from db.\r\nAvailable zones can be fetched from [get]://api/zones",
             "nullable": true
           }
         },
         "additionalProperties": false,
         "description": ""
       },
-      "UserRole": {
+      "Acos.Websak.UserAPI.Core.Models.UserRole": {
         "type": "object",
         "properties": {
           "roleId": {
@@ -2704,7 +3622,39 @@
         "additionalProperties": false,
         "description": "Is not returned today."
       },
-      "WebsakEnvironment": {
+      "Acos.Websak.UserAPI.Core.Models.UserRoleRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifier for the role template (Gbr_GrmID); required.",
+            "nullable": true
+          },
+          "departmentList": {
+            "type": "string",
+            "description": "Comma separated list of department identifiers; required.",
+            "nullable": true
+          },
+          "archiveList": {
+            "type": "string",
+            "description": "Comma separated list of archive identifiers; optional.",
+            "nullable": true
+          },
+          "journalUnitList": {
+            "type": "string",
+            "description": "Comma separated list of journal unit identifiers; optional.",
+            "nullable": true
+          },
+          "gradeList": {
+            "type": "string",
+            "description": "Comma separated list of grade identifiers; required.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Payload for adding or updating a user role assignment."
+      },
+      "Acos.Websak.UserAPI.Core.Models.WebsakEnvironment": {
         "type": "object",
         "properties": {
           "id": {
@@ -2720,14 +3670,37 @@
             "nullable": true
           },
           "zone": {
-            "$ref": "#/components/schemas/Zone"
+            "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Zone"
           }
         },
         "additionalProperties": false
       },
-      "WebsakUser": {
+      "Acos.Websak.UserAPI.Core.Models.WebsakUser": {
         "type": "object",
         "properties": {
+          "gidId": {
+            "type": "string",
+            "description": "",
+            "nullable": true
+          },
+          "externalUsername": {
+            "type": "string",
+            "description": "[Obsolete]",
+            "nullable": true
+          },
+          "active": {
+            "type": "boolean",
+            "description": ""
+          },
+          "orgUnitId": {
+            "type": "string",
+            "description": "",
+            "nullable": true
+          },
+          "userRequestJsonString": {
+            "type": "string",
+            "nullable": true
+          },
           "accessTemplateId": {
             "type": "string",
             "description": "This is user profile",
@@ -2901,41 +3874,22 @@
           "userAccessFunctions": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/AccessFunction"
+              "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.AccessFunction"
             },
             "nullable": true
           },
           "userRoles": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/UserRole"
+              "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.UserRole"
             },
-            "nullable": true
-          },
-          "gidId": {
-            "type": "string",
-            "description": "",
-            "nullable": true
-          },
-          "externalUsername": {
-            "type": "string",
-            "description": "[Obsolete]",
-            "nullable": true
-          },
-          "active": {
-            "type": "boolean",
-            "description": ""
-          },
-          "orgUnitId": {
-            "type": "string",
-            "description": "",
             "nullable": true
           }
         },
         "additionalProperties": false,
         "description": ""
       },
-      "Zone": {
+      "Acos.Websak.UserAPI.Core.Models.Zone": {
         "type": "object",
         "properties": {
           "id": {
@@ -2962,6 +3916,33 @@
           }
         },
         "additionalProperties": false
+      },
+      "Microsoft.AspNetCore.Mvc.ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
       }
     },
     "securitySchemes": {
@@ -2974,21 +3955,16 @@
             "scopes": {
               "userapi": "User API"
             }
+          },
+          "authorizationCode": {
+            "authorizationUrl": "https://erlend5570.intern.acos.no:5007/connect/authorize",
+            "tokenUrl": "https://erlend5570.intern.acos.no:5007/connect/token",
+            "scopes": {
+              "userapi": "User API"
+            }
           }
         }
-      },
-      "bearer": {
-        "type": "http",
-        "description": "Please enter JWT into field",
-        "scheme": "bearer",
-        "bearerFormat": "JWT"
       }
     }
-  },
-  "security": [
-    {
-      "bearer": [ ],
-      "oauth2": [ ]
-    }
-  ]
+  }
 }

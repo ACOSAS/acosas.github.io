@@ -38,8 +38,8 @@ $plussRequestHeader=@{
     'Accept' = 'application/json'
 }
 #Gets users
-#By default limit is 10000 => Use limit and offset to get more data.
-$response = Invoke-RestMethod -Uri "$($plussApiBaseUrl)api/users/?limit=1000&offset=0" -Method GET -Headers $plussRequestHeader
+#By default limit is 100 => Use limit and offset to get more data.
+$response = Invoke-RestMethod -Uri "$($plussApiBaseUrl)api/users/?limit=100&offset=0" -Method GET -Headers $plussRequestHeader
 
 write-output $response
 ```
@@ -88,7 +88,7 @@ All user endpoints which requires finding a user, have this query parameter. For
 
 To get the stored information for all users call 
 ### parameters
-limit=1000 number of returned records<br>
+limit=100 number of returned records<br>
 offset=0 number of skipped records<br>
 includeEmailAddresses=true (default false) true will cause email addresses to be populated **performance impact**<br>
 includeUserAccess=true (default false) true will cause user functions to be populated **performance impact**<br>
@@ -96,9 +96,9 @@ includeRoles=true  (default false) true will cause user roles to be populated **
 It is <em>recommended</em> to use /api/user/{id} to get full user profile. 
 
 ```curl
-    http get to /api/users/?limit=1000&offset=0&includeEmailAddresses=true&includeUserAccess=true&includeRoles=true
+    http get to /api/users/?limit=100&offset=0&includeEmailAddresses=true&includeUserAccess=true&includeRoles=true
 ```
-Be warned that this may return a lot of information. Future versions of this api may restrict the number of returned users. Use limit and offset to reduce number of users returned. By default 10000 users will be returned. 
+Be warned that this may return a lot of information. Future versions of this api may restrict the number of returned users. Use limit and offset to reduce number of users returned. By default 100 users will be returned. 
 
 ## Get a User
 

@@ -21,11 +21,20 @@ entries:
     - title: /api/AccessGroups/members/{id}
       url: /userapi__api_accessgroups_members__id_.html
       output: web, pdf
+    - title: /api/info
+      url: /userapi__api_info.html
+      output: web, pdf
     - title: /api/Departments
       url: /userapi__api_departments.html
       output: web, pdf
+    - title: /api/Departments/flat
+      url: /userapi__api_departments_flat.html
+      output: web, pdf
     - title: /api/Departments/{id}
       url: /userapi__api_departments__id_.html
+      output: web, pdf
+    - title: /api/Departments/external/{externalId}
+      url: /userapi__api_departments_external__externalid_.html
       output: web, pdf
     - title: /api/Departments/{id}/deactivate
       url: /userapi__api_departments__id__deactivate.html
@@ -59,6 +68,15 @@ entries:
       output: web, pdf
     - title: /api/Users/{id}/RemoveUserFromAccessGroup/{accessGroupId}
       url: /userapi__api_users__id__removeuserfromaccessgroup__accessgroupid_.html
+      output: web, pdf
+    - title: /api/Users/{userId}/roles
+      url: /userapi__api_users__userid__roles.html
+      output: web, pdf
+    - title: /api/Users/{userId}/accesscodes
+      url: /userapi__api_users__userid__accesscodes.html
+      output: web, pdf
+    - title: /api/Users/{userId}/roles/{roleId}
+      url: /userapi__api_users__userid__roles__roleid_.html
       output: web, pdf
     - title: /api/Users/{id}/RemoveUserFromAccessGroupName/{accessGroupName}
       url: /userapi__api_users__id__removeuserfromaccessgroupname__accessgroupname_.html
