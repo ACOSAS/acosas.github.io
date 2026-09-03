@@ -1,0 +1,41 @@
+# THIS PAGE IS GENERATED. ANY CHANGES TO PAGE WILL POTENTIALLY BE OVERWRITTEN.
+# This is your sidebar TOC. The sidebar code loops through sections here and provides the appropriate formatting.
+entries:
+- title: sidebar
+  # product: Documentation
+  # version: 1.0
+  folders:
+  - title: User API SCIM
+    output: web
+    type: frontmatter
+    folderitems: 
+    - title: /scim/v2/Groups
+      url: /userapi_scim__scim_v2_groups.html
+      output: web, pdf
+    - title: /scim/v2/Groups/{id}
+      url: /userapi_scim__scim_v2_groups__id_.html
+      output: web, pdf
+    - title: /scim/v2/ResourceTypes
+      url: /userapi_scim__scim_v2_resourcetypes.html
+      output: web, pdf
+    - title: /scim/v2/ResourceTypes/{id}
+      url: /userapi_scim__scim_v2_resourcetypes__id_.html
+      output: web, pdf
+    - title: /scim/v2/Schemas
+      url: /userapi_scim__scim_v2_schemas.html
+      output: web, pdf
+    - title: /scim/v2/Schemas/{schemaUri}
+      url: /userapi_scim__scim_v2_schemas__schemauri_.html
+      output: web, pdf
+    - title: /scim/v2/ServiceProviderConfig
+      url: /userapi_scim__scim_v2_serviceproviderconfig.html
+      output: web, pdf
+    - title: /scim/v2/Users
+      url: /userapi_scim__scim_v2_users.html
+      output: web, pdf
+    - title: /scim/v2/Users/{id}
+      url: /userapi_scim__scim_v2_users__id_.html
+      output: web, pdf
+    - title: User API SCIM Models
+      url: /user_api_scim_components.html
+      output: web, pdf
