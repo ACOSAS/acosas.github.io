@@ -2,256 +2,257 @@
 entries:
 - title: sidebar
   folders:
-  - title: "Guider"
+  - title: "ACOS UserAPI"
     output: web
     type: frontmatter
     folderitems:
     - title: "Oversikt"
       url: "/userapi_guide.html"
       output: web, pdf
-    - title: "Identitet og tilgang"
-      url: "/userapi_identity_and_access.html"
-      output: web, pdf
-    - title: "SCIM-provisjonering (beta)"
-      url: "/userapi_scim_guide.html"
-      output: web, pdf
-    - title: "REST UserAPI"
-      url: "/userapi_rest_guide.html"
-      output: web, pdf
-    - title: "REST: tilgangsgrupper"
-      url: "/userapi_rest_access_groups.html"
-      output: web, pdf
-    - title: "REST: roller og funksjoner"
-      url: "/userapi_rest_roles.html"
-      output: web, pdf
-    - title: "REST: avdelinger"
-      url: "/userapi_rest_departments.html"
-      output: web, pdf
-    - title: "Feltmapping"
-      url: "/userapi_field_mapping.html"
-      output: web, pdf
-    - title: "Konfigurasjonsmal"
-      url: "/userapi_configuration_template.html"
-      output: web, pdf
-    - title: "Publiseringsmetadata"
-      url: "/userapi_build_metadata.html"
-      output: web, pdf
-  - title: "REST-referanse"
-    output: web
-    type: frontmatter
-    folderitems:
-    - title: "/api/AccessGroups"
-      url: "/userapi__api_accessgroups.html"
-      output: web, pdf
-    - title: "/api/AccessGroups/cases/{caseId}"
-      url: "/userapi__api_accessgroups_cases__caseid_.html"
-      output: web, pdf
-    - title: "/api/AccessGroups/cases/{caseId}/{groupId}"
-      url: "/userapi__api_accessgroups_cases__caseid___groupid_.html"
-      output: web, pdf
-    - title: "/api/AccessGroups/journals/{journalId}"
-      url: "/userapi__api_accessgroups_journals__journalid_.html"
-      output: web, pdf
-    - title: "/api/AccessGroups/journals/{journalId}/{groupId}"
-      url: "/userapi__api_accessgroups_journals__journalid___groupid_.html"
-      output: web, pdf
-    - title: "/api/AccessGroups/members/{id}"
-      url: "/userapi__api_accessgroups_members__id_.html"
-      output: web, pdf
-    - title: "/api/AccessGroups/{groupId}/members/{userGidId}"
-      url: "/userapi__api_accessgroups__groupid__members__usergidid_.html"
-      output: web, pdf
-    - title: "/api/AccessGroups/{id}"
-      url: "/userapi__api_accessgroups__id_.html"
-      output: web, pdf
-    - title: "/api/Admin/availableidentityproviders"
-      url: "/userapi__api_admin_availableidentityproviders.html"
-      output: web, pdf
-    - title: "/api/Admin/departmentcount"
-      url: "/userapi__api_admin_departmentcount.html"
-      output: web, pdf
-    - title: "/api/Admin/generalaccessgroupcount"
-      url: "/userapi__api_admin_generalaccessgroupcount.html"
-      output: web, pdf
-    - title: "/api/Admin/usercount"
-      url: "/userapi__api_admin_usercount.html"
-      output: web, pdf
-    - title: "/api/Departments"
-      url: "/userapi__api_departments.html"
-      output: web, pdf
-    - title: "/api/Departments/external/{externalId}"
-      url: "/userapi__api_departments_external__externalid_.html"
-      output: web, pdf
-    - title: "/api/Departments/flat"
-      url: "/userapi__api_departments_flat.html"
-      output: web, pdf
-    - title: "/api/Departments/{id}"
-      url: "/userapi__api_departments__id_.html"
-      output: web, pdf
-    - title: "/api/Identities"
-      url: "/userapi__api_identities.html"
-      output: web, pdf
-    - title: "/api/Identities/{id}"
-      url: "/userapi__api_identities__id_.html"
-      output: web, pdf
-    - title: "/api/Users"
-      url: "/userapi__api_users.html"
-      output: web, pdf
-    - title: "/api/Users/changes/{fromDate}"
-      url: "/userapi__api_users_changes__fromdate_.html"
-      output: web, pdf
-    - title: "/api/Users/{id}"
-      url: "/userapi__api_users__id_.html"
-      output: web, pdf
-    - title: "/api/Users/{id}/AccessGroupMembership"
-      url: "/userapi__api_users__id__accessgroupmembership.html"
-      output: web, pdf
-    - title: "/api/Users/{id}/useraccesses"
-      url: "/userapi__api_users__id__useraccesses.html"
-      output: web, pdf
-    - title: "/api/Users/{userId}/accesscodes"
-      url: "/userapi__api_users__userid__accesscodes.html"
-      output: web, pdf
-    - title: "/api/Users/{userId}/roles"
-      url: "/userapi__api_users__userid__roles.html"
-      output: web, pdf
-    - title: "/api/Users/{userId}/roles/{roleId}"
-      url: "/userapi__api_users__userid__roles__roleid_.html"
-      output: web, pdf
-    - title: "/api/Zones"
-      url: "/userapi__api_zones.html"
-      output: web, pdf
-    - title: "/api/info"
-      url: "/userapi__api_info.html"
-      output: web, pdf
-    - title: "/api/v2/DepartmentsV2"
-      url: "/userapi__api_v2_departmentsv2.html"
-      output: web, pdf
-    - title: "/api/v2/DepartmentsV2/external/{externalId}"
-      url: "/userapi__api_v2_departmentsv2_external__externalid_.html"
-      output: web, pdf
-    - title: "/api/v2/DepartmentsV2/external/{orgUnitId}/post-distributors/{userGidId}"
-      url: "/userapi__api_v2_departmentsv2_external__orgunitid__post-distributors__usergidid_.html"
-      output: web, pdf
-    - title: "/api/v2/DepartmentsV2/flat"
-      url: "/userapi__api_v2_departmentsv2_flat.html"
-      output: web, pdf
-    - title: "/api/v2/DepartmentsV2/{departmentId}/activation"
-      url: "/userapi__api_v2_departmentsv2__departmentid__activation.html"
-      output: web, pdf
-    - title: "/api/v2/DepartmentsV2/{id}"
-      url: "/userapi__api_v2_departmentsv2__id_.html"
-      output: web, pdf
-    - title: "/api/v2/accessgroups/by-name/{accessGroupName}/members/{userGidId}"
-      url: "/userapi__api_v2_accessgroups_by-name__accessgroupname__members__usergidid_.html"
-      output: web, pdf
-    - title: "/api/v2/accessgroups/{accessGroupId}/members/{userGidId}"
-      url: "/userapi__api_v2_accessgroups__accessgroupid__members__usergidid_.html"
-      output: web, pdf
-    - title: "/api/v2/departments"
-      url: "/userapi__api_v2_departments.html"
-      output: web, pdf
-    - title: "/api/v2/departments/external/{externalId}"
-      url: "/userapi__api_v2_departments_external__externalid_.html"
-      output: web, pdf
-    - title: "/api/v2/departments/external/{orgUnitId}/post-distributors/{userGidId}"
-      url: "/userapi__api_v2_departments_external__orgunitid__post-distributors__usergidid_.html"
-      output: web, pdf
-    - title: "/api/v2/departments/flat"
-      url: "/userapi__api_v2_departments_flat.html"
-      output: web, pdf
-    - title: "/api/v2/departments/{departmentId}/activation"
-      url: "/userapi__api_v2_departments__departmentid__activation.html"
-      output: web, pdf
-    - title: "/api/v2/departments/{id}"
-      url: "/userapi__api_v2_departments__id_.html"
-      output: web, pdf
-    - title: "/api/v2/users/{userGidId}/activation"
-      url: "/userapi__api_v2_users__usergidid__activation.html"
-      output: web, pdf
-    - title: "REST-modeller"
-      url: "/user_api_components.html"
-      output: web, pdf
-  - title: "SCIM-referanse (beta)"
-    output: web
-    type: frontmatter
-    folderitems:
-    - title: "/scim/v2/Groups"
-      url: "/userapi_scim__scim_v2_groups.html"
-      output: web, pdf
-    - title: "/scim/v2/Groups/{id}"
-      url: "/userapi_scim__scim_v2_groups__id_.html"
-      output: web, pdf
-    - title: "/scim/v2/ResourceTypes"
-      url: "/userapi_scim__scim_v2_resourcetypes.html"
-      output: web, pdf
-    - title: "/scim/v2/ResourceTypes/{id}"
-      url: "/userapi_scim__scim_v2_resourcetypes__id_.html"
-      output: web, pdf
-    - title: "/scim/v2/Schemas"
-      url: "/userapi_scim__scim_v2_schemas.html"
-      output: web, pdf
-    - title: "/scim/v2/Schemas/{schemaUri}"
-      url: "/userapi_scim__scim_v2_schemas__schemauri_.html"
-      output: web, pdf
-    - title: "/scim/v2/ServiceProviderConfig"
-      url: "/userapi_scim__scim_v2_serviceproviderconfig.html"
-      output: web, pdf
-    - title: "/scim/v2/Users"
-      url: "/userapi_scim__scim_v2_users.html"
-      output: web, pdf
-    - title: "/scim/v2/Users/{id}"
-      url: "/userapi_scim__scim_v2_users__id_.html"
-      output: web, pdf
-    - title: "SCIM-modeller"
-      url: "/user_api_scim_components.html"
-      output: web, pdf
-  - title: "Legacy"
-    output: web
-    type: frontmatter
-    folderitems:
-    - title: "Migreringsguide"
-      url: "/userapi_legacy.html"
-      output: web, pdf
-    - title: "/api/Departments/{id}/activate"
-      url: "/userapi__api_departments__id__activate.html"
-      output: web, pdf
-    - title: "/api/Departments/{id}/deactivate"
-      url: "/userapi__api_departments__id__deactivate.html"
-      output: web, pdf
-    - title: "/api/Users/{id}/Activate"
-      url: "/userapi__api_users__id__activate.html"
-      output: web, pdf
-    - title: "/api/Users/{id}/AddUserAsPostDistributor/{orgUnitId}"
-      url: "/userapi__api_users__id__adduseraspostdistributor__orgunitid_.html"
-      output: web, pdf
-    - title: "/api/Users/{id}/AddUserToAccessGroup/{accessGroupId}"
-      url: "/userapi__api_users__id__addusertoaccessgroup__accessgroupid_.html"
-      output: web, pdf
-    - title: "/api/Users/{id}/AddUserToAccessGroupByGroupName/{accessGroupName}"
-      url: "/userapi__api_users__id__addusertoaccessgroupbygroupname__accessgroupname_.html"
-      output: web, pdf
-    - title: "/api/Users/{id}/Deactivate"
-      url: "/userapi__api_users__id__deactivate.html"
-      output: web, pdf
-    - title: "/api/Users/{id}/RemoveUserAsPostDistributor/{orgUnitId}"
-      url: "/userapi__api_users__id__removeuseraspostdistributor__orgunitid_.html"
-      output: web, pdf
-    - title: "/api/Users/{id}/RemoveUserFromAccessGroup/{accessGroupId}"
-      url: "/userapi__api_users__id__removeuserfromaccessgroup__accessgroupid_.html"
-      output: web, pdf
-    - title: "/api/Users/{id}/RemoveUserFromAccessGroupName/{accessGroupName}"
-      url: "/userapi__api_users__id__removeuserfromaccessgroupname__accessgroupname_.html"
-      output: web, pdf
-    - title: "/api/v2/DepartmentsV2/{id}/activate"
-      url: "/userapi__api_v2_departmentsv2__id__activate.html"
-      output: web, pdf
-    - title: "/api/v2/DepartmentsV2/{id}/deactivate"
-      url: "/userapi__api_v2_departmentsv2__id__deactivate.html"
-      output: web, pdf
-    - title: "/api/v2/departments/{id}/activate"
-      url: "/userapi__api_v2_departments__id__activate.html"
-      output: web, pdf
-    - title: "/api/v2/departments/{id}/deactivate"
-      url: "/userapi__api_v2_departments__id__deactivate.html"
-      output: web, pdf
+      subfolders:
+      - title: "Guider"
+        output: web
+        subfolderitems:
+        - title: "Identitet og tilgang"
+          url: "/userapi_identity_and_access.html"
+          output: web, pdf
+        - title: "SCIM-provisjonering (beta)"
+          url: "/userapi_scim_guide.html"
+          output: web, pdf
+        - title: "REST UserAPI"
+          url: "/userapi_rest_guide.html"
+          output: web, pdf
+        - title: "REST: tilgangsgrupper"
+          url: "/userapi_rest_access_groups.html"
+          output: web, pdf
+        - title: "REST: roller og funksjoner"
+          url: "/userapi_rest_roles.html"
+          output: web, pdf
+        - title: "REST: avdelinger"
+          url: "/userapi_rest_departments.html"
+          output: web, pdf
+        - title: "Feltmapping"
+          url: "/userapi_field_mapping.html"
+          output: web, pdf
+        - title: "Konfigurasjonsmal"
+          url: "/userapi_configuration_template.html"
+          output: web, pdf
+        - title: "Publiseringsmetadata"
+          url: "/userapi_build_metadata.html"
+          output: web, pdf
+      - title: "REST-referanse"
+        output: web
+        subfolderitems:
+        - title: "/api/AccessGroups"
+          url: "/userapi__api_accessgroups.html"
+          output: web, pdf
+        - title: "/api/AccessGroups/cases/{caseId}"
+          url: "/userapi__api_accessgroups_cases__caseid_.html"
+          output: web, pdf
+        - title: "/api/AccessGroups/cases/{caseId}/{groupId}"
+          url: "/userapi__api_accessgroups_cases__caseid___groupid_.html"
+          output: web, pdf
+        - title: "/api/AccessGroups/journals/{journalId}"
+          url: "/userapi__api_accessgroups_journals__journalid_.html"
+          output: web, pdf
+        - title: "/api/AccessGroups/journals/{journalId}/{groupId}"
+          url: "/userapi__api_accessgroups_journals__journalid___groupid_.html"
+          output: web, pdf
+        - title: "/api/AccessGroups/members/{id}"
+          url: "/userapi__api_accessgroups_members__id_.html"
+          output: web, pdf
+        - title: "/api/AccessGroups/{groupId}/members/{userGidId}"
+          url: "/userapi__api_accessgroups__groupid__members__usergidid_.html"
+          output: web, pdf
+        - title: "/api/AccessGroups/{id}"
+          url: "/userapi__api_accessgroups__id_.html"
+          output: web, pdf
+        - title: "/api/Admin/availableidentityproviders"
+          url: "/userapi__api_admin_availableidentityproviders.html"
+          output: web, pdf
+        - title: "/api/Admin/departmentcount"
+          url: "/userapi__api_admin_departmentcount.html"
+          output: web, pdf
+        - title: "/api/Admin/generalaccessgroupcount"
+          url: "/userapi__api_admin_generalaccessgroupcount.html"
+          output: web, pdf
+        - title: "/api/Admin/usercount"
+          url: "/userapi__api_admin_usercount.html"
+          output: web, pdf
+        - title: "/api/Departments"
+          url: "/userapi__api_departments.html"
+          output: web, pdf
+        - title: "/api/Departments/external/{externalId}"
+          url: "/userapi__api_departments_external__externalid_.html"
+          output: web, pdf
+        - title: "/api/Departments/flat"
+          url: "/userapi__api_departments_flat.html"
+          output: web, pdf
+        - title: "/api/Departments/{id}"
+          url: "/userapi__api_departments__id_.html"
+          output: web, pdf
+        - title: "/api/Identities"
+          url: "/userapi__api_identities.html"
+          output: web, pdf
+        - title: "/api/Identities/{id}"
+          url: "/userapi__api_identities__id_.html"
+          output: web, pdf
+        - title: "/api/Users"
+          url: "/userapi__api_users.html"
+          output: web, pdf
+        - title: "/api/Users/changes/{fromDate}"
+          url: "/userapi__api_users_changes__fromdate_.html"
+          output: web, pdf
+        - title: "/api/Users/{id}"
+          url: "/userapi__api_users__id_.html"
+          output: web, pdf
+        - title: "/api/Users/{id}/AccessGroupMembership"
+          url: "/userapi__api_users__id__accessgroupmembership.html"
+          output: web, pdf
+        - title: "/api/Users/{id}/useraccesses"
+          url: "/userapi__api_users__id__useraccesses.html"
+          output: web, pdf
+        - title: "/api/Users/{userId}/accesscodes"
+          url: "/userapi__api_users__userid__accesscodes.html"
+          output: web, pdf
+        - title: "/api/Users/{userId}/roles"
+          url: "/userapi__api_users__userid__roles.html"
+          output: web, pdf
+        - title: "/api/Users/{userId}/roles/{roleId}"
+          url: "/userapi__api_users__userid__roles__roleid_.html"
+          output: web, pdf
+        - title: "/api/Zones"
+          url: "/userapi__api_zones.html"
+          output: web, pdf
+        - title: "/api/info"
+          url: "/userapi__api_info.html"
+          output: web, pdf
+        - title: "/api/v2/DepartmentsV2"
+          url: "/userapi__api_v2_departmentsv2.html"
+          output: web, pdf
+        - title: "/api/v2/DepartmentsV2/external/{externalId}"
+          url: "/userapi__api_v2_departmentsv2_external__externalid_.html"
+          output: web, pdf
+        - title: "/api/v2/DepartmentsV2/external/{orgUnitId}/post-distributors/{userGidId}"
+          url: "/userapi__api_v2_departmentsv2_external__orgunitid__post-distributors__usergidid_.html"
+          output: web, pdf
+        - title: "/api/v2/DepartmentsV2/flat"
+          url: "/userapi__api_v2_departmentsv2_flat.html"
+          output: web, pdf
+        - title: "/api/v2/DepartmentsV2/{departmentId}/activation"
+          url: "/userapi__api_v2_departmentsv2__departmentid__activation.html"
+          output: web, pdf
+        - title: "/api/v2/DepartmentsV2/{id}"
+          url: "/userapi__api_v2_departmentsv2__id_.html"
+          output: web, pdf
+        - title: "/api/v2/accessgroups/by-name/{accessGroupName}/members/{userGidId}"
+          url: "/userapi__api_v2_accessgroups_by-name__accessgroupname__members__usergidid_.html"
+          output: web, pdf
+        - title: "/api/v2/accessgroups/{accessGroupId}/members/{userGidId}"
+          url: "/userapi__api_v2_accessgroups__accessgroupid__members__usergidid_.html"
+          output: web, pdf
+        - title: "/api/v2/departments"
+          url: "/userapi__api_v2_departments.html"
+          output: web, pdf
+        - title: "/api/v2/departments/external/{externalId}"
+          url: "/userapi__api_v2_departments_external__externalid_.html"
+          output: web, pdf
+        - title: "/api/v2/departments/external/{orgUnitId}/post-distributors/{userGidId}"
+          url: "/userapi__api_v2_departments_external__orgunitid__post-distributors__usergidid_.html"
+          output: web, pdf
+        - title: "/api/v2/departments/flat"
+          url: "/userapi__api_v2_departments_flat.html"
+          output: web, pdf
+        - title: "/api/v2/departments/{departmentId}/activation"
+          url: "/userapi__api_v2_departments__departmentid__activation.html"
+          output: web, pdf
+        - title: "/api/v2/departments/{id}"
+          url: "/userapi__api_v2_departments__id_.html"
+          output: web, pdf
+        - title: "/api/v2/users/{userGidId}/activation"
+          url: "/userapi__api_v2_users__usergidid__activation.html"
+          output: web, pdf
+        - title: "REST-modeller"
+          url: "/user_api_components.html"
+          output: web, pdf
+      - title: "SCIM-referanse (beta)"
+        output: web
+        subfolderitems:
+        - title: "/scim/v2/Groups"
+          url: "/userapi_scim__scim_v2_groups.html"
+          output: web, pdf
+        - title: "/scim/v2/Groups/{id}"
+          url: "/userapi_scim__scim_v2_groups__id_.html"
+          output: web, pdf
+        - title: "/scim/v2/ResourceTypes"
+          url: "/userapi_scim__scim_v2_resourcetypes.html"
+          output: web, pdf
+        - title: "/scim/v2/ResourceTypes/{id}"
+          url: "/userapi_scim__scim_v2_resourcetypes__id_.html"
+          output: web, pdf
+        - title: "/scim/v2/Schemas"
+          url: "/userapi_scim__scim_v2_schemas.html"
+          output: web, pdf
+        - title: "/scim/v2/Schemas/{schemaUri}"
+          url: "/userapi_scim__scim_v2_schemas__schemauri_.html"
+          output: web, pdf
+        - title: "/scim/v2/ServiceProviderConfig"
+          url: "/userapi_scim__scim_v2_serviceproviderconfig.html"
+          output: web, pdf
+        - title: "/scim/v2/Users"
+          url: "/userapi_scim__scim_v2_users.html"
+          output: web, pdf
+        - title: "/scim/v2/Users/{id}"
+          url: "/userapi_scim__scim_v2_users__id_.html"
+          output: web, pdf
+        - title: "SCIM-modeller"
+          url: "/user_api_scim_components.html"
+          output: web, pdf
+      - title: "Legacy"
+        output: web
+        subfolderitems:
+        - title: "Migreringsguide"
+          url: "/userapi_legacy.html"
+          output: web, pdf
+        - title: "/api/Departments/{id}/activate"
+          url: "/userapi__api_departments__id__activate.html"
+          output: web, pdf
+        - title: "/api/Departments/{id}/deactivate"
+          url: "/userapi__api_departments__id__deactivate.html"
+          output: web, pdf
+        - title: "/api/Users/{id}/Activate"
+          url: "/userapi__api_users__id__activate.html"
+          output: web, pdf
+        - title: "/api/Users/{id}/AddUserAsPostDistributor/{orgUnitId}"
+          url: "/userapi__api_users__id__adduseraspostdistributor__orgunitid_.html"
+          output: web, pdf
+        - title: "/api/Users/{id}/AddUserToAccessGroup/{accessGroupId}"
+          url: "/userapi__api_users__id__addusertoaccessgroup__accessgroupid_.html"
+          output: web, pdf
+        - title: "/api/Users/{id}/AddUserToAccessGroupByGroupName/{accessGroupName}"
+          url: "/userapi__api_users__id__addusertoaccessgroupbygroupname__accessgroupname_.html"
+          output: web, pdf
+        - title: "/api/Users/{id}/Deactivate"
+          url: "/userapi__api_users__id__deactivate.html"
+          output: web, pdf
+        - title: "/api/Users/{id}/RemoveUserAsPostDistributor/{orgUnitId}"
+          url: "/userapi__api_users__id__removeuseraspostdistributor__orgunitid_.html"
+          output: web, pdf
+        - title: "/api/Users/{id}/RemoveUserFromAccessGroup/{accessGroupId}"
+          url: "/userapi__api_users__id__removeuserfromaccessgroup__accessgroupid_.html"
+          output: web, pdf
+        - title: "/api/Users/{id}/RemoveUserFromAccessGroupName/{accessGroupName}"
+          url: "/userapi__api_users__id__removeuserfromaccessgroupname__accessgroupname_.html"
+          output: web, pdf
+        - title: "/api/v2/DepartmentsV2/{id}/activate"
+          url: "/userapi__api_v2_departmentsv2__id__activate.html"
+          output: web, pdf
+        - title: "/api/v2/DepartmentsV2/{id}/deactivate"
+          url: "/userapi__api_v2_departmentsv2__id__deactivate.html"
+          output: web, pdf
+        - title: "/api/v2/departments/{id}/activate"
+          url: "/userapi__api_v2_departments__id__activate.html"
+          output: web, pdf
+        - title: "/api/v2/departments/{id}/deactivate"
+          url: "/userapi__api_v2_departments__id__deactivate.html"
+          output: web, pdf
