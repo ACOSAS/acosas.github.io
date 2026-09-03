@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="430" viewBox="0 0 1120 430" role="img" aria-labelledby="title desc">
+  <title id="title">SCIM beta: kundens provisjoneringsflyt</title>
+  <desc id="desc">Entra sender SCIM med scope userapi.scim. UserAPI finner brukeren med externalId, oppretter eller oppdaterer og kunden kontrollerer resultat og logg.</desc>
+  <defs><style>.h{font:700 26px Arial;fill:#12304a}.t{font:17px Arial;fill:#18384f}.s{font:14px Arial;fill:#40596b}.box{fill:#f4f8fb;stroke:#1f6680;stroke-width:2}.beta{fill:#fff0d9;stroke:#c26300;stroke-width:2}.arrow{stroke:#1f6680;stroke-width:3;fill:none;marker-end:url(#a)}.n{fill:#127b7e}.nt{font:700 16px Arial;fill:white}</style><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#1f6680"/></marker></defs>
+  <rect width="1120" height="430" rx="18" fill="#fff" stroke="#d8e2e8"/>
+  <text class="h" x="40" y="48">SCIM-provisjonering – kontrollert beta</text>
+  <rect class="beta" x="820" y="20" width="260" height="46" rx="23"/><text class="t" x="855" y="50">Ikke full produksjon</text>
+  <rect class="box" x="50" y="115" width="235" height="150" rx="12"/><text class="t" x="83" y="153">Microsoft Entra ID</text><text class="s" x="76" y="187">Member og guest</text><text class="s" x="76" y="214">behandles likt</text><text class="s" x="76" y="241">userType mappes ikke</text>
+  <rect class="box" x="440" y="115" width="235" height="150" rx="12"/><text class="t" x="493" y="153">UserAPI / SCIM</text><text class="s" x="471" y="187">scope: userapi.scim</text><text class="s" x="471" y="214">externalId = object ID</text><text class="s" x="471" y="241">konfigurert provider</text>
+  <rect class="box" x="830" y="115" width="235" height="150" rx="12"/><text class="t" x="868" y="153">ACOS WebSak</text><text class="s" x="861" y="187">bruker og rettigheter</text><text class="s" x="861" y="214">aktiv tilstand</text><text class="s" x="861" y="241">loginmapping</text>
+  <path class="arrow" d="M285 190 H430"/><text class="s" x="310" y="176">SCIM v2</text><path class="arrow" d="M675 190 H820"/><text class="s" x="704" y="176">ønsket tilstand</text>
+  <circle class="n" cx="180" cy="324" r="22"/><text class="nt" x="175" y="330">1</text><text class="s" x="215" y="320">Entra søker på stabil externalId</text><text class="s" x="215" y="342">og sender POST, PATCH eller PUT.</text>
+  <circle class="n" cx="588" cy="324" r="22"/><text class="nt" x="583" y="330">2</text><text class="s" x="623" y="320">UserAPI oppretter eller oppdaterer</text><text class="s" x="623" y="342">med avtalt mapping.</text>
+  <circle class="n" cx="930" cy="324" r="22"/><text class="nt" x="925" y="330">3</text><text class="s" x="965" y="320">Kunden leser tilbake</text><text class="s" x="965" y="342">og følger pilotloggen.</text>
+  <text class="s" x="40" y="400">Ved usikkert resultat: GET → sammenlign → retry samme ønskede tilstand. Ikke lag ny korrelasjonsnøkkel.</text>
+</svg>

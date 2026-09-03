@@ -1,0 +1,1859 @@
+{
+  "components": {
+    "schemas": {
+      "Acos.Websak.UserAPI.Core.Models.Scim.ScimAcosUserExtension": {
+        "additionalProperties": false,
+        "properties": {
+          "applicationRole": {
+            "description": "Customer-defined application role mapped to one WebSak access template ID.",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Acos.Websak.UserAPI.Core.Models.Scim.ScimAddress": {
+        "additionalProperties": false,
+        "properties": {
+          "country": {
+            "nullable": true,
+            "type": "string"
+          },
+          "locality": {
+            "nullable": true,
+            "type": "string"
+          },
+          "postalCode": {
+            "nullable": true,
+            "type": "string"
+          },
+          "streetAddress": {
+            "nullable": true,
+            "type": "string"
+          },
+          "type": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Acos.Websak.UserAPI.Core.Models.Scim.ScimAuthenticationScheme": {
+        "additionalProperties": false,
+        "properties": {
+          "description": {
+            "nullable": true,
+            "type": "string"
+          },
+          "name": {
+            "nullable": true,
+            "type": "string"
+          },
+          "type": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Acos.Websak.UserAPI.Core.Models.Scim.ScimBulkSupported": {
+        "additionalProperties": false,
+        "properties": {
+          "maxOperations": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "maxPayloadSize": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "supported": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "Acos.Websak.UserAPI.Core.Models.Scim.ScimEnterpriseUserExtension": {
+        "additionalProperties": false,
+        "properties": {
+          "department": {
+            "description": "One exact external department ID resolved against the department Gid_DIV1 value.\nDelimited lists are not supported.",
+            "nullable": true,
+            "type": "string"
+          },
+          "manager": {
+            "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimManager"
+          }
+        },
+        "type": "object"
+      },
+      "Acos.Websak.UserAPI.Core.Models.Scim.ScimEntitlement": {
+        "additionalProperties": false,
+        "properties": {
+          "display": {
+            "nullable": true,
+            "type": "string"
+          },
+          "type": {
+            "nullable": true,
+            "type": "string"
+          },
+          "value": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Acos.Websak.UserAPI.Core.Models.Scim.ScimErrorResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "detail": {
+            "nullable": true,
+            "type": "string"
+          },
+          "schemas": {
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "scimType": {
+            "nullable": true,
+            "type": "string"
+          },
+          "status": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Acos.Websak.UserAPI.Core.Models.Scim.ScimFilterSupported": {
+        "additionalProperties": false,
+        "properties": {
+          "maxResults": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "supported": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "Acos.Websak.UserAPI.Core.Models.Scim.ScimGroupMember": {
+        "additionalProperties": false,
+        "properties": {
+          "display": {
+            "nullable": true,
+            "type": "string"
+          },
+          "ref": {
+            "nullable": true,
+            "type": "string"
+          },
+          "value": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Acos.Websak.UserAPI.Core.Models.Scim.ScimGroupResource": {
+        "additionalProperties": false,
+        "properties": {
+          "displayName": {
+            "nullable": true,
+            "type": "string"
+          },
+          "externalId": {
+            "nullable": true,
+            "type": "string"
+          },
+          "id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "members": {
+            "items": {
+              "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimGroupMember"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimMeta"
+          },
+          "schemas": {
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "Acos.Websak.UserAPI.Core.Models.Scim.ScimListResponse`1[[Acos.Websak.UserAPI.Core.Models.Scim.ScimGroupResource, Acos.Websak.UserAPI.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "additionalProperties": false,
+        "properties": {
+          "itemsPerPage": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "resources": {
+            "items": {
+              "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimGroupResource"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "schemas": {
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "startIndex": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "totalResults": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "Acos.Websak.UserAPI.Core.Models.Scim.ScimListResponse`1[[Acos.Websak.UserAPI.Core.Models.Scim.ScimResourceTypeResource, Acos.Websak.UserAPI.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "additionalProperties": false,
+        "properties": {
+          "itemsPerPage": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "resources": {
+            "items": {
+              "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimResourceTypeResource"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "schemas": {
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "startIndex": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "totalResults": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "Acos.Websak.UserAPI.Core.Models.Scim.ScimListResponse`1[[Acos.Websak.UserAPI.Core.Models.Scim.ScimSchemaResource, Acos.Websak.UserAPI.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "additionalProperties": false,
+        "properties": {
+          "itemsPerPage": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "resources": {
+            "items": {
+              "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimSchemaResource"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "schemas": {
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "startIndex": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "totalResults": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "Acos.Websak.UserAPI.Core.Models.Scim.ScimListResponse`1[[Acos.Websak.UserAPI.Core.Models.Scim.ScimUserResource, Acos.Websak.UserAPI.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "additionalProperties": false,
+        "properties": {
+          "itemsPerPage": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "resources": {
+            "items": {
+              "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimUserResource"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "schemas": {
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "startIndex": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "totalResults": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "Acos.Websak.UserAPI.Core.Models.Scim.ScimManager": {
+        "additionalProperties": false,
+        "properties": {
+          "displayName": {
+            "nullable": true,
+            "type": "string"
+          },
+          "ref": {
+            "nullable": true,
+            "type": "string"
+          },
+          "value": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Acos.Websak.UserAPI.Core.Models.Scim.ScimMeta": {
+        "additionalProperties": false,
+        "properties": {
+          "created": {
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "lastModified": {
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "location": {
+            "nullable": true,
+            "type": "string"
+          },
+          "resourceType": {
+            "nullable": true,
+            "type": "string"
+          },
+          "version": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Acos.Websak.UserAPI.Core.Models.Scim.ScimMultiValueAttribute": {
+        "additionalProperties": false,
+        "properties": {
+          "primary": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "type": {
+            "nullable": true,
+            "type": "string"
+          },
+          "value": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Acos.Websak.UserAPI.Core.Models.Scim.ScimName": {
+        "additionalProperties": false,
+        "properties": {
+          "familyName": {
+            "nullable": true,
+            "type": "string"
+          },
+          "formatted": {
+            "nullable": true,
+            "type": "string"
+          },
+          "givenName": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Acos.Websak.UserAPI.Core.Models.Scim.ScimPatchOperation": {
+        "additionalProperties": false,
+        "properties": {
+          "op": {
+            "nullable": true,
+            "type": "string"
+          },
+          "path": {
+            "nullable": true,
+            "type": "string"
+          },
+          "value": {
+            "$ref": "#/components/schemas/System.Text.Json.JsonElement"
+          }
+        },
+        "type": "object"
+      },
+      "Acos.Websak.UserAPI.Core.Models.Scim.ScimPatchRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "operations": {
+            "items": {
+              "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimPatchOperation"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "schemas": {
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "Acos.Websak.UserAPI.Core.Models.Scim.ScimResourceTypeResource": {
+        "additionalProperties": false,
+        "properties": {
+          "description": {
+            "nullable": true,
+            "type": "string"
+          },
+          "endpoint": {
+            "nullable": true,
+            "type": "string"
+          },
+          "id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimMeta"
+          },
+          "name": {
+            "nullable": true,
+            "type": "string"
+          },
+          "schema": {
+            "nullable": true,
+            "type": "string"
+          },
+          "schemaExtensions": {
+            "items": {
+              "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimSchemaExtension"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "schemas": {
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "Acos.Websak.UserAPI.Core.Models.Scim.ScimRole": {
+        "additionalProperties": false,
+        "properties": {
+          "display": {
+            "nullable": true,
+            "type": "string"
+          },
+          "value": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Acos.Websak.UserAPI.Core.Models.Scim.ScimSchemaAttribute": {
+        "additionalProperties": false,
+        "properties": {
+          "canonicalValues": {
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "description": {
+            "nullable": true,
+            "type": "string"
+          },
+          "multiValued": {
+            "type": "boolean"
+          },
+          "mutability": {
+            "nullable": true,
+            "type": "string"
+          },
+          "name": {
+            "nullable": true,
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "returned": {
+            "nullable": true,
+            "type": "string"
+          },
+          "subAttributes": {
+            "items": {
+              "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimSchemaAttribute"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "type": {
+            "nullable": true,
+            "type": "string"
+          },
+          "uniqueness": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Acos.Websak.UserAPI.Core.Models.Scim.ScimSchemaExtension": {
+        "additionalProperties": false,
+        "properties": {
+          "required": {
+            "type": "boolean"
+          },
+          "schema": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Acos.Websak.UserAPI.Core.Models.Scim.ScimSchemaResource": {
+        "additionalProperties": false,
+        "properties": {
+          "attributes": {
+            "items": {
+              "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimSchemaAttribute"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "description": {
+            "nullable": true,
+            "type": "string"
+          },
+          "id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "name": {
+            "nullable": true,
+            "type": "string"
+          },
+          "schemas": {
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "Acos.Websak.UserAPI.Core.Models.Scim.ScimServiceProviderConfigResource": {
+        "additionalProperties": false,
+        "properties": {
+          "authenticationSchemes": {
+            "items": {
+              "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimAuthenticationScheme"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "bulk": {
+            "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimBulkSupported"
+          },
+          "changePassword": {
+            "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimSupported"
+          },
+          "documentationUri": {
+            "nullable": true,
+            "type": "string"
+          },
+          "etag": {
+            "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimSupported"
+          },
+          "filter": {
+            "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimFilterSupported"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimMeta"
+          },
+          "patch": {
+            "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimSupported"
+          },
+          "schemas": {
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "sort": {
+            "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimSupported"
+          }
+        },
+        "type": "object"
+      },
+      "Acos.Websak.UserAPI.Core.Models.Scim.ScimSupported": {
+        "additionalProperties": false,
+        "properties": {
+          "supported": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "Acos.Websak.UserAPI.Core.Models.Scim.ScimUserResource": {
+        "additionalProperties": false,
+        "properties": {
+          "acosExtension": {
+            "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimAcosUserExtension"
+          },
+          "active": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "addresses": {
+            "items": {
+              "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimAddress"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "displayName": {
+            "nullable": true,
+            "type": "string"
+          },
+          "emails": {
+            "items": {
+              "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimMultiValueAttribute"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "enterpriseExtension": {
+            "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimEnterpriseUserExtension"
+          },
+          "entitlements": {
+            "items": {
+              "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimEntitlement"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "externalId": {
+            "description": "Stable client-managed identifier. Entra maps objectId here; UserAPI stores\nthe value in Gid_DIV2 and uses it for the modern login mapping.",
+            "nullable": true,
+            "type": "string"
+          },
+          "groups": {
+            "items": {
+              "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimGroupMember"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "id": {
+            "nullable": true,
+            "type": "string"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimMeta"
+          },
+          "name": {
+            "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimName"
+          },
+          "phoneNumbers": {
+            "items": {
+              "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimMultiValueAttribute"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "preferredLanguage": {
+            "nullable": true,
+            "type": "string"
+          },
+          "roles": {
+            "items": {
+              "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimRole"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "schemas": {
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "title": {
+            "nullable": true,
+            "type": "string"
+          },
+          "userName": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "System.Text.Json.JsonElement": {
+        "additionalProperties": false,
+        "properties": {
+          "valueKind": {
+            "$ref": "#/components/schemas/System.Text.Json.JsonValueKind"
+          }
+        },
+        "type": "object"
+      },
+      "System.Text.Json.JsonValueKind": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "format": "int32",
+        "type": "integer"
+      }
+    },
+    "securitySchemes": {
+      "oauth2": {
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://authority.invalid/connect/authorize",
+            "scopes": {
+              "userapi": "User API",
+              "userapi.scim": "SCIM provisioning API (beta)"
+            },
+            "tokenUrl": "https://authority.invalid/connect/token"
+          },
+          "clientCredentials": {
+            "authorizationUrl": "https://authority.invalid/",
+            "scopes": {
+              "userapi": "User API",
+              "userapi.scim": "SCIM provisioning API (beta)"
+            },
+            "tokenUrl": "https://authority.invalid/connect/token"
+          }
+        },
+        "type": "oauth2"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "email": "support@acos.no",
+      "name": "Acos Dokumenthåndtering",
+      "url": "https://wwww.acos.no"
+    },
+    "description": "BETA: ACOS WebSak UserAPI SCIM 2.0 provisioning reference. Not ready for full production.",
+    "title": "User API SCIM",
+    "version": "3.3.85",
+    "x-acos-publication": {
+      "commitSha": "74b9b7994e671c8eb20607d07328ff33eac4e8c4",
+      "generatedAt": "2026-09-03T08:12:35Z",
+      "userApiVersion": "3.3.85"
+    },
+    "x-acos-status": "beta"
+  },
+  "openapi": "3.0.4",
+  "paths": {
+    "/scim/v2/Groups": {
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "filter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "startIndex",
+            "schema": {
+              "default": 1,
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "count",
+            "schema": {
+              "default": 100,
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "attributes",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "excludedAttributes",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimListResponse`1[[Acos.Websak.UserAPI.Core.Models.Scim.ScimGroupResource, Acos.Websak.UserAPI.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimErrorResponse"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "tags": [
+          "ScimGroups"
+        ]
+      },
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimGroupResource"
+              }
+            },
+            "application/scim+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimGroupResource"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimGroupResource"
+                }
+              }
+            },
+            "description": "Created"
+          },
+          "400": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimErrorResponse"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          },
+          "409": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "tags": [
+          "ScimGroups"
+        ]
+      }
+    },
+    "/scim/v2/Groups/{id}": {
+      "delete": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          },
+          "404": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "412": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimErrorResponse"
+                }
+              }
+            },
+            "description": "Precondition Failed"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "tags": [
+          "ScimGroups"
+        ]
+      },
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "attributes",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "excludedAttributes",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimGroupResource"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimErrorResponse"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          },
+          "404": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "tags": [
+          "ScimGroups"
+        ]
+      },
+      "patch": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimPatchRequest"
+              }
+            },
+            "application/scim+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimPatchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimErrorResponse"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          },
+          "404": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "tags": [
+          "ScimGroups"
+        ]
+      },
+      "put": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          },
+          "405": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimErrorResponse"
+                }
+              }
+            },
+            "description": "Method Not Allowed"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "tags": [
+          "ScimGroups"
+        ]
+      }
+    },
+    "/scim/v2/ResourceTypes": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimListResponse`1[[Acos.Websak.UserAPI.Core.Models.Scim.ScimResourceTypeResource, Acos.Websak.UserAPI.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "tags": [
+          "ScimResourceTypes"
+        ]
+      }
+    },
+    "/scim/v2/ResourceTypes/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimResourceTypeResource"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          },
+          "404": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "tags": [
+          "ScimResourceTypes"
+        ]
+      }
+    },
+    "/scim/v2/Schemas": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimListResponse`1[[Acos.Websak.UserAPI.Core.Models.Scim.ScimSchemaResource, Acos.Websak.UserAPI.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "tags": [
+          "ScimSchemas"
+        ]
+      }
+    },
+    "/scim/v2/Schemas/{schemaUri}": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "schemaUri",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimSchemaResource"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          },
+          "404": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "tags": [
+          "ScimSchemas"
+        ]
+      }
+    },
+    "/scim/v2/ServiceProviderConfig": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimServiceProviderConfigResource"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "tags": [
+          "ScimServiceProviderConfig"
+        ]
+      }
+    },
+    "/scim/v2/Users": {
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "filter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "startIndex",
+            "schema": {
+              "default": 1,
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "count",
+            "schema": {
+              "default": 100,
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "sortBy",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "sortOrder",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "attributes",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "excludedAttributes",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimListResponse`1[[Acos.Websak.UserAPI.Core.Models.Scim.ScimUserResource, Acos.Websak.UserAPI.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimErrorResponse"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "tags": [
+          "ScimUsers"
+        ]
+      },
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimUserResource"
+              }
+            },
+            "application/scim+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimUserResource"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimUserResource"
+                }
+              }
+            },
+            "description": "Created"
+          },
+          "400": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimErrorResponse"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          },
+          "409": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "503": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "tags": [
+          "ScimUsers"
+        ]
+      }
+    },
+    "/scim/v2/Users/{id}": {
+      "delete": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          },
+          "404": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "tags": [
+          "ScimUsers"
+        ]
+      },
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "attributes",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "excludedAttributes",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimUserResource"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimErrorResponse"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          },
+          "404": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "tags": [
+          "ScimUsers"
+        ]
+      },
+      "patch": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimPatchRequest"
+              }
+            },
+            "application/scim+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimPatchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimUserResource"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimErrorResponse"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          },
+          "404": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "503": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "tags": [
+          "ScimUsers"
+        ]
+      },
+      "put": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimUserResource"
+              }
+            },
+            "application/scim+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimUserResource"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimUserResource"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimErrorResponse"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          },
+          "404": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "503": {
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Websak.UserAPI.Core.Models.Scim.ScimErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "tags": [
+          "ScimUsers"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ScimGroups"
+    },
+    {
+      "name": "ScimResourceTypes"
+    },
+    {
+      "name": "ScimSchemas"
+    },
+    {
+      "name": "ScimServiceProviderConfig"
+    },
+    {
+      "name": "ScimUsers"
+    }
+  ]
+}
