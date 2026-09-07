@@ -22,7 +22,7 @@ skjemaer finnes i generert OpenAPI. `Inn` betyr at klienten kan sende feltet,
 | `departmentCode` | inn/ut | vinner over `externalDepartmentId` | oppslag mot `Soa_AdmKort`, intern avdelings-ID lagres |
 | `externalDepartmentId` | inn | én eksakt verdi | oppslag mot avdelingens `Gid_DIV1` |
 | `accessTemplateId` | inn/ut | standard `-1` når utelatt ved REST-oppretting | rettighetsmal; kopierer roller og funksjoner |
-| `userAccesses` | inn/ut | ikke-tom ved PUT; ikke tillatt for sekundærbruker | IdentityServer loginmapping |
+| `userAccesses` | inn ved POST; inn/ut via `/useraccesses` | ikke-tom ved dedikert PUT; ikke tillatt for sekundærbruker | IdentityServer loginmapping; ignoreres av `PUT /api/Users/{id}` |
 | `accessToZones` | inn | tom/utelatt bruker databasens standard | sonetildeling |
 | `userType` | inn | ordinær REST-standard er bruker (`B`) | WebSak brukertype; ikke et SCIM-felt |
 | `title` | inn/ut | valgfritt | `Gid_Tittel` |
@@ -45,7 +45,15 @@ Andre adresse- og kontaktfelt følger navngivningen i OpenAPI. Ikke send
 | `isPrimary` | inn/ut | standard `true` | markerer primær mapping |
 
 `userAccesses` er loginmapping. `accessTemplateId` er rettighetsmal. De kan
-brukes i samme ordinære brukerflyt, men løser forskjellige behov.
+sendes sammen ved oppretting av en ordinær primærbruker, men løser forskjellige
+behov. For en eksisterende bruker må loginmappingen vedlikeholdes via
+`GET`/`PUT /api/Users/{id}/useraccesses`; den ordinære brukerprofil-PUT-en
+behandler ikke `userAccesses`.
+
+REST-responsens `externalId` er IdentityServers interne ID (`Gid_EksternID`).
+Feltet er readOnly for klienten og fylles når loginmappingen opprettes. En
+manglende verdi skal repareres gjennom det dedikerte `useraccesses`-endepunktet,
+ikke ved å opprette WebSak-brukeren på nytt.
 
 ## SCIM User
 

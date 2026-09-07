@@ -17,8 +17,8 @@ beta-status.
 |---|---|---|
 | Liste | `GET /api/Users` | paginering med `limit` og `offset` |
 | Hent | `GET /api/Users/{id}` | `lookupField=Id` er standard; `Code` støttes |
-| Opprett | `POST /api/Users` | returnerer `409` når bruker finnes og `feilVedEksisterende=true` |
-| Oppdater | `PUT /api/Users/{id}` | full brukerpayload etter gjeldende kontrakt |
+| Opprett | `POST /api/Users` | kan inkludere første `userAccesses`-mapping; returnerer `409` når bruker finnes og `feilVedEksisterende=true` |
+| Oppdater profil | `PUT /api/Users/{id}` | full profilpayload; endrer ikke loginmapping, roller eller tilgangskoder direkte |
 | Aktiver | `PUT /api/v2/users/{userGidId}/activation` | riktig V2-mutasjon |
 | Deaktiver | `DELETE /api/v2/users/{userGidId}/activation` | setter sluttdato; sletter ikke fysisk |
 | Les loginmapping | `GET /api/Users/{id}/useraccesses` | `id` er numerisk GID-ID |
@@ -27,6 +27,31 @@ beta-status.
 Ved oppretting anbefales en godkjent `accessTemplateId`. Hvis både
 `departmentCode` og `externalDepartmentId` sendes, har `departmentCode`
 prioritet. `externalDepartmentId` skal være én eksakt verdi.
+
+### Brukerprofil og loginmapping
+
+Brukerprofil og loginmapping er separate ressurser. Ved oppretting av en
+ordinær primærbruker kan `userAccesses` sendes i samme
+`POST /api/Users`. UserAPI oppretter da mappingen etter at WebSak-brukeren er
+opprettet. REST-responsens `externalId` er IdentityServers interne ID
+(`Gid_EksternID`); verdien genereres av tjenesten og skal ikke sendes av
+klienten.
+
+`PUT /api/Users/{id}` oppdaterer brukerprofilen. Den oppdaterer ikke
+`userAccesses`, selv om feltet vises i den delte `UserRequest`-modellen i
+OpenAPI. For en eksisterende bruker skal loginmappingen leses og erstattes via
+henholdsvis `GET` og `PUT /api/Users/{id}/useraccesses`. Det separate PUT-kallet
+er bare nødvendig når mappingen skal opprettes eller endres.
+
+`userAccessFunctions`, `userAccessCodes` og `userRoles` er heller ikke direkte
+skrivefelter i brukerprofil-PUT. Bruk en godkjent `accessTemplateId` eller de
+dedikerte rutene for tilgangskoder og roller. Ikke send en komplett GET-respons
+tilbake som POST/PUT-payload; bygg en operasjonsspesifikk request.
+
+Hvis en eksisterende bruker mangler `externalId`, skal klienten ikke opprette
+en ny WebSak-bruker. Les nåtilstanden, erstatt loginmappingen via
+`PUT /api/Users/{id}/useraccesses`, og kontroller deretter både mappingen og
+`externalId` på nytt.
 
 ### Sekundærbruker
 
