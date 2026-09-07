@@ -74,6 +74,19 @@ SCIM bygger nøyaktig én primær loginmapping fra `externalId`: konfigurert
 `externalId` brukes som `key`, `isPrimary` er `true`, og `domain` er `null`.
 Loginmappingen eksponeres ikke som et eget SCIM extension-felt.
 
+For ordinært REST API gjelder følgende livssyklus:
+
+| Operasjon | Loginmapping |
+|---|---|
+| `POST /api/Users` | kan opprette første `userAccesses`-mapping sammen med primærbrukeren |
+| `PUT /api/Users/{id}` | oppdaterer brukerprofilen og ignorerer `userAccesses` |
+| `GET /api/Users/{id}/useraccesses` | leser eksisterende mappinger |
+| `PUT /api/Users/{id}/useraccesses` | erstatter mappingene for en eksisterende bruker |
+
+Det siste endepunktet er også reparasjonsruten når en eksisterende REST-bruker
+mangler IdentityServers interne `externalId` (`Gid_EksternID`). Klienten skal
+beholde brukerens GID-ID og skal ikke sende en ny bruker-POST.
+
 ## Roller, tilgangsfunksjoner og maler
 
 En WebSak-rolle bestemmer lese- og skrivetilgang til saker, journalposter og
