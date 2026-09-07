@@ -9,8 +9,8 @@ Denne dokumentasjonsleveransen ble generert fra samme bygg som OpenAPI-filene.
 
 | Felt | Verdi |
 |---|---|
-| UserAPI-versjon | `3.3.88` |
-| Commit SHA | `6c6499490e9f241e3f16db3c6892a207728c6af1` |
-| Generert (UTC) | `2026-09-07T11:13:23Z` |
+| UserAPI-versjon | `3.3.87` |
+| Commit SHA | `4a9f48829a2fc8b6a3afd4a96943aa3251f46769` |
+| Generert (UTC) | `2026-09-07T09:32:57Z` |
 
 REST- og SCIM-referansen er kontrollert for full ruteseparasjon før publisering.
