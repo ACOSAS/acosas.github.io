@@ -6,7 +6,7 @@ sidebars:
 folder: swagger
 toc: false
 swaggerfile: arkivmelding
-swaggerkey: definitions
+swaggerkey: components
 permalink: acos_mottak_webapi_components.html
 link: acos_mottak_webapi_components.html
 ---

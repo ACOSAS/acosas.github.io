@@ -1,17 +1,27 @@
 {% comment %}Get links from each sidebar, as listed in the _config.yml file under sidebars{% endcomment %}
+{% assign published_urls = "" %}
+{% for published_page in site.pages %}
+{% assign published_urls = published_urls | append: "|" | append: published_page.url | append: "|" %}
+{% endfor %}
 
 {% for sidebar in site.sidebars %}
 {% for entry in site.data.sidebars[sidebar].entries %}
 {% for folder in entry.folders %}
 {% for folderitem in folder.folderitems %}
+{% assign nav_needle = folderitem.url | prepend: "|" | append: "|" %}
+{% if folderitem.url and published_urls contains nav_needle %}
 {% if folderitem.url contains "html#" %}
 [{{folderitem.url | remove: "/" }}]: {{folderitem.url | remove: "/"}}
 {% else %}
 [{{folderitem.url | remove: "/"  | remove: ".html"}}]: {{folderitem.url | remove: "/"}}
 {% endif %}
+{% endif %}
 {% for subfolders in folderitem.subfolders %}
 {% for subfolderitem in subfolders.subfolderitems %}
+{% assign nav_needle = subfolderitem.url | prepend: "|" | append: "|" %}
+{% if subfolderitem.url and published_urls contains nav_needle %}
 [{{subfolderitem.url | remove: "/"  | remove: ".html"}}]: {{subfolderitem.url | remove: "/"}}
+{% endif %}
 {% endfor %}
 {% endfor %}
 {% endfor %}

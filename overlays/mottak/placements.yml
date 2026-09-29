@@ -1,0 +1,72 @@
+product: mottak
+title: Acos Mottak WebApi
+sidebar: acos_mottak_webapi_sidebar.yml
+overview:
+  title: Oversikt
+  url: /mottakwebapi_guide.html
+swagger_files:
+  - file: arkivmelding.json
+    rest_folder: REST-referanse
+    models_title: REST-modeller
+metadata:
+  file: pages/mottakwebapi/build-metadata.md
+  permalink: /mottakwebapi_build_metadata.html
+  swagger_file: arkivmelding.json
+index:
+  file: pages/swagger/acos_mottak_webapi_index.md
+  permalink: acos_mottak_webapi_index.html
+  title: Acos Mottak WebApi overview
+  keywords: json, mottak, schemas
+  fragments:
+    - source: fragments/index-pointer.md
+      order: 10
+guides:
+  - title: Autentisering og tenant
+    url: /mottakwebapi_auth.html
+    folder: Guider
+    order: 10
+  - title: Sende arkivmelding
+    url: /mottakwebapi_send.html
+    folder: Guider
+    order: 20
+  - title: Feilhåndtering og drift
+    url: /mottakwebapi_errors.html
+    folder: Guider
+    order: 30
+  - title: Kodeeksempler
+    url: /mottakwebapi_examples.html
+    folder: Guider
+    order: 40
+  - title: Publiseringsmetadata
+    url: /mottakwebapi_build_metadata.html
+    folder: Guider
+    order: 50
+rest:
+  - source: fragments/multipart.md
+    swaggerfile: arkivmelding
+    path: /api/{tenant}/arkivmelding
+    slot: after_request_body
+  - source: fragments/multipart.md
+    swaggerfile: arkivmelding
+    path: /api/{tenant}/arkivmelding/arkiverdokument
+    slot: after_request_body
+  - source: fragments/hash.md
+    swaggerfile: arkivmelding
+    path: /api/{tenant}/arkivmelding
+    slot: after_request_body
+  - source: fragments/hash.md
+    swaggerfile: arkivmelding
+    path: /api/{tenant}/arkivmelding/arkiverdokument
+    slot: after_request_body
+  - source: fragments/created-is-queue.md
+    swaggerfile: arkivmelding
+    path: /api/{tenant}/arkivmelding
+    slot: after_responses
+  - source: fragments/created-is-queue.md
+    swaggerfile: arkivmelding
+    path: /api/{tenant}/arkivmelding/arkiverdokument
+    slot: after_responses
+required_permalinks:
+  - acos_mottak_webapi_index.html
+  - arkivmelding__api__tenant__test.html
+  - /mottakwebapi_guide.html

@@ -13,3 +13,4 @@ swaggerpath: paths
 swaggerkey: /api/Users/{id}/RemoveUserAsPostDistributor
 ---
 {% include swagger_json/get_path.md %}
+{% include swagger_json/overlay_slot.md slot="after_page" %}

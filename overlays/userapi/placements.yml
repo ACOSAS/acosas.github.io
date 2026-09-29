@@ -1,0 +1,99 @@
+product: userapi
+title: ACOS UserAPI
+sidebar: user_api_sidebar.yml
+overview:
+  title: Oversikt
+  url: /userapi_guide.html
+swagger_files:
+  - file: userapi.json
+    rest_folder: REST-referanse
+    models_title: REST-modeller
+    split_deprecated: true
+    legacy_folder: Legacy
+  - file: userapi_scim.json
+    rest_folder: SCIM-referanse (beta)
+    models_title: SCIM-modeller
+metadata:
+  file: pages/userapi/build-metadata.md
+  permalink: /userapi_build_metadata.html
+  swagger_file: userapi.json
+index:
+  file: pages/swagger/user_api_index.md
+  permalink: user_api_index.html
+  title: Acos User Api overview
+  keywords: json, userapi, schemas
+  heading: Code Examples
+  fragments:
+    - source: fragments/authenticate.md
+      order: 10
+    - source: fragments/create-department.md
+      order: 20
+    - source: fragments/users-general.md
+      order: 30
+    - source: fragments/list-users.md
+      order: 40
+    - source: fragments/get-user.md
+      order: 50
+    - source: fragments/create-user.md
+      order: 60
+    - source: fragments/update-user.md
+      order: 70
+    - source: fragments/deactivate-user.md
+      order: 80
+    - source: fragments/reactivate-user.md
+      order: 90
+    - source: fragments/create-access-group.md
+      order: 100
+    - source: fragments/add-user-to-access-group.md
+      order: 110
+    - source: fragments/remove-user-from-access-group.md
+      order: 120
+guides:
+  - title: Identitet og tilgang
+    url: /userapi_identity_and_access.html
+    folder: Guider
+    order: 10
+  - title: SCIM-provisjonering (beta)
+    url: /userapi_scim_guide.html
+    folder: Guider
+    order: 20
+  - title: REST UserAPI
+    url: /userapi_rest_guide.html
+    folder: Guider
+    order: 30
+  - title: "REST: tilgangsgrupper"
+    url: /userapi_rest_access_groups.html
+    folder: Guider
+    order: 40
+  - title: "REST: roller og funksjoner"
+    url: /userapi_rest_roles.html
+    folder: Guider
+    order: 50
+  - title: "REST: avdelinger"
+    url: /userapi_rest_departments.html
+    folder: Guider
+    order: 60
+  - title: Feltmapping
+    url: /userapi_field_mapping.html
+    folder: Guider
+    order: 70
+  - title: Konfigurasjonsmal
+    url: /userapi_configuration_template.html
+    folder: Guider
+    order: 80
+  # Omitted from the sidebar while pages/userapi/sap-successfactors-integration.md
+  # has published: false. Remove that flag and re-run compose to show the link.
+  - title: SAP SuccessFactors
+    url: /userapi_sap_successfactors_integration.html
+    folder: Guider
+    order: 90
+  - title: Publiseringsmetadata
+    url: /userapi_build_metadata.html
+    folder: Guider
+    order: 100
+legacy_guides:
+  - title: Migreringsguide
+    url: /userapi_legacy.html
+required_permalinks:
+  - user_api_index.html
+  - /userapi_guide.html

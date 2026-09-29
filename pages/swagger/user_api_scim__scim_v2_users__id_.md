@@ -15,3 +15,4 @@ swagger_components: components
 components_file: user_api_scim
 ---
 {% include swagger_json/get_path.md %}
+{% include swagger_json/overlay_slot.md slot="after_page" %}

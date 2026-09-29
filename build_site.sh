@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-./build_pages.sh
+./scripts/rebuild-docs.sh
 echo "Serving site"
 bundle exec jekyll serve --incremental

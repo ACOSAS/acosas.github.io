@@ -11,7 +11,8 @@ toc: false
 swaggerfile: arkivmelding
 swaggerpath: paths
 swaggerkey: /api/{tenant}/arkivmelding
-swagger_components: definitions
+swagger_components: components
 components_file: acos_mottak_webapi
 ---
 {% include swagger_json/get_path.md %}
+{% include swagger_json/overlay_slot.md slot="after_page" %}

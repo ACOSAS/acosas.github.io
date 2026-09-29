@@ -1,0 +1,31 @@
+# Permalink-audit
+#
+# Live REST-permalinks kommer fra filnavnet integration.json
+# (integration__api_integration_*.html). _config.yml peker på
+# websak__integration_api_sidebar.yml, så compose skriver den filen og
+# lenker til integration__*-permalinks.
+#
+# pages/swagger/websak__integration_api__*.md er rester etter et eldre
+# info.title ("Websak+ Integration API"). De slettes ikke; bokmerker til
+# websak__integration_api_*.html fortsetter å virke, men er ikke i navigen.
+product: integration
+title: integration
+sidebar: websak__integration_api_sidebar.yml
+overview:
+  title: Oversikt
+  url: /integration_index.html
+swagger_files:
+  - file: integration.json
+    rest_folder: REST-referanse
+    models_title: REST-modeller
+index:
+  file: pages/swagger/integration_index.md
+  permalink: integration_index.html
+  title: Integration API overview
+  keywords: json, integration, schemas
+  fragments:
+    - source: fragments/overview.md
+      order: 10
+required_permalinks:
+  - integration_index.html
+  - integration__api_integration_test.html

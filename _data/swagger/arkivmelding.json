@@ -1,225 +1,460 @@
-
 {
-    "swagger": "2.0",
-    "info": {
-      "version": "v1",
-      "title": "Acos Mottak WebApi",
-      "description": "WebApi for Acos Mottak for mottak av arkivdata.",
-      "termsOfService": "\r\n                                        Ingen deler av dette programmet skal benyttes av andre enn ansatte internt i din organisasjon. \r\n                                        Programmet skal nyttes for det formål programmet lages for. \r\n                                        Annen bruk må avklares skriftlig med Acos AS.\r\n                            ",
-      "contact": {
-        "name": "Acos AS",
-        "url": "http://www.acos.no/",
-        "email": "utvikling@acos.no"
+  "openapi": "3.0.4",
+  "info": {
+    "title": "Acos Mottak WebApi",
+    "description": "WebApi for Acos Mottak for mottak av arkivdata",
+    "contact": {
+      "name": "Acos WebSak",
+      "url": "https://wwww.acos.no",
+      "email": "support@acos.no"
+    },
+    "version": "v1"
+  },
+  "paths": {
+    "/info": {
+      "get": {
+        "tags": [
+          "Acos.Mottaksenter.SkjemaWebService"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
-    "host": "localhost:9005",
-    "schemes": [
-      "http",
-      "https"
-    ],
-    "paths": {
-      "/api/{tenant}/test": {
-        "get": {
-          "tags": [
-            "Arkivmelding"
-          ],
-          "summary": "",
-          "operationId": "Arkivmelding_Get",
-          "consumes": [],
-          "produces": [
-            "application/json",
-            "text/json",
-            "application/xml",
-            "text/xml"
-          ],
-          "parameters": [
-            {
-              "name": "tenant",
-              "in": "path",
-              "description": "ApiKey. Ny nøkkel tildeles i produksjon.",
-              "required": true,
+    "/api/{tenant}/arkivmelding/test": {
+      "get": {
+        "tags": [
+          "Arkivmelding"
+        ],
+        "summary": "Tester at tenant-nøkkelen er gyldig og at tjenesten svarer.",
+        "operationId": "TestTilkobling",
+        "parameters": [
+          {
+            "name": "tenant",
+            "in": "path",
+            "description": "API-nøkkel (GUID) tildelt avsenderen i Mottak+. Behandles som hemmelighet. Ugyldig eller inaktiv nøkkel gir HTTP 404.",
+            "required": true,
+            "schema": {
               "type": "string",
-              "default": "6CF63C7F-B738-4B0E-BB50-08080B0360F1"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "type": "object"
-              }
+              "format": "uuid",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
-        }
-      },
-      "/api/{tenant}/arkivmelding": {
-        "post": {
-          "tags": [
-            "Arkivmelding"
-          ],
-          "summary": "",
-          "operationId": "Arkivmelding_Post",
-          "consumes": [],
-          "produces": [
-            "application/json",
-            "text/json",
-            "application/xml",
-            "text/xml"
-          ],
-          "parameters": [
-            {
-              "name": "tenant",
-              "in": "path",
-              "description": "ApiKey. Ny nøkkel tildeles i produksjon.",
-              "required": true,
-              "type": "string",
-              "default": "6CF63C7F-B738-4B0E-BB50-08080B0360F1"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "type": "object"
-              }
-            }
-          }
-        }
-      },
-      "/api/{tenant}/arkivmelding/arkiverdokument": {
-        "post": {
-          "tags": [
-            "Arkivmelding"
-          ],
-          "summary": "",
-          "operationId": "Arkivmelding_AkriverDokument",
-          "consumes": [],
-          "produces": [
-            "application/json",
-            "text/json",
-            "application/xml",
-            "text/xml"
-          ],
-          "parameters": [
-            {
-              "name": "tenant",
-              "in": "path",
-              "description": "ApiKey. Ny nøkkel tildeles i produksjon.",
-              "required": true,
-              "type": "string",
-              "default": "6CF63C7F-B738-4B0E-BB50-08080B0360F1"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "type": "object"
-              }
-            },
-            "201": {
-              "description": "Created",
-              "schema": {
-                "$ref": "#/definitions/Manifest"
+        ],
+        "responses": {
+          "200": {
+            "description": "Tilkobling OK. Kroppen er en tekststreng med tenant-navn.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
               },
-              "examples": {
-                "application/json": {
-                  "type": "elevmelding",
-                  "files": [
-                    {
-                      "contentid": "content1",
-                      "filename": "tmpA54E.tmp.zip",
-                      "hash": "FC3003DDAF437771C7EFBB6AFF068678C0DD31FF8D9F70E2ECD37514B5569D0A",
-                      "alg": "SHA256",
-                      "metadata": false
-                    }
-                  ]
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ukjent eller inaktiv tenant-nøkkel."
+          }
+        },
+        "security": [ ]
+      }
+    },
+    "/api/{tenant}/arkivmelding": {
+      "post": {
+        "tags": [
+          "Arkivmelding"
+        ],
+        "summary": "Mottar en KS/Noark-arkivmelding som ZIP i multipart/related.",
+        "description": "Brukes når ZIP-pakken inneholder arkivmelding-XML (standardfil arkivmelding.xml, eller MetadataFilnavn på avsenderen).\r\nJSON-manifestet må være første multipart-del med type arkivmelding. ZIP-delen må ha Content-Id og filename som matcher files[].\r\nXSD-validering styres av avsenderoppsettet. HTTP 201 betyr lagret i Mottak, ikke journalført i WebSak.",
+        "operationId": "PostArkivMelding",
+        "parameters": [
+          {
+            "name": "tenant",
+            "in": "path",
+            "description": "API-nøkkel (GUID) tildelt avsenderen i Mottak+. Behandles som hemmelighet. Ugyldig eller inaktiv nøkkel gir HTTP 404.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "example": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "multipart/related med JSON-manifest som første del og ZIP som andre del. JSON-delen må komme først. type skal være arkivmelding. ZIP må inneholde arkivmelding.xml eller avsenderens MetadataFilnavn. Content-Id og filename må matche files[].",
+          "content": {
+            "multipart/related": {
+              "schema": {
+                "required": [
+                  "metadata",
+                  "arkivmelding"
+                ],
+                "type": "object",
+                "properties": {
+                  "metadata": {
+                    "$ref": "#/components/schemas/Acos.Mottaksenter.SkjemaWebService.Infrastructure.OpenApi.ArkivmeldingManifestDto"
+                  },
+                  "arkivmelding": {
+                    "type": "string",
+                    "description": "ZIP-pakken. Content-Disposition: form-data; name=\"arkivmelding\"; filename=\"<filnavn.zip>\". Content-Type: application/zip. Content-Id må matche files[].contentid.",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "metadata": {
+                  "contentType": "application/json"
+                },
+                "arkivmelding": {
+                  "contentType": "application/zip"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Meldingen er mottatt og lagret som importobjekt i Mottak. Dette er ikke bekreftelse på at innholdet er journalført i WebSak.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Mottaksenter.SkjemaWebService.Infrastructure.OpenApi.ArkivmeldingAcceptedFileDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ugyldig pakke. Hash som ikke stemmer returneres som ren tekst. XSD-feil og manglende fil i ZIP returneres som JSON med message, errors, warnings og fil.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Mottaksenter.SkjemaWebService.Infrastructure.OpenApi.ArkivmeldingValidationErrorDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ukjent eller inaktiv tenant-nøkkel. Ruten matcher ikke."
+          },
+          "422": {
+            "description": "Meldingen kunne ikke behandles. JSON-feltet heter messge.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Mottaksenter.SkjemaWebService.Infrastructure.OpenApi.ArkivmeldingUnprocessableErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Uventet feil, inkludert request som ikke er multipart. Kroppen er ProblemDetails.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
                 }
               }
             }
           }
-        }
+        },
+        "security": [ ]
       }
     },
-    "definitions": {
-      "Manifest": {
-        "description": "",
-        "type": "object",
-        "properties": {
-          "type": {
-            "description": "",
-            "type": "string"
-          },
-          "files": {
-            "description": "",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/File"
+    "/api/{tenant}/arkivmelding/arkiverdokument": {
+      "post": {
+        "tags": [
+          "Arkivmelding"
+        ],
+        "summary": "Mottar en generell meldingspakke som ZIP i multipart/related.",
+        "description": "Brukes når metadatafilen ikke er en standard arkivmelding. MetadataFilnavn må være satt på avsenderen.\r\nJSON-manifestet må være første multipart-del med type melding. Hvis type er arkivmelding, hoppes XSD-validering over på denne ruten.\r\nHTTP 201 betyr lagret i Mottak, ikke journalført i WebSak.",
+        "operationId": "ArkiverDokument",
+        "parameters": [
+          {
+            "name": "tenant",
+            "in": "path",
+            "description": "API-nøkkel (GUID) tildelt avsenderen i Mottak+. Behandles som hemmelighet. Ugyldig eller inaktiv nøkkel gir HTTP 404.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "example": "00000000-0000-0000-0000-000000000000"
             }
           }
-        }
-      },
-      "File": {
-        "description": "",
+        ],
+        "requestBody": {
+          "description": "multipart/related med JSON-manifest som første del og ZIP som andre del. JSON-delen må komme først. type skal være melding. ZIP må inneholde metadatafilen som er konfigurert på avsenderen (MetadataFilnavn). Content-Id og filename må matche files[].",
+          "content": {
+            "multipart/related": {
+              "schema": {
+                "required": [
+                  "metadata",
+                  "melding"
+                ],
+                "type": "object",
+                "properties": {
+                  "metadata": {
+                    "$ref": "#/components/schemas/Acos.Mottaksenter.SkjemaWebService.Infrastructure.OpenApi.ArkivmeldingManifestDto"
+                  },
+                  "melding": {
+                    "type": "string",
+                    "description": "ZIP-pakken. Content-Disposition: form-data; name=\"melding\"; filename=\"<filnavn.zip>\". Content-Type: application/zip. Content-Id må matche files[].contentid.",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "metadata": {
+                  "contentType": "application/json"
+                },
+                "melding": {
+                  "contentType": "application/zip"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Meldingen er mottatt og lagret som importobjekt i Mottak. Dette er ikke bekreftelse på at innholdet er journalført i WebSak.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Mottaksenter.SkjemaWebService.Infrastructure.OpenApi.ArkivmeldingAcceptedFileDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ugyldig pakke. Hash som ikke stemmer returneres som ren tekst. XSD-feil og manglende fil i ZIP returneres som JSON med message, errors, warnings og fil.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Mottaksenter.SkjemaWebService.Infrastructure.OpenApi.ArkivmeldingValidationErrorDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ukjent eller inaktiv tenant-nøkkel. Ruten matcher ikke."
+          },
+          "422": {
+            "description": "Meldingen kunne ikke behandles. JSON-feltet heter messge.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.Mottaksenter.SkjemaWebService.Infrastructure.OpenApi.ArkivmeldingUnprocessableErrorDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Uventet feil, inkludert request som ikke er multipart. Kroppen er ProblemDetails.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [ ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Acos.Mottaksenter.SkjemaWebService.Infrastructure.OpenApi.ArkivmeldingAcceptedFileDto": {
+        "required": [
+          "alg",
+          "contentid",
+          "filename",
+          "hash"
+        ],
         "type": "object",
         "properties": {
           "contentid": {
-            "description": "",
-            "type": "string"
+            "type": "string",
+            "description": "Content-Id for ZIP-delen i multipart-forespørselen, for eksempel content1.\r\nMå samsvare med headeren Content-Id på fil-delen.",
+            "nullable": true
           },
           "filename": {
-            "description": "",
-            "type": "string"
+            "type": "string",
+            "description": "Filnavn på ZIP-pakken. Må samsvare med filename i Content-Disposition på fil-delen.",
+            "nullable": true
           },
           "hash": {
-            "description": "",
-            "type": "string"
+            "type": "string",
+            "description": "Sjekksum av hele ZIP-filen som heksadesimal streng. Sammenlignes eksakt med serverens beregning.",
+            "nullable": true
           },
           "alg": {
-            "description": "",
-            "type": "string"
+            "enum": [
+              "SHA256",
+              "SHA512",
+              "MD5"
+            ],
+            "type": "string",
+            "description": "Hash-algoritme. Støttet: SHA256 (anbefalt), SHA512, MD5.",
+            "nullable": true
           },
           "metadata": {
-            "description": "",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Om denne delen er metadata. For ZIP-pakken skal verdien være false."
           }
-        }
+        },
+        "additionalProperties": false,
+        "description": "Offentlig 201-svar for en mottatt ZIP-fil. Feltnavnene matcher JSON-kontrakten for files[]."
       },
-      "HttpContent": {
+      "Acos.Mottaksenter.SkjemaWebService.Infrastructure.OpenApi.ArkivmeldingManifestDto": {
+        "required": [
+          "files",
+          "type"
+        ],
         "type": "object",
         "properties": {
-          "headers": {
+          "type": {
+            "enum": [
+              "arkivmelding",
+              "melding"
+            ],
+            "type": "string",
+            "description": "Meldingstype. Bruk arkivmelding mot POST /arkivmelding og melding mot POST /arkivmelding/arkiverdokument.",
+            "nullable": true
+          },
+          "messageId": {
+            "type": "string",
+            "description": "Valgfri korrelasjons-id fra avsender. Lagres på importobjektet. Tjenesten avviser ikke duplikater.",
+            "nullable": true
+          },
+          "skjemaId": {
+            "type": "string",
+            "description": "Valgfri skjema-id. Brukes særlig på /arkiverdokument når avsenderoppsettet ikke allerede angir skjemaId.",
+            "nullable": true
+          },
+          "files": {
             "type": "array",
             "items": {
-              "$ref": "#/definitions/KeyValuePair[String,IEnumerable[String]]"
+              "$ref": "#/components/schemas/Acos.Mottaksenter.SkjemaWebService.Infrastructure.OpenApi.ArkivmeldingAcceptedFileDto"
             },
-            "readOnly": true
+            "description": "Filer i pakken. Vanligvis én ZIP der contentid og filename matcher fil-delen.",
+            "nullable": true
           }
-        }
+        },
+        "additionalProperties": false,
+        "description": "JSON-manifestet som sendes som første del i multipart/related.\r\nJSON-delen må komme før ZIP-delen."
       },
-      "KeyValuePair[String,IEnumerable[String]]": {
+      "Acos.Mottaksenter.SkjemaWebService.Infrastructure.OpenApi.ArkivmeldingUnprocessableErrorDto": {
         "type": "object",
         "properties": {
-          "key": {
+          "messge": {
             "type": "string",
-            "readOnly": true
+            "description": "Feilmelding. Feltnavnet er messge (uten a) i den faktiske responsen.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "422-svar når meldingen ikke kan behandles. Feltnavnet messge matcher den faktiske JSON-kroppen."
+      },
+      "Acos.Mottaksenter.SkjemaWebService.Infrastructure.OpenApi.ArkivmeldingValidationErrorDto": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Menneskelesbar feiltekst.",
+            "nullable": true
           },
-          "value": {
+          "errors": {
             "type": "array",
             "items": {
               "type": "string"
             },
-            "readOnly": true
+            "description": "XSD- eller parsefeil. Tom når feilen er manglende fil i ZIP.",
+            "nullable": true
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "XSD-advarsler.",
+            "nullable": true
+          },
+          "fil": {
+            "type": "string",
+            "description": "Filnavn som feilet, enten metadatafil i ZIP eller ZIP-filnavn.",
+            "nullable": true
           }
-        }
+        },
+        "additionalProperties": false,
+        "description": "400-svar når ZIP-innhold eller XSD-validering feiler."
+      },
+      "Microsoft.AspNetCore.Mvc.ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
       }
     },
-    "securityDefinitions": {
+    "securitySchemes": {
+      "oauth2": {
+        "type": "oauth2",
+        "description": "Intern OAuth for tjenestens egne kall (fillager). Integrasjonspartnere autentiserer med tenant-nøkkelen i URL-stien, ikke med bearer token.",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://identityserver:7169/connect/authorize",
+            "tokenUrl": "https://identityserver:7169/connect/token",
+            "scopes": {
+              "mottak_fillager.skrive": "Skrive"
+            }
+          }
+        }
+      },
       "tenant": {
         "type": "apiKey",
-        "description": "API nøkkel",
+        "description": "API-nøkkel (GUID) tildelt avsenderen i Mottak+. Behandles som hemmelighet. Ugyldig nøkkel gir HTTP 404. Dette er avsenderautentisering; OAuth i denne spesifikasjonen gjelder intern fillager-klient, ikke integrasjonspartnere.",
         "name": "tenant",
-        "in": "url"
+        "in": "path"
       }
     }
-  }
+  },
+  "tags": [
+    {
+      "name": "Acos.Mottaksenter.SkjemaWebService"
+    },
+    {
+      "name": "Arkivmelding",
+      "description": "HTTP-API for mottak av arkivmelding og andre meldingspakker til Acos Mottak.\r\nAvsender autentiseres med tenant-GUID i URL-stien. HTTP 201 betyr at pakken er lagret i Mottak, ikke at den er journalført i WebSak."
+    }
+  ]
+}

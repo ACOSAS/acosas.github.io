@@ -1,4 +1,9 @@
 <ul id="mysidebar" class="nav">
+{% comment %}Pages with published: false are omitted from site.pages, so their sidebar URLs must not become links.{% endcomment %}
+{% assign published_urls = "" %}
+{% for published_page in site.pages %}
+{% assign published_urls = published_urls | append: "|" | append: published_page.url | append: "|" %}
+{% endfor %}
 {% for _sidebar in site.site_sidebars %}
 {% assign sidebar = site.data.sidebars[_sidebar.name].entries %}
 {% assign _sidebarIdx = 0 %}
@@ -11,15 +16,17 @@
       <ul>
           {% for folderitem in folder.folderitems %}
           {% if folderitem.output contains "web" %}
+          {% assign nav_needle = folderitem.url | prepend: "|" | append: "|" %}
           {% if folderitem.external_url %}
           <li><a href="{{folderitem.external_url}}" target="_blank">{{folderitem.title}}</a></li>
-          {% elsif page.url == folderitem.url %}
+          {% elsif folderitem.url and published_urls contains nav_needle %}
+          {% if page.url == folderitem.url %}
           <li class="active"><a href="{{folderitem.url | remove: "/"}}">{{folderitem.title}}</a></li>
           {% elsif folderitem.type == "empty" %}
           <li><a href="{{folderitem.url | remove: "/"}}">{{folderitem.title}}</a></li>
-
           {% else %}
           <li><a href="{{folderitem.url | remove: "/"}}">{{folderitem.title}}</a></li>
+          {% endif %}
           {% endif %}
           {% for subfolders in folderitem.subfolders %}
           {% if subfolders.output contains "web" %}
@@ -28,12 +35,15 @@
               <ul>
                   {% for subfolderitem in subfolders.subfolderitems %}
                   {% if subfolderitem.output contains "web" %}
+                  {% assign nav_needle = subfolderitem.url | prepend: "|" | append: "|" %}
                   {% if subfolderitem.external_url %}
                   <li><a href="{{subfolderitem.external_url}}" target="_blank">{{subfolderitem.title}}</a></li>
-                  {% elsif page.url == subfolderitem.url %}
+                  {% elsif subfolderitem.url and published_urls contains nav_needle %}
+                  {% if page.url == subfolderitem.url %}
                   <li class="active"><a href="{{subfolderitem.url | remove: "/"}}">{{subfolderitem.title}}</a></li>
                   {% else %}
                   <li><a href="{{subfolderitem.url | remove: "/"}}">{{subfolderitem.title}}</a></li>
+                  {% endif %}
                   {% endif %}
                   {% endif %}
                   {% endfor %}

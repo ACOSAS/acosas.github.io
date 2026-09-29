@@ -33,6 +33,14 @@ port: 4000
 exclude:
   - .idea/
   - .gitignore
+  - vendor
+  - .bundle
+  - overlays
+  - scripts
+  - .ruby-version
+  - README.md
+  - Gemfile
+  - Gemfile.lock
 # these are the files and directories that jekyll will exclude from the build
 
 feedback_subject_line: Acos Documentation feedback
