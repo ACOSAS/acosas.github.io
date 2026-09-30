@@ -17,9 +17,7 @@ autentisering og feilhåndtering. OpenAPI er detaljkilden for felt og typer.
 ## Versjon og gyldighet
 
 Dokumentasjonsversjon: 1.0. Den beskriver HTTP-kontrakten i
-`_data/swagger/integration.json` (`info.version` `v1`). Filen har ikke
-publiseringsmetadata (`x-acos-publication`), så commit og genereringstidspunkt
-står ikke på denne siden.
+`_data/swagger/integration.json` (`info.version` `v1`).
 
 Ved motstrid gjelder denne prioriteten:
 
@@ -61,7 +59,6 @@ De vises i REST-referansen, men er ikke beskrevet i disse guidene.
 - [Filer](/integrationapi_files.html)
 - [Søk](/integrationapi_search.html)
 - [Feilhåndtering](/integrationapi_errors.html)
-- [Publiseringsmetadata](/integrationapi_build_metadata.html)
 
 Den genererte REST-referansen publiseres ved siden av disse guidene.
 Lenkene bruker `integration__*.html`.

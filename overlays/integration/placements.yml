@@ -50,10 +50,6 @@ guides:
     url: /integrationapi_errors.html
     folder: Guider
     order: 60
-  - title: Publiseringsmetadata
-    url: /integrationapi_build_metadata.html
-    folder: Guider
-    order: 70
 required_permalinks:
   - integration_index.html
   - integration__api_integration_test.html

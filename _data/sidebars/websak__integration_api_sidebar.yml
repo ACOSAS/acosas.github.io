@@ -31,9 +31,6 @@ entries:
         - title: "Feilhåndtering"
           url: "/integrationapi_errors.html"
           output: web, pdf
-        - title: "Publiseringsmetadata"
-          url: "/integrationapi_build_metadata.html"
-          output: web, pdf
       - title: "REST-referanse"
         output: web
         subfolderitems:
