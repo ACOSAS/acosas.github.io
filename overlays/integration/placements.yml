@@ -1,19 +1,18 @@
 # Permalink-audit
 #
 # Live REST-permalinks kommer fra filnavnet integration.json
-# (integration__api_integration_*.html). _config.yml peker på
-# websak__integration_api_sidebar.yml, så compose skriver den filen og
-# lenker til integration__*-permalinks.
+# (integration__api_integration_*.html). Stub-filnavnene kommer fra
+# info.title (websak_integration_api__*.md). _config.yml peker på
+# websak__integration_api_sidebar.yml.
 #
-# pages/swagger/websak__integration_api__*.md er rester etter et eldre
-# info.title ("Websak+ Integration API"). De slettes ikke; bokmerker til
-# websak__integration_api_*.html fortsetter å virke, men er ikke i navigen.
+# Eldre stubber med samme permalink er fjernet. websak__integration_api_components.html
+# er beholdt som eget bokmerke og er ikke i navigasjonen.
 product: integration
-title: integration
+title: WebSak Integration API
 sidebar: websak__integration_api_sidebar.yml
 overview:
   title: Oversikt
-  url: /integration_index.html
+  url: /integrationapi_guide.html
 swagger_files:
   - file: integration.json
     rest_folder: REST-referanse
@@ -21,11 +20,41 @@ swagger_files:
 index:
   file: pages/swagger/integration_index.md
   permalink: integration_index.html
-  title: Integration API overview
-  keywords: json, integration, schemas
+  title: WebSak Integration API overview
+  keywords: json, integration, websak
   fragments:
     - source: fragments/overview.md
       order: 10
+guides:
+  - title: Autentisering
+    url: /integrationapi_auth.html
+    folder: Guider
+    order: 10
+  - title: Saker og journalposter
+    url: /integrationapi_cases.html
+    folder: Guider
+    order: 20
+  - title: Klassering og tilleggsdata
+    url: /integrationapi_classification.html
+    folder: Guider
+    order: 30
+  - title: Filer
+    url: /integrationapi_files.html
+    folder: Guider
+    order: 40
+  - title: Søk
+    url: /integrationapi_search.html
+    folder: Guider
+    order: 50
+  - title: Feilhåndtering
+    url: /integrationapi_errors.html
+    folder: Guider
+    order: 60
+  - title: Publiseringsmetadata
+    url: /integrationapi_build_metadata.html
+    folder: Guider
+    order: 70
 required_permalinks:
   - integration_index.html
   - integration__api_integration_test.html
+  - /integrationapi_guide.html

@@ -2,17 +2,86 @@
 entries:
 - title: sidebar
   folders:
-  - title: "integration"
+  - title: "WebSak Integration API"
     output: web
     type: frontmatter
     folderitems:
     - title: "Oversikt"
-      url: "/integration_index.html"
+      url: "/integrationapi_guide.html"
       output: web, pdf
       subfolders:
+      - title: "Guider"
+        output: web
+        subfolderitems:
+        - title: "Autentisering"
+          url: "/integrationapi_auth.html"
+          output: web, pdf
+        - title: "Saker og journalposter"
+          url: "/integrationapi_cases.html"
+          output: web, pdf
+        - title: "Klassering og tilleggsdata"
+          url: "/integrationapi_classification.html"
+          output: web, pdf
+        - title: "Filer"
+          url: "/integrationapi_files.html"
+          output: web, pdf
+        - title: "Søk"
+          url: "/integrationapi_search.html"
+          output: web, pdf
+        - title: "Feilhåndtering"
+          url: "/integrationapi_errors.html"
+          output: web, pdf
+        - title: "Publiseringsmetadata"
+          url: "/integrationapi_build_metadata.html"
+          output: web, pdf
       - title: "REST-referanse"
         output: web
         subfolderitems:
+        - title: "/api/egendefinerte/sak/{id}"
+          url: "/integration__api_egendefinerte_sak__id_.html"
+          output: web, pdf
+        - title: "/api/egendefinerte/sak/{id}/{feltNavn}"
+          url: "/integration__api_egendefinerte_sak__id___feltnavn_.html"
+          output: web, pdf
+        - title: "/api/egendefinerte/journalpost/{id}"
+          url: "/integration__api_egendefinerte_journalpost__id_.html"
+          output: web, pdf
+        - title: "/api/egendefinerte/journalpost/{id}/{feltNavn}"
+          url: "/integration__api_egendefinerte_journalpost__id___feltnavn_.html"
+          output: web, pdf
+        - title: "/api/egendefinerte/sok"
+          url: "/integration__api_egendefinerte_sok.html"
+          output: web, pdf
+        - title: "/api/egendefinerte/{id}"
+          url: "/integration__api_egendefinerte__id_.html"
+          output: web, pdf
+        - title: "/api/functionlibrary"
+          url: "/integration__api_functionlibrary.html"
+          output: web, pdf
+        - title: "/api/functionlibrary/by-label/{label}"
+          url: "/integration__api_functionlibrary_by-label__label_.html"
+          output: web, pdf
+        - title: "/api/functionlibrary/{functionId}"
+          url: "/integration__api_functionlibrary__functionid_.html"
+          output: web, pdf
+        - title: "/api/functionlibrary/create"
+          url: "/integration__api_functionlibrary_create.html"
+          output: web, pdf
+        - title: "/api/functionlibrary/execute"
+          url: "/integration__api_functionlibrary_execute.html"
+          output: web, pdf
+        - title: "/api/functionlibrary/logs/statistics"
+          url: "/integration__api_functionlibrary_logs_statistics.html"
+          output: web, pdf
+        - title: "/api/functionlibrary/functions/export-bulk"
+          url: "/integration__api_functionlibrary_functions_export-bulk.html"
+          output: web, pdf
+        - title: "/api/functionlibrary/functions/check-exists"
+          url: "/integration__api_functionlibrary_functions_check-exists.html"
+          output: web, pdf
+        - title: "/api/functionlibrary/functions/import-bulk"
+          url: "/integration__api_functionlibrary_functions_import-bulk.html"
+          output: web, pdf
         - title: "/api/integration/test"
           url: "/integration__api_integration_test.html"
           output: web, pdf
@@ -46,8 +115,14 @@ entries:
         - title: "/api/integration/sak/{id}/tilleggsdata"
           url: "/integration__api_integration_sak__id__tilleggsdata.html"
           output: web, pdf
+        - title: "/api/integration/sak/{id}/tilleggsdata/list"
+          url: "/integration__api_integration_sak__id__tilleggsdata_list.html"
+          output: web, pdf
         - title: "/api/integration/journalpost/{id}/tilleggsdata"
           url: "/integration__api_integration_journalpost__id__tilleggsdata.html"
+          output: web, pdf
+        - title: "/api/integration/journalpost/{id}/tilleggsdata/list"
+          url: "/integration__api_integration_journalpost__id__tilleggsdata_list.html"
           output: web, pdf
         - title: "/api/integration/tilleggsdata/update"
           url: "/integration__api_integration_tilleggsdata_update.html"
@@ -69,6 +144,9 @@ entries:
           output: web, pdf
         - title: "/api/integration/sak/{id}/merknader"
           url: "/integration__api_integration_sak__id__merknader.html"
+          output: web, pdf
+        - title: "/api/integration/sak/{id}/merknader/{type}"
+          url: "/integration__api_integration_sak__id__merknader__type_.html"
           output: web, pdf
         - title: "/api/integration/journalpost/{id}"
           url: "/integration__api_integration_journalpost__id_.html"
@@ -97,6 +175,9 @@ entries:
         - title: "/api/integration/journalpost/{id}/merknader"
           url: "/integration__api_integration_journalpost__id__merknader.html"
           output: web, pdf
+        - title: "/api/integration/journalpost/{id}/merknader/{type}"
+          url: "/integration__api_integration_journalpost__id__merknader__type_.html"
+          output: web, pdf
         - title: "/api/integration/skjema/lagreskjema"
           url: "/integration__api_integration_skjema_lagreskjema.html"
           output: web, pdf
@@ -109,12 +190,27 @@ entries:
         - title: "/api/integration/journalpost/ny"
           url: "/integration__api_integration_journalpost_ny.html"
           output: web, pdf
+        - title: "/api/integration/journalpost/{jpId}/attachments"
+          url: "/integration__api_integration_journalpost__jpid__attachments.html"
+          output: web, pdf
+        - title: "/api/integration/journalpost/{jpId}/attachments/{verId}"
+          url: "/integration__api_integration_journalpost__jpid__attachments__verid_.html"
+          output: web, pdf
         - title: "/api/integration/journalpost/{jpid}/dokument/nytthoveddokument"
           url: "/integration__api_integration_journalpost__jpid__dokument_nytthoveddokument.html"
           output: web, pdf
         - title: "/api/integration/journalpost/{jpid}/dokument/nyttvedlegg"
           url: "/integration__api_integration_journalpost__jpid__dokument_nyttvedlegg.html"
           output: web, pdf
+        - title: "/api/integration/search/saker"
+          url: "/integration__api_integration_search_saker.html"
+          output: web, pdf
+        - title: "/api/integration/search/journalposter"
+          url: "/integration__api_integration_search_journalposter.html"
+          output: web, pdf
+        - title: "/api/integration/search/dokumenter"
+          url: "/integration__api_integration_search_dokumenter.html"
+          output: web, pdf
         - title: "REST-modeller"
-          url: "/integration_components.html"
+          url: "/websak_integration_api_components.html"
           output: web, pdf

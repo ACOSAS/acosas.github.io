@@ -1,7 +1,7 @@
 {
-  "openapi": "3.0.1",
+  "openapi": "3.0.4",
   "info": {
-    "title": "integration",
+    "title": "WebSak Integration API",
     "description": "Integration API",
     "contact": {
       "name": "Acos Dokumenthåndtering",
@@ -10,12 +10,1080 @@
     },
     "version": "v1"
   },
-  "servers": [
-    {
-      "url": "/api/websak"
-    }
-  ],
   "paths": {
+    "/api/egendefinerte/sak/{id}": {
+      "get": {
+        "tags": [
+          "Egendefinert"
+        ],
+        "summary": "Fetches custom defined properties on a given case",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Case identifier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.EgendefinertVerdi"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.EgendefinertVerdi"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.EgendefinertVerdi"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Egendefinert"
+        ],
+        "summary": "Add or update a custom defined property on a given case.\nIf `Overskriv` is true and a property with the same name exists, the value will be updated.\nOtherwise a new property will be added.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Case identifier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The property name, value and overwrite flag",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.NyEgendefinertVerdiRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.NyEgendefinertVerdiRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.NyEgendefinertVerdiRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.NyEgendefinertVerdiRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.EgendefinertVerdi"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.EgendefinertVerdi"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.EgendefinertVerdi"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/api/egendefinerte/sak/{id}/{feltNavn}": {
+      "delete": {
+        "tags": [
+          "Egendefinert"
+        ],
+        "summary": "Delete all custom defined properties with the given name on a case",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Case identifier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "feltNavn",
+            "in": "path",
+            "description": "The property name to delete",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/api/egendefinerte/journalpost/{id}": {
+      "get": {
+        "tags": [
+          "Egendefinert"
+        ],
+        "summary": "Fetches custom defined properties on a given document",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Document identifier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.EgendefinertVerdi"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.EgendefinertVerdi"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.EgendefinertVerdi"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Egendefinert"
+        ],
+        "summary": "Add or update a custom defined property on a given document.\nIf `Overskriv` is true and a property with the same name exists, the value will be updated.\nOtherwise a new property will be added.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Document identifier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The property name, value and overwrite flag",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.NyEgendefinertVerdiRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.NyEgendefinertVerdiRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.NyEgendefinertVerdiRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.NyEgendefinertVerdiRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.EgendefinertVerdi"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.EgendefinertVerdi"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.EgendefinertVerdi"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/api/egendefinerte/journalpost/{id}/{feltNavn}": {
+      "delete": {
+        "tags": [
+          "Egendefinert"
+        ],
+        "summary": "Delete all custom defined properties with the given name on a document",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Document identifier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "feltNavn",
+            "in": "path",
+            "description": "The property name to delete",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/api/egendefinerte/sok": {
+      "get": {
+        "tags": [
+          "Egendefinert"
+        ],
+        "summary": "Search for custom defined properties across all cases and/or documents.\nUse this to find entries by field name and optionally by value, for example to find\nall cases linked to a specific process.",
+        "parameters": [
+          {
+            "name": "feltNavn",
+            "in": "query",
+            "description": "The property name to search for (required)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "verdi",
+            "in": "query",
+            "description": "The property value to match (optional)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tab",
+            "in": "query",
+            "description": "Filter by type: SAS for cases, SDO for documents (optional, default: both)",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.EgendefinertVerdiSokResultat"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.EgendefinertVerdiSokResultat"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.EgendefinertVerdiSokResultat"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/api/egendefinerte/{id}": {
+      "delete": {
+        "tags": [
+          "Egendefinert"
+        ],
+        "summary": "Delete a specific custom defined property by its unique ID (Gft_IdNr).\nUse the search endpoint to find entries first, then delete by ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the custom defined property (Gft_IdNr)",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/api/functionlibrary": {
+      "get": {
+        "tags": [
+          "FunctionLibrary"
+        ],
+        "summary": "Get a list of all functions",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.SimpleFunction"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.SimpleFunction"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.SimpleFunction"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/api/functionlibrary/by-label/{label}": {
+      "get": {
+        "tags": [
+          "FunctionLibrary"
+        ],
+        "summary": "Get a list of functions filtered by label",
+        "parameters": [
+          {
+            "name": "label",
+            "in": "path",
+            "description": "The label to filter by",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.SimpleFunction"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.SimpleFunction"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.SimpleFunction"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/api/functionlibrary/{functionId}": {
+      "get": {
+        "tags": [
+          "FunctionLibrary"
+        ],
+        "summary": "Get function details for the function with the given id.",
+        "parameters": [
+          {
+            "name": "functionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Function"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Function"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Function"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/api/functionlibrary/create": {
+      "post": {
+        "tags": [
+          "FunctionLibrary"
+        ],
+        "summary": "Request a new function",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Requests.CreateFunctionRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Requests.CreateFunctionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Requests.CreateFunctionRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Requests.CreateFunctionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Function"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Function"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Function"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/api/functionlibrary/execute": {
+      "post": {
+        "tags": [
+          "FunctionLibrary"
+        ],
+        "summary": "Execute a function",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Requests.ExecuteFunctionRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Requests.ExecuteFunctionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Requests.ExecuteFunctionRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Requests.ExecuteFunctionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.WebsakTaskResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.WebsakTaskResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.WebsakTaskResult"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/api/functionlibrary/logs/statistics": {
+      "get": {
+        "tags": [
+          "FunctionLibrary"
+        ],
+        "parameters": [
+          {
+            "name": "externalSystem",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "externalId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Responses.ExternalSystemLogStatistics"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Responses.ExternalSystemLogStatistics"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Responses.ExternalSystemLogStatistics"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/api/functionlibrary/functions/export-bulk": {
+      "post": {
+        "tags": [
+          "FunctionLibrary"
+        ],
+        "summary": "Export multiple functions by their UUIDs. Returns full FunctionExportDTO for each.\nTemporarily placed here instead of FunctionLibraryAdminController due to auth scope constraints.",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.FunctionExportDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.FunctionExportDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.FunctionExportDTO"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/api/functionlibrary/functions/check-exists": {
+      "post": {
+        "tags": [
+          "FunctionLibrary"
+        ],
+        "summary": "Check which function UUIDs already exist in this environment.\nTemporarily placed here instead of FunctionLibraryAdminController due to auth scope constraints.",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Responses.FunctionExistsResult"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Responses.FunctionExistsResult"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Responses.FunctionExistsResult"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/api/functionlibrary/functions/import-bulk": {
+      "post": {
+        "tags": [
+          "FunctionLibrary"
+        ],
+        "summary": "Import multiple functions with optional overwrite of existing ones (matched by UUID).\nTemporarily placed here instead of FunctionLibraryAdminController due to auth scope constraints.",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Requests.BulkFunctionImportRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Requests.BulkFunctionImportRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Requests.BulkFunctionImportRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Requests.BulkFunctionImportRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.BulkImportResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.BulkImportResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.BulkImportResult"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
     "/api/integration/test": {
       "get": {
         "tags": [
@@ -24,7 +1092,7 @@
         "summary": "You can use this action to check that your client works and is authorized.",
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -74,7 +1142,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -149,7 +1217,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -215,7 +1283,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -268,7 +1336,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -346,7 +1414,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -408,7 +1476,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -495,7 +1563,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -536,7 +1604,7 @@
         "summary": "Fetches main complementary data for all case types",
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -586,7 +1654,7 @@
         "summary": "Fetches main complementary data for all document types",
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -648,7 +1716,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -663,6 +1731,59 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.TilleggsDataSett"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/api/integration/sak/{id}/tilleggsdata/list": {
+      "get": {
+        "tags": [
+          "Integration"
+        ],
+        "summary": "Fetches complementary data on a given case - this method flattens the data structure for easier consumption",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.FlattenedTilleggsDataSett"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.FlattenedTilleggsDataSett"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.FlattenedTilleggsDataSett"
                 }
               }
             }
@@ -701,7 +1822,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -716,6 +1837,59 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.TilleggsDataSett"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/api/integration/journalpost/{id}/tilleggsdata/list": {
+      "get": {
+        "tags": [
+          "Integration"
+        ],
+        "summary": "Fetches complementary data on a document - this method flattens the data structure for easier consumption",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.FlattenedTilleggsDataSett"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.FlattenedTilleggsDataSett"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.FlattenedTilleggsDataSett"
                 }
               }
             }
@@ -767,7 +1941,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -820,7 +1994,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -882,7 +2056,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -948,7 +2122,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -986,7 +2160,7 @@
         "tags": [
           "Integration"
         ],
-        "summary": "Get possible values for a classification if it is configured with\r\npredefined values.",
+        "summary": "Get possible values for a classification if it is configured with\npredefined values.",
         "parameters": [
           {
             "name": "name",
@@ -1000,7 +2174,7 @@
           {
             "name": "query",
             "in": "query",
-            "description": "An optional search term for the values. Some principles (e.g. offnr\r\nand pnr) requires a query to actually return a result whilst others\r\nwill just filter the values from the predefined result list that\r\nwould be returned if the query was omitted.",
+            "description": "An optional search term for the values. Some principles (e.g. offnr\nand pnr) requires a query to actually return a result whilst others\nwill just filter the values from the predefined result list that\nwould be returned if the query was omitted.",
             "schema": {
               "type": "string"
             }
@@ -1118,7 +2292,7 @@
         "tags": [
           "Integration"
         ],
-        "summary": "Remove redaction from a value returned from the endpoint\r\n`api/integration/klassering/{name}/values` and log that it has been\r\nunredacted",
+        "summary": "Remove redaction from a value returned from the endpoint\n`api/integration/klassering/{name}/values` and log that it has been\nunredacted",
         "requestBody": {
           "description": "The value that has been redacted",
           "content": {
@@ -1239,7 +2413,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1281,6 +2455,76 @@
         ]
       }
     },
+    "/api/integration/sak/{id}/merknader/{type}": {
+      "post": {
+        "tags": [
+          "Integration"
+        ],
+        "summary": "Add notes on a given case.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the case to create a note",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "type",
+            "in": "path",
+            "description": "The type of note. Check the drop down in the case client to get available types",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The note contents",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
     "/api/integration/journalpost/{id}": {
       "get": {
         "tags": [
@@ -1301,7 +2545,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1354,7 +2598,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1392,7 +2636,7 @@
         "tags": [
           "Integration"
         ],
-        "summary": "Fetches recievers on a given document.\r\nNB: PersonID will be retrieved and the retrieval is logged in Websak.",
+        "summary": "Fetches recievers on a given document.\nNB: PersonID will be retrieved and the retrieval is logged in Websak.",
         "parameters": [
           {
             "name": "id",
@@ -1407,7 +2651,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1494,7 +2738,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1535,7 +2779,7 @@
         "summary": "Fetches information about the currently active user",
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1588,7 +2832,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1673,7 +2917,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1746,73 +2990,141 @@
         "requestBody": {
           "description": "JsonPatchDocument.",
           "content": {
-            "application/json-patch+json": {
+            "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/JsonPatchDocument"
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.JsonPatch.Operations.Operation"
+                }
               },
               "example": [
-  {
-    "op": "replace",
-    "path": "/Navn",
-    "value": "New name"
-  },
-  {
-    "op": "replace",
-    "path": "/Telefon",
-    "value": "+4711111111"
-  },
-  {
-    "op": "replace",
-    "path": "/Epost",
-    "value": "some@email.com"
-  },
-  {
-    "op": "replace",
-    "path": "/Adresse1",
-    "value": "somewhere"
-  },
-  {
-    "op": "replace",
-    "path": "/Adresse2",
-    "value": "somewhere else"
-  },
-  {
-    "op": "replace",
-    "path": "/Adresse3",
-    "value": "somewhere else"
-  },
-  {
-    "op": "replace",
-    "path": "/Adresse4",
-    "value": "somewhere else"
-  },
-  {
-    "op": "replace",
-    "path": "/Postnr",
-    "value": "5500"
-  },
-  {
-    "op": "replace",
-    "path": "/Offentlignummer",
-    "value": "25097643078"
-  },
-  {
-    "op": "replace",
-    "path": "/ErPersonnavn",
-    "value": true
-  },
-  {
-    "op": "replace",
-    "path": "/LandId",
-    "value": "NO"
-  }
-]
+                {
+                  "op": "replace",
+                  "path": "/Navn",
+                  "value": "New name"
+                },
+                {
+                  "op": "replace",
+                  "path": "/Telefon",
+                  "value": "+4711111111"
+                },
+                {
+                  "op": "replace",
+                  "path": "/Epost",
+                  "value": "some@email.com"
+                },
+                {
+                  "op": "replace",
+                  "path": "/Adresse1",
+                  "value": "somewhere"
+                },
+                {
+                  "op": "replace",
+                  "path": "/Adresse2",
+                  "value": "somewhere else"
+                },
+                {
+                  "op": "replace",
+                  "path": "/Adresse3",
+                  "value": "somewhere else"
+                },
+                {
+                  "op": "replace",
+                  "path": "/Adresse4",
+                  "value": "somewhere else"
+                },
+                {
+                  "op": "replace",
+                  "path": "/Postnr",
+                  "value": "5500"
+                },
+                {
+                  "op": "replace",
+                  "path": "/Offentlignummer",
+                  "value": "25097643078"
+                },
+                {
+                  "op": "replace",
+                  "path": "/ErPersonnavn",
+                  "value": true
+                },
+                {
+                  "op": "replace",
+                  "path": "/LandId",
+                  "value": "NO"
+                }
+              ]
+            },
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.JsonPatch.Operations.Operation"
+                }
+              },
+              "example": [
+                {
+                  "op": "replace",
+                  "path": "/Navn",
+                  "value": "New name"
+                },
+                {
+                  "op": "replace",
+                  "path": "/Telefon",
+                  "value": "+4711111111"
+                },
+                {
+                  "op": "replace",
+                  "path": "/Epost",
+                  "value": "some@email.com"
+                },
+                {
+                  "op": "replace",
+                  "path": "/Adresse1",
+                  "value": "somewhere"
+                },
+                {
+                  "op": "replace",
+                  "path": "/Adresse2",
+                  "value": "somewhere else"
+                },
+                {
+                  "op": "replace",
+                  "path": "/Adresse3",
+                  "value": "somewhere else"
+                },
+                {
+                  "op": "replace",
+                  "path": "/Adresse4",
+                  "value": "somewhere else"
+                },
+                {
+                  "op": "replace",
+                  "path": "/Postnr",
+                  "value": "5500"
+                },
+                {
+                  "op": "replace",
+                  "path": "/Offentlignummer",
+                  "value": "25097643078"
+                },
+                {
+                  "op": "replace",
+                  "path": "/ErPersonnavn",
+                  "value": true
+                },
+                {
+                  "op": "replace",
+                  "path": "/LandId",
+                  "value": "NO"
+                }
+              ]
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "401": {
             "description": "Unauthorized - Missing or invalid access token"
@@ -1848,7 +3160,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1910,7 +3222,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1937,6 +3249,76 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/api/integration/journalpost/{id}/merknader/{type}": {
+      "post": {
+        "tags": [
+          "Integration"
+        ],
+        "summary": "Add notes on a given case.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the case to create a note",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "type",
+            "in": "path",
+            "description": "The type of note. Check the drop down in the case client to get available types",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The note contents",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
           },
           "401": {
             "description": "Unauthorized - Missing or invalid access token"
@@ -1985,7 +3367,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "401": {
             "description": "Unauthorized - Missing or invalid access token"
@@ -2020,7 +3402,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "401": {
             "description": "Unauthorized - Missing or invalid access token"
@@ -2055,7 +3437,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "401": {
             "description": "Unauthorized - Missing or invalid access token"
@@ -2104,7 +3486,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -2122,6 +3504,178 @@
                 "schema": {
                   "type": "integer",
                   "format": "int32"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/api/integration/journalpost/{jpId}/attachments": {
+      "get": {
+        "tags": [
+          "Integration"
+        ],
+        "summary": "List all files for a given journalpost",
+        "parameters": [
+          {
+            "name": "jpId",
+            "in": "path",
+            "description": "Journalpost identifier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.JpFile"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.JpFile"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.JpFile"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/api/integration/journalpost/{jpId}/attachments/{verId}": {
+      "head": {
+        "tags": [
+          "Integration"
+        ],
+        "summary": "Retrieve metadata about a specific document version, can be used to verify if the file has changed and needs\nto be downloaded again",
+        "parameters": [
+          {
+            "name": "jpId",
+            "in": "path",
+            "description": "Journalpost identifier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "verId",
+            "in": "path",
+            "description": "Document version identifier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "Integration"
+        ],
+        "summary": "Downloads a file from a given journalpost and version id. The file is streamed to the client.",
+        "parameters": [
+          {
+            "name": "jpId",
+            "in": "path",
+            "description": "Journalpost identifier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "verId",
+            "in": "path",
+            "description": "Document version identifier",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
                 }
               }
             }
@@ -2166,6 +3720,7 @@
                 "properties": {
                   "file": {
                     "type": "string",
+                    "description": "",
                     "format": "binary"
                   }
                 }
@@ -2180,7 +3735,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -2242,6 +3797,7 @@
                 "properties": {
                   "file": {
                     "type": "string",
+                    "description": "",
                     "format": "binary"
                   }
                 }
@@ -2256,7 +3812,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -2277,6 +3833,219 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/api/integration/search/saker": {
+      "get": {
+        "tags": [
+          "Integration"
+        ],
+        "summary": "Proxy endpoint for searching 'Saker' in SearchApi.",
+        "description": "To Expand the search add additional query parameters to the request. For example to filter on a specific classification type   &saksakKlassifikasjoner=value",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Query string",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of items to skip",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "Number of items to take",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "save",
+            "in": "query",
+            "description": "Save query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "settingsId",
+            "in": "query",
+            "description": "Settings ID",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/api/integration/search/journalposter": {
+      "get": {
+        "tags": [
+          "Integration"
+        ],
+        "summary": "Proxy endpoint for searching 'Journalposter' in SearchApi.",
+        "description": "To Expand the search add additional query parameters to the request. For example to filter on a specific classification type   &saksakKlassifikasjoner=value",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Query string",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of items to skip",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "Number of items to take",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "save",
+            "in": "query",
+            "description": "Save query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "settingsId",
+            "in": "query",
+            "description": "Settings ID",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized - Missing or invalid access token"
+          },
+          "403": {
+            "description": "Forbidden - Provided access token does not permit usage of this API or data"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/api/integration/search/dokumenter": {
+      "get": {
+        "tags": [
+          "Integration"
+        ],
+        "summary": "Proxy endpoint for searching 'Dokumenter' in SearchApi.",
+        "description": "To Expand the search add additional query parameters to the request. For example to filter on a specific classification type   &saksakKlassifikasjoner=value",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Query string",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of items to skip",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "Number of items to take",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "save",
+            "in": "query",
+            "description": "Save query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "settingsId",
+            "in": "query",
+            "description": "Settings ID",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           },
           "401": {
             "description": "Unauthorized - Missing or invalid access token"
@@ -2323,6 +4092,774 @@
           }
         },
         "additionalProperties": false
+      },
+      "Acos.WebSak.Pluss.Services.FunctionLibrary.Models.BulkImportResult": {
+        "type": "object",
+        "properties": {
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.ImportValidationResult"
+            },
+            "nullable": true
+          },
+          "successCount": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Function": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "uuid": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "version": {
+            "type": "string",
+            "nullable": true
+          },
+          "activated": {
+            "type": "boolean"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "requestedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "updated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "requiredParameters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.RequiredParameter"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "customRequiredParameters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.RequiredParameter"
+            },
+            "nullable": true
+          },
+          "returnedData": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Interfaces.NameAndType"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "customReturnedData": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Interfaces.NameAndType"
+            },
+            "nullable": true
+          },
+          "returnedDataDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "isObsolete": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "obsoleteMessage": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "allowsSecretParameters": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "parameterMappings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.ParameterMapping"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Acos.WebSak.Pluss.Services.FunctionLibrary.Models.FunctionExportDTO": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "version": {
+            "type": "string",
+            "nullable": true
+          },
+          "customRequiredParameters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.RequiredParameter"
+            },
+            "nullable": true
+          },
+          "customReturnedData": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Interfaces.NameAndType"
+            },
+            "nullable": true
+          },
+          "parameterMappings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.ParameterMapping"
+            },
+            "nullable": true
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "tasks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.SimpleTask"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Acos.WebSak.Pluss.Services.FunctionLibrary.Models.ImportValidationResult": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "functionUuid": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "functionName": {
+            "type": "string",
+            "nullable": true
+          },
+          "issues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.ValidationIssue"
+            },
+            "nullable": true
+          },
+          "hasErrors": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasWarnings": {
+            "type": "boolean",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Interfaces.DataType": {
+        "enum": [
+          "String",
+          "Int",
+          "Date",
+          "Bool",
+          "Json",
+          "Guid",
+          "KeyValueList",
+          "Array",
+          "Xml"
+        ],
+        "type": "string"
+      },
+      "Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Interfaces.NameAndType": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Interfaces.DataType"
+          },
+          "keyValuePairs": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.RequiredParameter"
+            },
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Acos.WebSak.Pluss.Services.FunctionLibrary.Models.LogEntry": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Acos.WebSak.Pluss.Services.FunctionLibrary.Models.ParameterAndValue": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          },
+          "isSecret": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Acos.WebSak.Pluss.Services.FunctionLibrary.Models.ParameterMapping": {
+        "type": "object",
+        "properties": {
+          "parameter": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Acos.WebSak.Pluss.Services.FunctionLibrary.Models.ParameterType": {
+        "enum": [
+          "String",
+          "Int",
+          "Bool",
+          "Guid",
+          "Float",
+          "KeyValueList",
+          "Json",
+          "Array",
+          "Date",
+          "Xml",
+          "Secret"
+        ],
+        "type": "string"
+      },
+      "Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Rename": {
+        "type": "object",
+        "properties": {
+          "originalName": {
+            "type": "string",
+            "nullable": true
+          },
+          "newName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Requests.BulkFunctionImportRequest": {
+        "type": "object",
+        "properties": {
+          "functions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.FunctionExportDTO"
+            },
+            "nullable": true
+          },
+          "overwriteExisting": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Requests.CreateFunctionRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "returnedParametersDescription": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Requests.ExecuteFunctionRequest": {
+        "type": "object",
+        "properties": {
+          "functionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "parameters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.ParameterAndValue"
+            },
+            "nullable": true
+          },
+          "externalSystem": {
+            "type": "string",
+            "nullable": true
+          },
+          "externalId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "logExpiresInDays": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Acos.WebSak.Pluss.Services.FunctionLibrary.Models.RequiredParameter": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.ParameterType"
+          },
+          "possibleValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.RequiredParameterValue"
+            },
+            "nullable": true
+          },
+          "keyValuePairs": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.RequiredParameter"
+            },
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Acos.WebSak.Pluss.Services.FunctionLibrary.Models.RequiredParameterValue": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Responses.ExternalSystemLogStatistics": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "errorCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lastExecutionDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Responses.FunctionExistsResult": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "exists": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "version": {
+            "type": "string",
+            "nullable": true
+          },
+          "updated": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Acos.WebSak.Pluss.Services.FunctionLibrary.Models.SimpleFunction": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "customRequiredParameters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.RequiredParameter"
+            },
+            "nullable": true
+          },
+          "customReturnedData": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Interfaces.NameAndType"
+            },
+            "nullable": true
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "uuid": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "version": {
+            "type": "string",
+            "nullable": true
+          },
+          "activated": {
+            "type": "boolean"
+          },
+          "parameterMappings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.ParameterMapping"
+            },
+            "nullable": true
+          },
+          "outputMappings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Rename"
+            },
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "iteratorVariable": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemVariableName": {
+            "type": "string",
+            "nullable": true
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.SimpleTask"
+            },
+            "nullable": true
+          },
+          "outputVariableName": {
+            "type": "string",
+            "nullable": true
+          },
+          "iteratorExpression": {
+            "type": "string",
+            "nullable": true
+          },
+          "filterJsonPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "filterOperator": {
+            "type": "string",
+            "nullable": true
+          },
+          "filterValue": {
+            "type": "string",
+            "nullable": true
+          },
+          "variableName": {
+            "type": "string",
+            "nullable": true
+          },
+          "variableType": {
+            "type": "string",
+            "nullable": true
+          },
+          "variableValue": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Acos.WebSak.Pluss.Services.FunctionLibrary.Models.SimpleTask": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "version": {
+            "type": "string",
+            "nullable": true
+          },
+          "activated": {
+            "type": "boolean"
+          },
+          "parameterMappings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.ParameterMapping"
+            },
+            "nullable": true
+          },
+          "outputMappings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.Rename"
+            },
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "iteratorVariable": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemVariableName": {
+            "type": "string",
+            "nullable": true
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.SimpleTask"
+            },
+            "nullable": true
+          },
+          "outputVariableName": {
+            "type": "string",
+            "nullable": true
+          },
+          "iteratorExpression": {
+            "type": "string",
+            "nullable": true
+          },
+          "filterJsonPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "filterOperator": {
+            "type": "string",
+            "nullable": true
+          },
+          "filterValue": {
+            "type": "string",
+            "nullable": true
+          },
+          "variableName": {
+            "type": "string",
+            "nullable": true
+          },
+          "variableType": {
+            "type": "string",
+            "nullable": true
+          },
+          "variableValue": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Acos.WebSak.Pluss.Services.FunctionLibrary.Models.ValidationIssue": {
+        "type": "object",
+        "properties": {
+          "severity": {
+            "type": "string",
+            "nullable": true
+          },
+          "taskName": {
+            "type": "string",
+            "nullable": true
+          },
+          "taskUuid": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "taskIndex": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "issueType": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Acos.WebSak.Pluss.Services.FunctionLibrary.Models.WebsakTaskResult": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "logEntries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.LogEntry"
+            },
+            "nullable": true
+          },
+          "returnedParameters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.FunctionLibrary.Models.ParameterAndValue"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Acos.WebSak.Pluss.Services.Integration.Models.AttachmentType": {
+        "enum": [
+          "Attachment",
+          "MainDocument"
+        ],
+        "type": "string"
       },
       "Acos.WebSak.Pluss.Services.Integration.Models.ChildUpdatePolicy": {
         "enum": [
@@ -2442,6 +4979,50 @@
         },
         "additionalProperties": false
       },
+      "Acos.WebSak.Pluss.Services.Integration.Models.EgendefinertVerdi": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "feltNavn": {
+            "type": "string",
+            "nullable": true
+          },
+          "verdi": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Acos.WebSak.Pluss.Services.Integration.Models.EgendefinertVerdiSokResultat": {
+        "type": "object",
+        "properties": {
+          "parentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tab": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "feltNavn": {
+            "type": "string",
+            "nullable": true
+          },
+          "verdi": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "Acos.WebSak.Pluss.Services.Integration.Models.FileContent": {
         "type": "object",
         "properties": {
@@ -2456,9 +5037,56 @@
         },
         "additionalProperties": false
       },
+      "Acos.WebSak.Pluss.Services.Integration.Models.FlatTilleggsdata": {
+        "type": "object",
+        "properties": {
+          "parentId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "tilleggsdataId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "navn": {
+            "type": "string",
+            "nullable": true
+          },
+          "verdi": {
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Acos.WebSak.Pluss.Services.Integration.Models.FlattenedTilleggsDataSett": {
+        "type": "object",
+        "properties": {
+          "revisjonId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tilleggsData": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.FlatTilleggsdata"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "Acos.WebSak.Pluss.Services.Integration.Models.InternalUser": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
           "name": {
             "type": "string",
             "nullable": true
@@ -2512,6 +5140,29 @@
           "tittel2": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Acos.WebSak.Pluss.Services.Integration.Models.JpFile": {
+        "type": "object",
+        "properties": {
+          "attachmentType": {
+            "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.AttachmentType"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "versions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.Version"
+            },
+            "nullable": true
+          },
+          "activeFile": {
+            "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.Variant"
           }
         },
         "additionalProperties": false
@@ -2671,6 +5322,23 @@
         },
         "additionalProperties": false
       },
+      "Acos.WebSak.Pluss.Services.Integration.Models.NyEgendefinertVerdiRequest": {
+        "type": "object",
+        "properties": {
+          "feltNavn": {
+            "type": "string",
+            "nullable": true
+          },
+          "verdi": {
+            "type": "string",
+            "nullable": true
+          },
+          "overskriv": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
       "Acos.WebSak.Pluss.Services.Integration.Models.NyJournalpostRequest": {
         "type": "object",
         "properties": {
@@ -2684,6 +5352,11 @@
           },
           "tittel": {
             "type": "string",
+            "nullable": true
+          },
+          "admEnhetId": {
+            "type": "integer",
+            "format": "int32",
             "nullable": true
           }
         },
@@ -2786,6 +5459,11 @@
           },
           "tittel2": {
             "type": "string",
+            "nullable": true
+          },
+          "admEnhetId": {
+            "type": "integer",
+            "format": "int32",
             "nullable": true
           },
           "klasseringer": {
@@ -3030,6 +5708,13 @@
       "Acos.WebSak.Pluss.Services.Integration.Models.Tilleggsdata": {
         "type": "object",
         "properties": {
+          "children": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.Tilleggsdata"
+            },
+            "nullable": true
+          },
           "id": {
             "type": "integer",
             "format": "int32"
@@ -3039,13 +5724,6 @@
             "nullable": true
           },
           "verdi": {
-            "nullable": true
-          },
-          "children": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.Tilleggsdata"
-            },
             "nullable": true
           }
         },
@@ -3090,6 +5768,56 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.Tilleggsdata"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Acos.WebSak.Pluss.Services.Integration.Models.Variant": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "variantCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "variantDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "fileName": {
+            "type": "string",
+            "nullable": true
+          },
+          "contentType": {
+            "type": "string",
+            "nullable": true
+          },
+          "downloadUri": {
+            "type": "string",
+            "nullable": true
+          },
+          "hasFile": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Acos.WebSak.Pluss.Services.Integration.Models.Version": {
+        "type": "object",
+        "properties": {
+          "versionNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "variants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Integration.Models.Variant"
             },
             "nullable": true
           }
@@ -3397,6 +6125,10 @@
             "type": "string",
             "nullable": true
           },
+          "nesteOppgave": {
+            "type": "string",
+            "nullable": true
+          },
           "canRun": {
             "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Arbeidsflyt.CanRun"
           },
@@ -3424,6 +6156,9 @@
           },
           "isStarted": {
             "type": "boolean"
+          },
+          "avanserTilNestePunkt": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -3444,6 +6179,28 @@
             "format": "int32"
           },
           "navn": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Acos.WebSak.Pluss.Services.Models.Bruker.EnkelAvdeling": {
+        "type": "object",
+        "properties": {
+          "navn": {
+            "type": "string",
+            "nullable": true
+          },
+          "kode": {
+            "type": "string",
+            "nullable": true
+          },
+          "kontakt": {
+            "type": "string",
+            "nullable": true
+          },
+          "tittel": {
             "type": "string",
             "nullable": true
           }
@@ -3556,6 +6313,10 @@
             "type": "string",
             "nullable": true
           },
+          "avdelingKontakt": {
+            "type": "string",
+            "nullable": true
+          },
           "avskrivingInfo": {
             "type": "string",
             "nullable": true
@@ -3566,7 +6327,8 @@
           },
           "avskrivingDato": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           },
           "gidId": {
             "type": "integer",
@@ -3681,7 +6443,15 @@
             "type": "integer",
             "format": "int32"
           },
+          "organNavn": {
+            "type": "string",
+            "nullable": true
+          },
           "visningsNavn": {
+            "type": "string",
+            "nullable": true
+          },
+          "visningsNavnKort": {
             "type": "string",
             "nullable": true
           },
@@ -3698,6 +6468,32 @@
           },
           "erAktiv": {
             "type": "boolean"
+          },
+          "leder": {
+            "type": "string",
+            "nullable": true
+          },
+          "lederTittel": {
+            "type": "string",
+            "nullable": true
+          },
+          "erAvdeling": {
+            "type": "boolean"
+          },
+          "tillattSomMottaker": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "tillattSomKopiMottaker": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "overliggendeAvdeling": {
+            "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Bruker.EnkelAvdeling"
+          },
+          "underenhetAv": {
+            "type": "string",
+            "nullable": true
           },
           "id": {
             "type": "integer",
@@ -3836,46 +6632,50 @@
       "Acos.WebSak.Pluss.Services.Models.Dokument.DokVersjon": {
         "type": "object",
         "properties": {
-          "navn": {
-            "type": "string",
-            "nullable": true
+          "tittel": {
+            "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Sak.TextValue"
           },
           "variant": {
-            "type": "string",
-            "nullable": true
+            "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Sak.SelectValue"
           },
           "eier": {
             "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Bruker.EnkelBruker"
           },
-          "opprettet": {
-            "type": "string",
-            "format": "date-time"
-          },
           "format": {
-            "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Register.RegisterItem"
-          },
-          "dokStatus": {
-            "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Register.RegisterItem"
+            "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Sak.SelectValue"
           },
           "kategori": {
-            "type": "string",
-            "nullable": true
+            "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Sak.SelectValue"
           },
-          "arkMerk": {
-            "type": "string",
-            "nullable": true
+          "arkivMerknad": {
+            "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Sak.TextValue"
+          },
+          "utarbeidetAv": {
+            "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Sak.SelectValue"
           },
           "utarbAv": {
             "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Bruker.Kontakt"
           },
-          "oppBeDato": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
+          "oppbevaresTil": {
+            "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Sak.DateValue"
           },
           "plassering": {
-            "type": "string",
-            "nullable": true
+            "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Sak.TextValue"
+          },
+          "dokStatus": {
+            "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Sak.SelectValue"
+          },
+          "tilknytning": {
+            "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Sak.SelectValue"
+          },
+          "registrertAv": {
+            "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Sak.SelectValue"
+          },
+          "opprettet": {
+            "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Sak.DateValue"
+          },
+          "ckEditor": {
+            "type": "boolean"
           },
           "dokumentId": {
             "type": "integer",
@@ -3982,6 +6782,9 @@
           "kanSendeEpost": {
             "type": "boolean"
           },
+          "kanPdfKonvertere": {
+            "type": "boolean"
+          },
           "kanSetteAktiv": {
             "type": "boolean"
           },
@@ -3990,6 +6793,12 @@
             "nullable": true
           },
           "kanLeggeTilOffentligVariant": {
+            "type": "boolean"
+          },
+          "kanLeggeTilArkivVariant": {
+            "type": "boolean"
+          },
+          "kanLeggeTilSladdetVariant": {
             "type": "boolean"
           },
           "publisering": {
@@ -4042,55 +6851,18 @@
           "eksternId": {
             "type": "string",
             "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "Acos.WebSak.Pluss.Services.Models.Dokument.DokumentLink": {
-        "type": "object",
-        "properties": {
-          "erTilknyttet": {
-            "type": "boolean"
           },
-          "tilknyttetJpId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "tilknyttetSakId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "tilknyttetSaksnavn": {
-            "type": "string",
-            "nullable": true
-          },
-          "tilknyttetJpVisningId": {
-            "type": "string",
-            "nullable": true
-          },
-          "tilknyttetJpNavn": {
-            "type": "string",
+          "ekstraData": {
+            "type": "object",
+            "additionalProperties": {
+              "nullable": true
+            },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "Acos.WebSak.Pluss.Services.Models.Dokument.DokumentTilgang": {
-        "enum": [
-          "Lesetilgang",
-          "Skrivetilgang",
-          "Ingen"
-        ],
-        "type": "string"
-      },
-      "Acos.WebSak.Pluss.Services.Models.Dokument.DokumentType": {
-        "enum": [
-          "Hoveddokument",
-          "Vedlegg"
-        ],
-        "type": "string"
-      },
-      "Acos.WebSak.Pluss.Services.Models.Dokument.Dokument`1[[Acos.WebSak.Pluss.Services.Models.Dokument.DokVersjon, Acos.WebSak.Pluss.Services, Version=9.1.188.0, Culture=neutral, PublicKeyToken=null]]": {
+      "Acos.WebSak.Pluss.Services.Models.Dokument.Dokument": {
         "type": "object",
         "properties": {
           "versjoner": {
@@ -4156,6 +6928,50 @@
           }
         },
         "additionalProperties": false
+      },
+      "Acos.WebSak.Pluss.Services.Models.Dokument.DokumentLink": {
+        "type": "object",
+        "properties": {
+          "erTilknyttet": {
+            "type": "boolean"
+          },
+          "tilknyttetJpId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tilknyttetSakId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tilknyttetSaksnavn": {
+            "type": "string",
+            "nullable": true
+          },
+          "tilknyttetJpVisningId": {
+            "type": "string",
+            "nullable": true
+          },
+          "tilknyttetJpNavn": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Acos.WebSak.Pluss.Services.Models.Dokument.DokumentTilgang": {
+        "enum": [
+          "Lesetilgang",
+          "Skrivetilgang",
+          "Ingen"
+        ],
+        "type": "string"
+      },
+      "Acos.WebSak.Pluss.Services.Models.Dokument.DokumentType": {
+        "enum": [
+          "Hoveddokument",
+          "Vedlegg"
+        ],
+        "type": "string"
       },
       "Acos.WebSak.Pluss.Services.Models.Dokument.Publisering": {
         "type": "object",
@@ -4269,6 +7085,10 @@
           "avdeling": {
             "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Register.KontaktRegisterItem"
           },
+          "aarLopeNr": {
+            "type": "string",
+            "nullable": true
+          },
           "behandlingstype": {
             "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Sak.SelectValue"
           },
@@ -4280,6 +7100,9 @@
             "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Sak.DateValue"
           },
           "erBehandlingFerdig": {
+            "type": "boolean"
+          },
+          "erMineRestanserBehandlet": {
             "type": "boolean"
           },
           "erBehandlingPaaBegynt": {
@@ -4301,7 +7124,7 @@
           "dokumenter": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Dokument.Dokument`1[[Acos.WebSak.Pluss.Services.Models.Dokument.DokVersjon, Acos.WebSak.Pluss.Services, Version=9.1.188.0, Culture=neutral, PublicKeyToken=null]]"
+              "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Dokument.Dokument"
             },
             "nullable": true
           },
@@ -4330,6 +7153,9 @@
             "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Sak.DateValue"
           },
           "harDokumenter": {
+            "type": "boolean"
+          },
+          "harFerdigStatus": {
             "type": "boolean"
           },
           "id": {
@@ -4416,8 +7242,26 @@
           "skjerming": {
             "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Register.Skjerming"
           },
+          "tilgangsKode": {
+            "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Register.TilgangsKode"
+          },
+          "avskjermingKode": {
+            "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Register.AvskjermingKode"
+          },
+          "paragraf": {
+            "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Register.Paragraf"
+          },
+          "skjermingskode": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
           "sone": {
             "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Miljo.Sone"
+          },
+          "perioder": {
+            "type": "string",
+            "nullable": true
           },
           "status": {
             "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Sak.SelectValue"
@@ -4442,6 +7286,18 @@
           "referanse": {
             "type": "string",
             "nullable": true
+          },
+          "eksternId": {
+            "type": "string",
+            "nullable": true
+          },
+          "dokNrVisningId": {
+            "type": "string",
+            "nullable": true
+          },
+          "uuid": {
+            "type": "string",
+            "format": "uuid"
           }
         },
         "additionalProperties": false
@@ -4474,6 +7330,9 @@
             "type": "boolean"
           },
           "kanLeggeTilDokument": {
+            "type": "boolean"
+          },
+          "kanRedigereHoveddokument": {
             "type": "boolean"
           },
           "kanLeggeTilMerknad": {
@@ -4542,7 +7401,8 @@
           "EnkelJournalpost",
           "FullJournalpost",
           "MottakJournalpost",
-          "KopiJournalpost"
+          "KopiJournalpost",
+          "SOKJOURNALPOST"
         ],
         "type": "string"
       },
@@ -4624,9 +7484,21 @@
           "tillaterEgendefinerteVerdier": {
             "type": "boolean"
           },
+          "beskrivelseObligatorisk": {
+            "type": "boolean"
+          },
           "tegnFoerSoek": {
             "type": "integer",
             "format": "int32"
+          },
+          "maksLengde": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tilDato": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -4652,6 +7524,9 @@
           "beskrivelse": {
             "type": "string",
             "nullable": true
+          },
+          "selectable": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -4706,6 +7581,11 @@
             "format": "int32",
             "nullable": true
           },
+          "parentId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "mappeTypeId": {
             "type": "integer",
             "format": "int32"
@@ -4713,6 +7593,10 @@
           "sakId": {
             "type": "integer",
             "format": "int32"
+          },
+          "aarLopeNr": {
+            "type": "string",
+            "nullable": true
           },
           "tittel": {
             "type": "string",
@@ -4895,6 +7779,18 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          },
+          "interactSkjemaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -4967,6 +7863,9 @@
             "nullable": true
           },
           "internParagraf": {
+            "type": "boolean"
+          },
+          "erGyldig": {
             "type": "boolean"
           },
           "id": {
@@ -5243,6 +8142,10 @@
           "variant": {
             "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Sak.SakVariant"
           },
+          "antallJournalposter": {
+            "type": "integer",
+            "format": "int32"
+          },
           "id": {
             "type": "integer",
             "format": "int32"
@@ -5305,6 +8208,20 @@
           "operasjoner": {
             "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Sak.SakTilgangOperasjoner"
           },
+          "tilgangsKode": {
+            "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Register.TilgangsKode"
+          },
+          "avskjermingKode": {
+            "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Register.AvskjermingKode"
+          },
+          "paragraf": {
+            "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Register.Paragraf"
+          },
+          "skjermingskode": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
           "mappeTypeId": {
             "type": "integer",
             "format": "int32"
@@ -5320,6 +8237,10 @@
           },
           "sone": {
             "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Miljo.Sone"
+          },
+          "perioder": {
+            "type": "string",
+            "nullable": true
           },
           "hovedfeltTillegsdata": {
             "type": "string",
@@ -5375,6 +8296,20 @@
           "malSakId": {
             "type": "integer",
             "format": "int32"
+          },
+          "erSoppelSak": {
+            "type": "boolean"
+          },
+          "erDummySak": {
+            "type": "boolean"
+          },
+          "eksternId": {
+            "type": "string",
+            "nullable": true
+          },
+          "uuid": {
+            "type": "string",
+            "format": "uuid"
           }
         },
         "additionalProperties": false
@@ -5491,13 +8426,17 @@
             "type": "integer",
             "format": "int32"
           },
+          "extras": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/System.Collections.Generic.KeyValuePair`2[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+            },
+            "nullable": true
+          },
           "erMalSak": {
             "type": "boolean"
           },
           "erDummySak": {
-            "type": "boolean"
-          },
-          "erSoppelSak": {
             "type": "boolean"
           },
           "erGrupperingSak": {
@@ -5571,6 +8510,20 @@
           "operasjoner": {
             "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Sak.SakTilgangOperasjoner"
           },
+          "tilgangsKode": {
+            "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Register.TilgangsKode"
+          },
+          "avskjermingKode": {
+            "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Register.AvskjermingKode"
+          },
+          "paragraf": {
+            "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Register.Paragraf"
+          },
+          "skjermingskode": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
           "mappeTypeId": {
             "type": "integer",
             "format": "int32"
@@ -5586,6 +8539,10 @@
           },
           "sone": {
             "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Miljo.Sone"
+          },
+          "perioder": {
+            "type": "string",
+            "nullable": true
           },
           "hovedfeltTillegsdata": {
             "type": "string",
@@ -5641,6 +8598,17 @@
           "malSakId": {
             "type": "integer",
             "format": "int32"
+          },
+          "erSoppelSak": {
+            "type": "boolean"
+          },
+          "eksternId": {
+            "type": "string",
+            "nullable": true
+          },
+          "uuid": {
+            "type": "string",
+            "format": "uuid"
           }
         },
         "additionalProperties": false
@@ -5658,6 +8626,10 @@
           "parentSakId": {
             "type": "integer",
             "format": "int32"
+          },
+          "overskrivSaksparterFraMal": {
+            "type": "boolean",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -5733,6 +8705,11 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          },
+          "avgjkodeid": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -5798,6 +8775,9 @@
             "type": "boolean"
           },
           "kanLeggeTilKlassering": {
+            "type": "boolean"
+          },
+          "kanEndreSone": {
             "type": "boolean"
           }
         },
@@ -5871,6 +8851,13 @@
           },
           "operasjoner": {
             "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.Sak.SakTilgangOperasjoner"
+          },
+          "arkiv": {
+            "type": "string",
+            "nullable": true
+          },
+          "erSoppelSak": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -6224,9 +9211,18 @@
             "format": "date-time",
             "nullable": true
           },
-          "createdById": {
-            "type": "integer",
-            "format": "int32"
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "editedDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "editedBy": {
+            "type": "string",
+            "nullable": true
           },
           "koblinger": {
             "type": "array",
@@ -6312,6 +9308,13 @@
           "tittel": {
             "type": "string",
             "nullable": true
+          },
+          "nyRevisjonRes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.TilskuddVedtak.NyRevisjonBehandling"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -6356,6 +9359,24 @@
             "additionalProperties": {
               "$ref": "#/components/schemas/Acos.WebSak.Pluss.Services.Models.TilleggsData.TilleggsDataObject"
             },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Acos.WebSak.Pluss.Services.Models.TilskuddVedtak.NyRevisjonBehandling": {
+        "type": "object",
+        "properties": {
+          "sakId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "feilmelding": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -6422,6 +9443,10 @@
       "Acos.Websak.Kontakter.Sok.Interfaces.IKontakt": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
           "eksternId": {
             "type": "string",
             "nullable": true
@@ -6430,40 +9455,23 @@
             "type": "string",
             "nullable": true
           },
+          "offentligNummer": {
+            "type": "string",
+            "nullable": true
+          },
           "epost": {
             "type": "string",
             "nullable": true
           },
-          "erIdentitet": {
-            "type": "boolean"
-          },
-          "kontaktType": {
-            "$ref": "#/components/schemas/Acos.Websak.Kontakter.Sok.Interfaces.KontaktType"
-          },
-          "kontakter": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Acos.Websak.Kontakter.Sok.Interfaces.IKontakt"
-            },
-            "nullable": true
-          },
-          "avdelingKode": {
+          "telefon": {
             "type": "string",
             "nullable": true
-          },
-          "avdelingNavn": {
-            "type": "string",
-            "nullable": true
-          },
-          "avdelingGidId": {
-            "type": "string",
-            "nullable": true
-          },
-          "avdelingId": {
-            "type": "integer",
-            "format": "int32"
           },
           "adresse": {
+            "type": "string",
+            "nullable": true
+          },
+          "kode": {
             "type": "string",
             "nullable": true
           },
@@ -6475,25 +9483,23 @@
             "type": "string",
             "nullable": true
           },
-          "telefon": {
+          "avdelingGidId": {
             "type": "string",
             "nullable": true
           },
-          "offentligNummer": {
+          "avdelingId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "avdelingNavn": {
             "type": "string",
             "nullable": true
           },
-          "erPersonNavn": {
-            "type": "boolean"
-          },
-          "attention": {
+          "avdelingKode": {
             "type": "string",
             "nullable": true
           },
-          "virksomhet": {
-            "$ref": "#/components/schemas/Acos.Websak.Kontakter.Sok.Interfaces.IKontakt"
-          },
-          "visningsNavn": {
+          "avdelingKontakt": {
             "type": "string",
             "nullable": true
           },
@@ -6508,19 +9514,65 @@
           "gradert": {
             "type": "boolean"
           },
-          "erAktiv": {
+          "erIdentitet": {
             "type": "boolean"
           },
-          "id": {
-            "type": "integer",
-            "format": "int32"
+          "kontaktType": {
+            "$ref": "#/components/schemas/Acos.Websak.Kontakter.Sok.Interfaces.KontaktType"
           },
-          "kode": {
+          "kontakter": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Acos.Websak.Kontakter.Sok.Interfaces.IKontakt"
+            },
+            "nullable": true
+          },
+          "attention": {
             "type": "string",
             "nullable": true
           },
+          "virksomhet": {
+            "$ref": "#/components/schemas/Acos.Websak.Kontakter.Sok.Interfaces.IKontakt"
+          },
+          "visningsNavn": {
+            "type": "string",
+            "nullable": true
+          },
+          "visningsNavnKort": {
+            "type": "string",
+            "nullable": true
+          },
+          "erPersonNavn": {
+            "type": "boolean"
+          },
           "selectable": {
             "type": "boolean"
+          },
+          "erAktiv": {
+            "type": "boolean"
+          },
+          "leder": {
+            "type": "string",
+            "nullable": true
+          },
+          "organNavn": {
+            "type": "string",
+            "nullable": true
+          },
+          "erAvdeling": {
+            "type": "boolean"
+          },
+          "tillattSomMottaker": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "tillattSomKopiMottaker": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "underenhetAv": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -6559,13 +9611,6 @@
         ],
         "type": "string"
       },
-      "JsonPatchDocument": {
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/Operation"
-        },
-        "description": "Array of operations to perform"
-      },
       "Microsoft.AspNetCore.JsonPatch.Operations.Operation": {
         "type": "object",
         "properties": {
@@ -6587,20 +9632,19 @@
         },
         "additionalProperties": false
       },
-      "Operation": {
+      "System.Collections.Generic.KeyValuePair`2[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]": {
         "type": "object",
         "properties": {
-          "op": {
-            "type": "string"
-          },
-          "value": {
-            "type": "object",
+          "key": {
+            "type": "string",
             "nullable": true
           },
-          "path": {
-            "type": "string"
+          "value": {
+            "type": "string",
+            "nullable": true
           }
-        }
+        },
+        "additionalProperties": false
       }
     },
     "securitySchemes": {
@@ -6608,18 +9652,34 @@
         "type": "oauth2",
         "flows": {
           "authorizationCode": {
-            "authorizationUrl": "https://azt-ca-identityserver.internal.redsea-3bd25892.norwayeast.azurecontainerapps.io/connect/authorize",
-            "tokenUrl": "https://azt-ca-identityserver.internal.redsea-3bd25892.norwayeast.azurecontainerapps.io/connect/token",
+            "authorizationUrl": "https://identityserver:7169/connect/authorize",
+            "tokenUrl": "https://identityserver:7169/connect/token",
             "scopes": {
               "integration": "Access to external websak+ integrations",
               "pluss_api": "Full access to the Websak+ API",
               "indeksering": "Access to the indeksering API",
               "brukertilgang": "Access to the indeksering API (brukertilgang)",
-              "konfigurering": "Access to the configuration API"
+              "konfigurering": "Access to the configuration API",
+              "tilskudd": "Access to the tilskuddutbetaling API",
+              "mottak_api": "Access to mottak API",
+              "search": "Access to search API",
+              "prosess_api": "Access to prosess API",
+              "websak_api_mote": "Access to endpoints for Mote"
             }
           }
         }
       }
     }
-  }
+  },
+  "tags": [
+    {
+      "name": "Egendefinert"
+    },
+    {
+      "name": "FunctionLibrary"
+    },
+    {
+      "name": "Integration"
+    }
+  ]
 }

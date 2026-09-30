@@ -1,6 +1,12 @@
-Integration API er HTTP-API-et for WebSak-integrasjon (sak, journalpost, skjema
-og tilleggsdata). REST-referansen under er generert fra
-`_data/swagger/integration.json`.
+Kundedokumentasjonen for WebSak Integration API ligger i guidene:
 
-Sider med permalink `websak__integration_api_*.html` er beholdt for gamle
-bokmerker. Bruk `integration__*.html` i nye lenker.
+- [Oversikt](/integrationapi_guide.html)
+- [Autentisering](/integrationapi_auth.html)
+- [Saker og journalposter](/integrationapi_cases.html)
+- [Klassering og tilleggsdata](/integrationapi_classification.html)
+- [Filer](/integrationapi_files.html)
+- [Søk](/integrationapi_search.html)
+- [Feilhåndtering](/integrationapi_errors.html)
+
+Denne siden er beholdt som inngang fra den genererte REST-indeksen.
+Lenkene i REST-referansen bruker `integration__*.html`.
