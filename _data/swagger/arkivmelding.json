@@ -145,7 +145,7 @@
             "description": "Ukjent eller inaktiv tenant-nøkkel. Ruten matcher ikke."
           },
           "422": {
-            "description": "Meldingen kunne ikke behandles. JSON-feltet heter messge.",
+            "description": "Meldingen kunne ikke behandles. JSON-feltet heter message.",
             "content": {
               "application/json": {
                 "schema": {
@@ -247,7 +247,7 @@
             "description": "Ukjent eller inaktiv tenant-nøkkel. Ruten matcher ikke."
           },
           "422": {
-            "description": "Meldingen kunne ikke behandles. JSON-feltet heter messge.",
+            "description": "Meldingen kunne ikke behandles. JSON-feltet heter message.",
             "content": {
               "application/json": {
                 "schema": {
@@ -356,14 +356,14 @@
       "Acos.Mottaksenter.SkjemaWebService.Infrastructure.OpenApi.ArkivmeldingUnprocessableErrorDto": {
         "type": "object",
         "properties": {
-          "messge": {
+          "message": {
             "type": "string",
-            "description": "Feilmelding. Feltnavnet er messge (uten a) i den faktiske responsen.",
+            "description": "Feilmelding.",
             "nullable": true
           }
         },
         "additionalProperties": false,
-        "description": "422-svar når meldingen ikke kan behandles. Feltnavnet messge matcher den faktiske JSON-kroppen."
+        "description": "422-svar når meldingen ikke kan behandles."
       },
       "Acos.Mottaksenter.SkjemaWebService.Infrastructure.OpenApi.ArkivmeldingValidationErrorDto": {
         "type": "object",

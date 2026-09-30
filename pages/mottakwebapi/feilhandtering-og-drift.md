@@ -13,7 +13,7 @@ permalink: /mottakwebapi_errors.html
 | 201 | Pakken er lagret som importobjekt i Mottak. |
 | 400 | Hash stemmer ikke (ren tekst), XSD-feil, eller metadatafil mangler i ZIP (JSON). |
 | 404 | Ukjent eller inaktiv tenant-nøkkel. Ruten matcher ikke. |
-| 422 | Meldingen kunne ikke behandles. JSON-feltet heter `messge`. |
+| 422 | Meldingen kunne ikke behandles. JSON-feltet heter `message`. |
 | 500 | Uventet feil, inkludert request som ikke er `multipart/*`. Kroppen er `ProblemDetails`. |
 
 Tjenesten returnerer ikke 415 for feil `Content-Type`. En kropp som ikke er
@@ -34,11 +34,9 @@ multipart ender som 500.
 
 ```json
 {
-  "messge": "Kunne ikke håndtere innkommet melding"
+  "message": "Kunne ikke håndtere innkommet melding"
 }
 ```
-
-Feltnavnet `messge` er den faktiske kontrakten.
 
 ### 500
 
