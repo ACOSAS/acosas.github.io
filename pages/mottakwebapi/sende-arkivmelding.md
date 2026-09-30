@@ -5,18 +5,30 @@ permalink: /mottakwebapi_send.html
 
 # Sende arkivmelding
 
-Begge innsendingsrutene bruker `POST` og `multipart/related`. Forskjellen er
-hva som ligger i ZIP-filen, og hvordan Mottak tolker metadata.
+En innsending er én pakke: metadata som XML, og eventuelle vedlegg. Avsenderen
+legger disse filene i **én ZIP** og sender ZIP-filen. Mottak pakker den ut,
+finner metadatafilen og tar med vedleggene. XML-en lastes derfor ikke opp
+alene. Sjekksummen i manifestet gjelder **hele ZIP-filen**.
+
+Slik bygges pakken:
+
+1. Legg metadatafilen og eventuelle vedlegg i ZIP-en.
+2. For `/arkivmelding` heter metadatafilen som standard `arkivmelding.xml`.
+   Avsenderen kan overstyre filnavnet i Mottak+ (`MetadataFilnavn`).
+3. For `/arkiverdokument` er `MetadataFilnavn` påkrevd i avsenderoppsettet.
+   Det navnet er metadatafilen Mottak leter etter i ZIP-en.
+
+Begge innsendingsrutene bruker `POST` og `multipart/related`: JSON-manifest
+først, deretter ZIP-filen. Forskjellen er hva som ligger i ZIP-en, og hvordan
+Mottak tolker metadata.
 
 | Rute | Når den skal brukes | `type` i manifest |
 |---|---|---|
 | `POST /api/{tenant}/arkivmelding` | ZIP inneholder KS/Noark-arkivmelding | `arkivmelding` |
 | `POST /api/{tenant}/arkivmelding/arkiverdokument` | ZIP inneholder annen meldings-XML styrt av avsenderoppsettet | `melding` |
 
-Standard metadatafil for `/arkivmelding` er `arkivmelding.xml`. Avsenderen kan
-overstyre filnavnet i Mottak+ (`MetadataFilnavn`). For `/arkiverdokument` er
-`MetadataFilnavn` påkrevd i avsenderoppsettet. Hvis `type` er `arkivmelding`
-på `/arkiverdokument`, hoppes XSD-validering over på den ruten.
+Hvis `type` er `arkivmelding` på `/arkiverdokument`, hoppes XSD-validering over
+på den ruten.
 
 XSD-validering på `/arkivmelding` styres av avsenderoppsettet. Når validering
 er på, sjekkes XML mot avsenderens XSD-filer (standard `arkivmelding.xsd` og
