@@ -53,8 +53,9 @@ Mappingen må være entydig begge veier.
 
 | Entra-kilde | SCIM-mål | Aktiv | Kommentar |
 |---|---|---|---|
-| `objectId` | `externalId` | `ja` | stabil login- og korrelasjonsnøkkel |
-| `<short-user-name-source>` | `userName` | `<ja/nei>` | maks 10 tegn og unik |
+| `<upn-source>` | `userName` | `ja` | loginidentifikator for konfigurert provider |
+| `<short-websak-code-source>` | Acos `userCode` | `ja` | påkrevd ved POST, maks. 10 tegn; SCIM genererer ikke koden |
+| `objectId` | `externalId` | `<ja/nei>` | valgfri, separat korrelasjonsverdi lagret i `Gid_DIV2` |
 | `accountEnabled` | `active` | `ja` | deaktivering/reaktivering |
 | `<department-source>` | enterprise `department` | `<ja/nei>` | én eksakt ekstern ID |
 | `<application-role-source>` | Acos `applicationRole` | `<ja/nei>` | rettighetsmalmapping |

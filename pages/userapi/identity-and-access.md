@@ -50,13 +50,15 @@ roller, tilgangsfunksjoner og tilgangsgrupper.
 | Verdi | Betydning | Lagring/bruk |
 |---|---|---|
 | SCIM `id` | Stabil intern WebSak-bruker-ID | `Gid_GidID`, returneres av tjenesten |
-| SCIM `externalId` | Entra object ID | `Gid_DIV2`, klientstyrt og unik for SCIM-brukere |
+| SCIM `externalId` | valgfri klientstyrt korrelasjonsverdi | `Gid_DIV2`; beholdes separat fra loginmapping |
 | REST `externalId` i brukerrespons | IdentityServers interne ID | `Gid_EksternID`; må ikke forveksles med SCIM `externalId` |
-| SCIM `userName` | Kort WebSak-brukerkode | `Gid_GidKode`, maksimalt 10 tegn |
+| SCIM `userName` | UPN/loginidentifikator for konfigurert provider | eksisterende moderne loginmapping; kan være lengre enn 10 tegn |
+| SCIM Acos `userCode` | kort WebSak-brukerkode | `Gid_GidKode`, maksimalt 10 tegn |
 | REST `username` | Eldre/konfigurert loginverdi | brukes av ordinære REST-flyter |
 
-Entra skal mappe den stabile `objectId`-verdien til SCIM `externalId`. E-post er
-ikke en stabil erstatning for denne nøkkelen.
+`externalId` er valgfritt og skal ikke brukes som loginidentifikator. Kunden kan
+sende Entra `objectId` der en separat korrelasjonsverdi er nyttig; e-post eller
+UPN settes ikke automatisk som `externalId`.
 
 ## Loginmapping
 
@@ -69,10 +71,10 @@ I REST er `userAccesses` en liste over loginmappinger. Hvert element inneholder:
 | `domain` | valgfritt domene for providere som bruker dette |
 | `isPrimary` | om mappingen er primær |
 
-SCIM bygger nøyaktig én primær loginmapping fra `externalId`: konfigurert
-`Scim:ModernAuthentication:Provider` brukes som `provider`, trimmet
-`externalId` brukes som `key`, `isPrimary` er `true`, og `domain` er `null`.
-Loginmappingen eksponeres ikke som et eget SCIM extension-felt.
+SCIM bruker `userName` som loginmappingens nøkkel for konfigurert provider;
+mappingen er også kilden til `userName` ved lesing. Acos `userCode` er separat
+fra innlogging. Se [SCIM-guiden](/userapi_scim_guide.html#oppretting) for konfigurasjon og
+oppførsel når en bruker mangler mapping.
 
 For ordinært REST API gjelder følgende livssyklus:
 

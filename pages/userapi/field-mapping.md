@@ -32,8 +32,8 @@ skjemaer finnes i generert OpenAPI. `Inn` betyr at klienten kan sende feltet,
 | `validFrom` | inn/ut | valgfri startdato | `Gid_FraDato` |
 
 Andre adresse- og kontaktfelt følger navngivningen i OpenAPI. Ikke send
-`misc1`–`misc5` uten en avtalt kundemapping; `Gid_DIV2` er reservert for SCIM
-`externalId` når brukeren forvaltes gjennom SCIM.
+`misc1`–`misc5` uten en avtalt kundemapping; `Gid_DIV2` brukes til SCIM
+`externalId` når klienten sender dette valgfrie korrelasjonsfeltet.
 
 ## REST loginmapping
 
@@ -63,8 +63,9 @@ avgrenset pilot og må ikke tolkes som produksjonsgodkjenning.
 | SCIM-felt | Retning | Krav/standard | WebSak-felt eller effekt |
 |---|---|---|---|
 | `id` | ut | readOnly | `Gid_GidID` |
-| `externalId` | inn/ut | påkrevd, trimmes, unik | Entra object ID i `Gid_DIV2` |
-| `userName` | inn/ut | påkrevd, unik, maks 10 tegn | `Gid_GidKode` |
+| `externalId` | inn/ut | valgfritt; klientstyrt korrelasjonsverdi | opprinnelig verdi i `Gid_DIV2`; ikke loginmapping |
+| `userName` | inn/ut | påkrevd; IdentityServer-nøkkel for konfigurert provider | loginmapping; kan være UPN over 10 tegn |
+| Acos `userCode` | inn ved POST, inn/ut ellers | påkrevd ved POST; streng på maks. 10 tegn | `Gid_GidKode`; utelatt ved PUT/PATCH bevarer eksisterende verdi |
 | `active` | inn/ut | standard etter opprettingskontrakten | avledes fra gyldighetsdatoer |
 | `displayName`/`name` | inn/ut | navn må kunne bygges | `Gid_Navn` |
 | `emails[type eq "work"]` | inn/ut | valgfritt | primær e-post |
@@ -77,6 +78,8 @@ avgrenset pilot og må ikke tolkes som produksjonsgodkjenning.
 | `entitlements` | inn/ut | avtalt verdiutvalg | tilgangsfunksjoner |
 
 SCIM mapper ikke `userType`. Entra member og guest følger samme User-mapping.
+Se [SCIM-guiden](/userapi_scim_guide.html#oppretting) for loginmappingkilde og oppførsel for
+brukere uten mapping for konfigurert provider.
 
 ## Avdeling
 
