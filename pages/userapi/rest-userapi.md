@@ -15,10 +15,10 @@ beta-status.
 
 | Operasjon | Anbefalt rute | Merknad |
 |---|---|---|
-| Liste | `GET /api/Users` | paginering med `limit` og `offset` |
+| Liste | `GET /api/Users` | paginering med `limit` og `offset`; valgfritt eksakt `email`-filter |
 | Hent | `GET /api/Users/{id}` | `lookupField=Id` er standard; `Code` støttes |
-| Opprett | `POST /api/Users` | kan inkludere første `userAccesses`-mapping; returnerer `409` når bruker finnes og `feilVedEksisterende=true` |
-| Oppdater profil | `PUT /api/Users/{id}` | full profilpayload; endrer ikke loginmapping, roller eller tilgangskoder direkte |
+| Opprett | `POST /api/Users` | returnerer `409` når bruker finnes og `feilVedEksisterende=true` |
+| Oppdater | `PUT /api/Users/{id}` | full brukerpayload etter gjeldende kontrakt |
 | Aktiver | `PUT /api/v2/users/{userGidId}/activation` | riktig V2-mutasjon |
 | Deaktiver | `DELETE /api/v2/users/{userGidId}/activation` | setter sluttdato; sletter ikke fysisk |
 | Les loginmapping | `GET /api/Users/{id}/useraccesses` | `id` er numerisk GID-ID |
@@ -28,30 +28,38 @@ Ved oppretting anbefales en godkjent `accessTemplateId`. Hvis både
 `departmentCode` og `externalDepartmentId` sendes, har `departmentCode`
 prioritet. `externalDepartmentId` skal være én eksakt verdi.
 
-### Brukerprofil og loginmapping
+### Oppslag på e-post før oppretting
 
-Brukerprofil og loginmapping er separate ressurser. Ved oppretting av en
-ordinær primærbruker kan `userAccesses` sendes i samme
-`POST /api/Users`. UserAPI oppretter da mappingen etter at WebSak-brukeren er
-opprettet. REST-responsens `externalId` er IdentityServers interne ID
-(`Gid_EksternID`); verdien genereres av tjenesten og skal ikke sendes av
-klienten.
+Integrasjoner bør slå opp eksisterende WebSak-brukere før de vurderer å kalle
+`POST /api/Users`:
 
-`PUT /api/Users/{id}` oppdaterer brukerprofilen. Den oppdaterer ikke
-`userAccesses`, selv om feltet vises i den delte `UserRequest`-modellen i
-OpenAPI. For en eksisterende bruker skal loginmappingen leses og erstattes via
-henholdsvis `GET` og `PUT /api/Users/{id}/useraccesses`. Det separate PUT-kallet
-er bare nødvendig når mappingen skal opprettes eller endres.
+```http
+GET /api/Users?email=person%40example.no&limit=100&offset=0
+```
 
-`userAccessFunctions`, `userAccessCodes` og `userRoles` er heller ikke direkte
-skrivefelter i brukerprofil-PUT. Bruk en godkjent `accessTemplateId` eller de
-dedikerte rutene for tilgangskoder og roller. Ikke send en komplett GET-respons
-tilbake som POST/PUT-payload; bygg en operasjonsspesifikk request.
+Filteret søker eksakt i aktive adresseposter. Innsendt og lagret verdi trimmes,
+og store/små bokstaver behandles likt. Det søkes ikke i de eldre
+`Gid_EmailAdr`-feltene. Både aktive og deaktiverte brukere kan returneres.
+E-post er ikke en unik nøkkel, så svaret kan inneholde flere brukere:
 
-Hvis en eksisterende bruker mangler `externalId`, skal klienten ikke opprette
-en ny WebSak-bruker. Les nåtilstanden, erstatt loginmappingen via
-`PUT /api/Users/{id}/useraccesses`, og kontroller deretter både mappingen og
-`externalId` på nytt.
+1. Ingen treff (`200 OK` med `[]`): brukeren kan opprettes etter øvrige
+   kontroller.
+2. Ett treff: bruk eksisterende `gidId`, les loginmappingen med
+   `GET /api/Users/{gidId}/useraccesses`, og oppdater den eksisterende brukeren
+   ved behov.
+3. Flere treff: stopp automatisk behandling og krev manuell avklaring.
+
+Filteret anvendes før `offset` og `limit`. Integrasjonen må derfor lese alle
+sider før den konkluderer med at treffet er entydig dersom `limit` kan skjule
+flere treff. Sett `includeEmailAddresses=true` dersom aktive adresser også skal
+være med i responsen; selve filteret aktiverer ikke dette inkluderingsflagget.
+En tom eller blank `email` avvises med `400 Bad Request`.
+
+E-post er bare oppslagsgrunnlag og må ikke behandles som stabil identifikator,
+Entra object ID eller REST-feltet `externalId`. Oppslaget endrer heller ikke
+oppførselen til `POST`, `PUT` eller loginmapping-rutene: UserAPI kobler,
+oppdaterer eller blokkerer ikke ordinær brukeroppretting automatisk basert på
+resultatet av e-postsøket.
 
 ### Sekundærbruker
 

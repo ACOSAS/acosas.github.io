@@ -1584,11 +1584,11 @@
     },
     "description": "ACOS WebSak UserAPI REST reference.",
     "title": "User API",
-    "version": "3.3.87",
+    "version": "3.3.97",
     "x-acos-publication": {
-      "commitSha": "4a9f48829a2fc8b6a3afd4a96943aa3251f46769",
-      "generatedAt": "2026-09-07T09:32:57Z",
-      "userApiVersion": "3.3.87"
+      "commitSha": "d3a69555ca4e87efb17f162c8b6f0147cc52c721",
+      "generatedAt": "2026-10-07T13:24:09Z",
+      "userApiVersion": "3.3.97"
     }
   },
   "openapi": "3.0.4",
@@ -3171,7 +3171,7 @@
             }
           },
           {
-            "description": "bool to include or exclude user email addresses",
+            "description": "Whether active email addresses are included in the response. The email filter does not change the default.",
             "in": "query",
             "name": "includeEmailAddresses",
             "schema": {
@@ -3195,6 +3195,14 @@
             "schema": {
               "default": false,
               "type": "boolean"
+            }
+          },
+          {
+            "description": "Optional exact email filter. Leading and trailing whitespace is ignored.",
+            "in": "query",
+            "name": "email",
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -3226,10 +3234,30 @@
                 }
               }
             },
-            "description": "Ok"
+            "description": "Matching users, or an empty array when an email filter has no matches"
           },
           "204": {
-            "description": "No content, if no users are registered"
+            "description": "No content when an unfiltered listing has no users"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            },
+            "description": "Email was supplied but is empty or whitespace"
           },
           "401": {
             "description": "Unauthorized - Missing or invalid access token"
@@ -3246,7 +3274,7 @@
             "oauth2": []
           }
         ],
-        "summary": "Gets all users defined in the system user limit=x&offset=n to paginate\nTo include email,access and roles, use following parameters\n&includeEmailAddresses=true&includeUserAccess=true&includeRoles=true",
+        "summary": "Gets users defined in the system. Use limit=x&offset=n to paginate.\nAn optional email filter matches the trimmed value exactly and case-insensitively\nagainst active identity address records. Filtering happens before paging and may\nreturn multiple users because email is not a unique identifier.\nTo include email, access and roles, use following parameters\n&includeEmailAddresses=true&includeUserAccess=true&includeRoles=true",
         "tags": [
           "Users"
         ]

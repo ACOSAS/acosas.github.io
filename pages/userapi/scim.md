@@ -47,8 +47,9 @@ Tokenet må fornyes etter kundens avtalte levetid. Ikke bruk et personlig token.
 
 | Entra-kilde | SCIM-mål | Krav og merknad |
 |---|---|---|
-| `objectId` | `externalId` | Påkrevd, stabil og unik; lagres i `Gid_DIV2` |
-| valgt kort brukerkode | `userName` | Påkrevd, unik, maksimalt 10 tegn |
+| UPN/loginidentifikator | `userName` | Påkrevd; brukes som nøkkel i loginmapping for konfigurert provider. Kan være lengre enn 10 tegn. |
+| Kundens avtalte korte brukerkode | Acos `userCode` | Påkrevd ved POST, maksimalt 10 tegn; lagres i `Gid_GidKode`. SCIM genererer ikke koden. |
+| `objectId` (valgfritt) | `externalId` | Valgfri korrelasjonsverdi; lagres uendret i `Gid_DIV2`. Brukes ikke som loginidentifikator. |
 | `accountEnabled` | `active` | Styrer deaktivering og reaktivering |
 | `givenName` | `name.givenName` | Skrivbar |
 | `surname` | `name.familyName` | Skrivbar |
@@ -64,7 +65,8 @@ Tokenet må fornyes etter kundens avtalte levetid. Ikke bruk et personlig token.
 Enterprise-attributtet bruker URI-en
 `urn:ietf:params:scim:schemas:extension:enterprise:2.0:User:department`.
 Acos-attributtet bruker
-`urn:acos:params:scim:schemas:extension:user:2.0:AcosUser:applicationRole`.
+`urn:acos:params:scim:schemas:extension:user:2.0:AcosUser`; `userCode` og
+`applicationRole` ligger i dette extension-objektet.
 
 Ikke map `userType`. Entra `member` og `guest` behandles likt av SCIM-adapteren;
 tilgang styres av assignment, grupper, avdeling og `applicationRole`, ikke av
@@ -85,17 +87,28 @@ sine reelle rettighetsmaler og dokumentere hvem som godkjenner endringer.
 
 ### Oppretting
 
-Entra sender `POST /scim/v2/Users`. `externalId` og `userName` må være unike.
-UserAPI oppretter WebSak-brukeren, setter `externalId` i `Gid_DIV2`, anvender
-avdeling/rettighetsmal og synkroniserer moderne loginmapping mot IdentityServer.
+Entra sender `POST /scim/v2/Users` med `userName` og Acos `userCode`.
+`userName` må kunne knyttes til en loginmapping for konfigurert provider.
+UserAPI oppretter WebSak-brukeren med `userCode` i `Gid_GidKode`, lagrer
+eventuell `externalId` i `Gid_DIV2`, anvender avdeling/rettighetsmal og knytter
+`userName` til den moderne loginmappingen.
+
+`Scim:ModernAuthentication:IdentifierSource` er valgfritt. Når det utelates,
+brukes `userName`; eksplisitt `userName` er også støttet. Andre verdier gir en
+konfigurasjons-/utilgjengelighetsfeil. Loginmappingen for konfigurert provider er
+kilden til `userName`; SCIM oppretter ikke en separat kopi av UPN i WebSak.
+Users-listing utelater brukere uten mapping for denne provideren, slik at hvert
+listet SCIM User har påkrevd `userName`. Direkte GET av en slik umappet bruker
+returnerer `404`.
 
 ### Oppdatering
 
 Entra bruker normalt `PATCH /scim/v2/Users/{id}`. `add`, `replace` og `remove`
 støttes for den avtalte profilen, blant annet navn, e-post, telefon, `active`,
-`externalId`, `preferredLanguage`, `department` og `applicationRole`. `PUT` kan
-brukes for full ressursoppdatering. Bruk `If-Match` når klienten har mottatt en
-ETag og vil unngå å overskrive en samtidig endring.
+`externalId`, `preferredLanguage`, `department` og `applicationRole`. Utelatt
+`userCode` ved PUT/PATCH bevarer eksisterende kode. `PUT` kan brukes for full
+ressursoppdatering. Bruk `If-Match` når klienten har mottatt en ETag og vil
+unngå å overskrive en samtidig endring.
 
 ### Deaktivering og reaktivering
 
@@ -134,16 +147,17 @@ extension-objekter, ikke generell projeksjon av alle subattributter.
 
 ## Retry og feilhåndtering
 
-En retry skal sende samme ønskede tilstand med samme stabile `externalId` og SCIM
-`id`; den skal ikke opprette en ny korrelasjonsnøkkel. Ved usikkert resultat:
+En retry skal bruke samme SCIM `id` når den er kjent. Hvis integrasjonen sender
+`externalId`, beholdes samme klientstyrte korrelasjonsverdi ved retry; SCIM
+`externalId` er valgfritt og brukes ikke til loginmapping. Ved usikkert resultat:
 
-1. les ressursen på nytt med `id` eller filter på `externalId`
+1. les ressursen på nytt med `id`, eller filtrer på `externalId` hvis verdien er sendt
 2. sammenlign nåværende tilstand med ønsket tilstand
 3. gjenta PATCH/PUT hvis avviket fortsatt finnes
 4. eskaler ved vedvarende `409`, `412` eller `503`
 
-UserAPI synkroniserer loginmapping også når `externalId` er uendret, slik at en
-retry kan konvergere etter en midlertidig IdentityServer-feil. Oppdateringen er
+UserAPI synkroniserer loginmapping fra `userName`, også når verdien er uendret,
+slik at en retry kan konvergere etter en midlertidig IdentityServer-feil. Oppdateringen er
 ikke atomisk mellom WebSak og IdentityServer; et WebSak-steg kan være fullført
 før et senere delkall feiler.
 
@@ -160,11 +174,11 @@ Alle eksplisitt håndterte SCIM-feil følger RFC 7644-format:
 
 | Status | Vanlig årsak | Tiltak |
 |---|---|---|
-| `400` | ugyldig attributt, filter, mapping eller manglende `externalId` | korriger payload/mapping |
+| `400` | ugyldig attributt, filter, mapping eller manglende `userName`/`userCode` | korriger payload/mapping |
 | `401` | token mangler eller er utløpt | hent nytt token |
 | `403` | token mangler `userapi.scim` | korriger klientens scope |
 | `404` | bruker, gruppe eller medlem finnes ikke | les scope/korrelasjon på nytt |
-| `409` | duplikat `userName`, `externalId` eller navn | finn eksisterende ressurs og rett mapping |
+| `409` | duplikat identitet eller navn | finn eksisterende ressurs og rett mapping |
 | `412` | ETag samsvarer ikke | GET, flett ønsket endring og forsøk med ny ETag |
 | `503` | IdentityServer/provider er ikke tilgjengelig eller konfigurert | rett konfigurasjon og retry senere |
 
@@ -173,7 +187,9 @@ Alle eksplisitt håndterte SCIM-feil følger RFC 7644-format:
 - Test Connection er grønn med scope `userapi.scim`.
 - Både én Entra member og én guest kan opprettes, oppdateres og deaktiveres.
 - Begge kan reaktiveres uten ny WebSak-bruker.
-- `objectId` finnes som SCIM `externalId`; `userType` er ikke mappet.
+- `userName` samsvarer med loginmappingen for konfigurert provider.
+- `userCode` er sendt ved oppretting og ligger innenfor WebSak-grensen på 10 tegn.
+- `externalId` er bare mappet hvis kunden trenger en separat korrelasjonsverdi; `userType` er ikke mappet.
 - Avdelingsoppslag bruker én eksakt ekstern ID.
 - Alle `applicationRole`-verdier peker til godkjente rettighetsmaler.
 - Gruppeoppretting og add/remove av medlem er testet.
