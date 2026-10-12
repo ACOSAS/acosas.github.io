@@ -68,6 +68,9 @@ secret store eller service connection.
 
 ```json
 {
+  "IdentityServer": {
+    "ReadOnly": false
+  },
   "Tenant": {
     "Id": "<tenant-id>"
   },
@@ -100,3 +103,8 @@ secret store eller service connection.
 | Avgrenset SCIM-betakontroll av member, guest og grupper | `<identitetsansvarlig>` | `<dato/resultat>` |
 | Scope, secret-håndtering og minste privilegium | `<sikkerhetsansvarlig>` | `<dato/resultat>` |
 | Gamle kundelenker og Pages-innhold | `<dokumentasjonsansvarlig>` | `<dato/resultat>` |
+
+Ved felles identitet i prod og historisk base settes `IdentityServer:ReadOnly`
+til `true` i hist (`IdentityServer__ReadOnly=true` som miljøvariabel). Standard
+er `false`. Se [felles identitet](/userapi_identity_and_access.html#felles-identitet-i-produksjon-og-historisk-base)
+for opprettelsesflyt og begrensninger.
