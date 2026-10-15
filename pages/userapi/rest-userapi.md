@@ -160,3 +160,11 @@ brukes i `accessToZones`.
 
 Se [legacy-oversikten](/userapi_legacy.html) for gamle GET-baserte mutasjoner som ikke skal
 tas i bruk av nye integrasjoner.
+
+## Koble en ny bruker til en eksisterende IdentityServer-identitet
+
+`POST /api/Users` støtter det valgfrie feltet
+`existingIdentityServerUserId`. Bruk IdentityServer-ID-en fra prod-brukerens
+`externalId` når en ny hist-bruker skal dele innlogging. Feltet kan ikke
+kombineres med `userAccesses` eller sekundærbruker og avvises ved PUT.
+Se [felles identitet og lesemodus](/userapi_identity_and_access.html#felles-identitet-i-produksjon-og-historisk-base).

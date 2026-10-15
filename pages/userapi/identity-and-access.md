@@ -89,6 +89,38 @@ Det siste endepunktet er også reparasjonsruten når en eksisterende REST-bruker
 mangler IdentityServers interne `externalId` (`Gid_EksternID`). Klienten skal
 beholde brukerens GID-ID og skal ikke sende en ny bruker-POST.
 
+## Felles identitet i produksjon og historisk base
+
+To UserAPI-instanser kan bruke samme IdentityServer-bruker. De lokale brukerne
+har hver sin GID-ID, mens `Gid_EksternID` er lik i begge baser.
+
+1. Opprett primærbrukeren i prod med `userAccesses`, og hent `externalId` fra responsen.
+2. Opprett en ny primærbruker i hist med samme ID i
+   `existingIdentityServerUserId`. Send øvrige vanlige opprettelsesfelt, men ingen
+   `userAccesses`.
+3. Sett `IdentityServer:ReadOnly` til `true` i hist og behold `false` i prod.
+   Begge instansene må bruke samme `Tenant:Id` og ha tilgang til den felles
+   identiteten gjennom IdentityServers interne API.
+
+Feltet støttes bare ved nyopprettelse gjennom `POST /api/Users`. UserAPI
+validerer ID og tenant før opprettelse og lagrer koblingen i samme transaksjon
+som brukeren. Feltet kan ikke kombineres med `isSecondaryUser=true`, brukes på
+PUT eller koble en allerede eksisterende hist-bruker. Slike forespørsler gir
+`400`; vanlig duplikatopprettelse gir fortsatt `409`. Klienten må selv velge
+riktig persons prod-ID. ID-en er IdentityServers bruker-ID, ikke SCIM
+`externalId`.
+
+I lesemodus kan hist lese loginmappinger og administrere lokale profiler,
+roller og aktivstatus. Mappingendringer gir `400`; lokal aktivering,
+deaktivering og sletting synkroniseres ikke til IdentityServer. Prod eier den
+felles identitetens mappinger og globale aktivstatus. Deaktivering fra prod
+påvirker derfor også hist-innloggingen.
+
+SCIM-brukeroppretting og -oppdatering skriver loginmappinger og avvises med
+`400 / invalidValue` i lesemodus før lokale endringer. SCIM-lesing og lokal
+sletting/deaktivering gjennom DELETE kan fortsatt brukes. Konfigurasjonen
+gjelder alle brukere i hist-instansen, ikke bare brukere med delt ID.
+
 ## Roller, tilgangsfunksjoner og maler
 
 En WebSak-rolle bestemmer lese- og skrivetilgang til saker, journalposter og
