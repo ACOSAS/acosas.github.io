@@ -22,7 +22,8 @@ skjemaer finnes i generert OpenAPI. `Inn` betyr at klienten kan sende feltet,
 | `departmentCode` | inn/ut | vinner over `externalDepartmentId` | oppslag mot `Soa_AdmKort`, intern avdelings-ID lagres |
 | `externalDepartmentId` | inn | én eksakt verdi | oppslag mot avdelingens `Gid_DIV1` |
 | `accessTemplateId` | inn/ut | standard `-1` når utelatt ved REST-oppretting | rettighetsmal; kopierer roller og funksjoner |
-| `userAccesses` | inn ved POST; inn/ut via `/useraccesses` | ikke-tom ved dedikert PUT; ikke tillatt for sekundærbruker | IdentityServer loginmapping; ignoreres av `PUT /api/Users/{id}` |
+| `existingIdentityServerUserId` | inn ved nyopprettelse | eksisterende IdentityServer-GUID i samme tenant; ikke med `userAccesses` eller sekundærbruker | lagres i `Gid_EksternID` uten ny IdentityServer-bruker |
+| `userAccesses` | inn ved POST; inn/ut via `/useraccesses` | ikke-tom ved dedikert PUT; ikke tillatt for sekundærbruker ved oppretting | IdentityServer- eller GLM-loginmapping; ignoreres av `PUT /api/Users/{id}` |
 | `accessToZones` | inn | tom/utelatt bruker databasens standard | sonetildeling |
 | `userType` | inn | ordinær REST-standard er bruker (`B`) | WebSak brukertype; ikke et SCIM-felt |
 | `title` | inn/ut | valgfritt | `Gid_Tittel` |
@@ -39,10 +40,11 @@ Andre adresse- og kontaktfelt følger navngivningen i OpenAPI. Ikke send
 
 | `userAccesses`-felt | Retning | Krav/standard | Effekt |
 |---|---|---|---|
-| `provider` | inn/ut | standard i modellen er `AD`; bruk avtalt IdentityServer-scheme | velger provider |
+| `provider` | inn/ut | standard i modellen er `AD`; bruk avtalt IdentityServer-scheme eller GLM-provider | IdentityServer-scheme eller `glm_idProvider` |
 | `key` | inn/ut | påkrevd identifikator hos provider | kobler ekstern identitet til bruker |
-| `domain` | inn/ut | valgfritt | provider-spesifikt domene |
-| `isPrimary` | inn/ut | standard `true` | markerer primær mapping |
+| `domain` | inn/ut for GLM | send streng; `""` uten domene | `glm_idDomain`; sendes ikke til IdentityServer |
+| `isPrimary` | inn/ut for GLM | standard `true` | `glm_idPrimary`; sendes ikke til IdentityServer |
+| `id` | ut | readOnly; brukerens numeriske GID-ID | `glm_idGid` ved GLM |
 
 `userAccesses` er loginmapping. `accessTemplateId` er rettighetsmal. De kan
 sendes sammen ved oppretting av en ordinær primærbruker, men løser forskjellige
@@ -50,10 +52,17 @@ behov. For en eksisterende bruker må loginmappingen vedlikeholdes via
 `GET`/`PUT /api/Users/{id}/useraccesses`; den ordinære brukerprofil-PUT-en
 behandler ikke `userAccesses`.
 
+Når `Apis:IdServerInternal` er tom eller ikke satt, brukes
+`GLM_LoginMapping`; ellers brukes IdentityServer. GLM mapper `key` til
+`glm_idKey` og erstatter brukerens koblinger i én transaksjon. Se
+[REST-guiden](/userapi_rest_guide.html#loginmapping-med-identityserver-eller-glm).
+
 REST-responsens `externalId` er IdentityServers interne ID (`Gid_EksternID`).
-Feltet er readOnly for klienten og fylles når loginmappingen opprettes. En
-manglende verdi skal repareres gjennom det dedikerte `useraccesses`-endepunktet,
-ikke ved å opprette WebSak-brukeren på nytt.
+Responsfeltet er readOnly for klienten og fylles når loginmappingen opprettes
+eller ved kobling gjennom `existingIdentityServerUserId` på en ny bruker. En
+manglende verdi ved bruk av IdentityServer skal repareres gjennom det dedikerte
+`useraccesses`-endepunktet, ikke ved å opprette WebSak-brukeren på nytt.
+GLM-koblinger trenger ikke denne verdien og fyller den ikke inn.
 
 ## SCIM User
 

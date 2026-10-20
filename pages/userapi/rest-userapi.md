@@ -28,6 +28,54 @@ Ved oppretting anbefales en godkjent `accessTemplateId`. Hvis både
 `departmentCode` og `externalDepartmentId` sendes, har `departmentCode`
 prioritet. `externalDepartmentId` skal være én eksakt verdi.
 
+### Loginmapping med IdentityServer eller GLM
+
+Når `Apis:IdServerInternal` er konfigurert, bruker loginmapping-rutene
+IdentityServer. Når innstillingen er tom eller ikke satt, leser og skriver
+de direkte i WebSaks `GLM_LoginMapping`. En feil hos en konfigurert
+IdentityServer fører ikke til at API-et bytter til GLM.
+
+Bruk `GET /api/Users/105/useraccesses` for å lese koblingene. Vanlig
+`GET /api/Users/105` inkluderer ikke `userAccesses`; `includeUserAccess=true`
+gjelder tilgangsfunksjoner. Vanlig PUT av brukerprofil ignorerer `userAccesses`,
+selv om resten av profilen oppdateres og svaret er `200`.
+
+Eksempel for GLM: send følgende JSON-array direkte som body til
+`PUT /api/Users/105/useraccesses`:
+
+```json
+[
+  {
+    "domain": "kontor",
+    "provider": "Windows",
+    "key": "BRUKER123",
+    "isPrimary": true
+  },
+  {
+    "domain": "login.example.no",
+    "provider": "adfs",
+    "key": "BRUKER123",
+    "isPrimary": false
+  }
+]
+```
+
+Bruk kundens faktiske provider-, domene- og nøkkelverdier. For GLM lagres
+`domain` og `isPrimary` sammen med `provider` og `key`. Send `domain` som en
+streng; bruk `""` når koblingen ikke har et domene.
+
+PUT erstatter alle koblingene for denne GID-ID-en og returnerer de lagrede
+koblingene med `200`. Send derfor hele ønsket liste. GLM-erstatningen skjer i
+én transaksjon: gjentatt identisk PUT lager ikke duplikater, og en INSERT-feil
+bevarer de tidligere koblingene. Null eller tom liste gir `400`, og ukjent
+bruker ved PUT gir `404`. GET uten koblinger gir `404`. Manglende GLM-tabell
+gir `500`.
+
+GLM-flyten bruker ikke `Gid_EksternID`. Se
+[konfigurasjonsmalen](/userapi_configuration_template.html#rest-med-glm-uten-identityserver)
+for oppsett. GLM-støtten gjelder ordinært REST API; SCIM krever fortsatt
+IdentityServers intern-API for brukeroppretting og -oppdatering.
+
 ### Oppslag på e-post før oppretting
 
 Integrasjoner bør slå opp eksisterende WebSak-brukere før de vurderer å kalle
@@ -160,3 +208,11 @@ brukes i `accessToZones`.
 
 Se [legacy-oversikten](/userapi_legacy.html) for gamle GET-baserte mutasjoner som ikke skal
 tas i bruk av nye integrasjoner.
+
+## Koble en ny bruker til en eksisterende IdentityServer-identitet
+
+`POST /api/Users` støtter det valgfrie feltet
+`existingIdentityServerUserId`. Bruk IdentityServer-ID-en fra prod-brukerens
+`externalId` når en ny hist-bruker skal dele innlogging. Feltet kan ikke
+kombineres med `userAccesses` eller sekundærbruker og avvises ved PUT.
+Se [felles identitet og lesemodus](/userapi_identity_and_access.html#felles-identitet-i-produksjon-og-historisk-base).

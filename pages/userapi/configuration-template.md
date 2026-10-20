@@ -68,6 +68,9 @@ secret store eller service connection.
 
 ```json
 {
+  "IdentityServer": {
+    "ReadOnly": false
+  },
   "Tenant": {
     "Id": "<tenant-id>"
   },
@@ -92,6 +95,34 @@ secret store eller service connection.
 }
 ```
 
+## REST med GLM uten IdentityServer
+
+For installasjoner som bruker `GLM_LoginMapping`, settes
+`Apis:IdServerInternal` til tom streng, eller innstillingen utelates:
+
+```json
+{
+  "Apis": {
+    "IdServerInternal": ""
+  },
+  "IdentityServer": {
+    "ReadOnly": false
+  }
+}
+```
+
+Kontroller at ingen miljøspesifikk konfigurasjon eller miljøvariabel
+`Apis__IdServerInternal` fortsatt angir en URL. GLM-tabellen må finnes i
+WebSak-databasen; API-et oppretter den ikke. GLM-koblinger trenger ikke
+`Gid_EksternID` eller `Tenant:Id`. `IdentityServer:ReadOnly=true` sperrer
+fortsatt endring av loginmappinger, også med GLM.
+
+Autentisering av API-klienten gjennom `Auth` og scope `userapi` kreves fortsatt.
+Dette oppsettet gjelder ordinært REST API. SCIM-brukeroppretting og
+-oppdatering krever fortsatt konfigurert IdentityServer, tenant og provider.
+Se [REST-guiden](/userapi_rest_guide.html#loginmapping-med-identityserver-eller-glm)
+for GET/PUT-eksempel og erstatningsregler.
+
 ## Godkjenning før bruk
 
 | Kontroll | Ansvarlig | Dato/resultat |
@@ -100,3 +131,8 @@ secret store eller service connection.
 | Avgrenset SCIM-betakontroll av member, guest og grupper | `<identitetsansvarlig>` | `<dato/resultat>` |
 | Scope, secret-håndtering og minste privilegium | `<sikkerhetsansvarlig>` | `<dato/resultat>` |
 | Gamle kundelenker og Pages-innhold | `<dokumentasjonsansvarlig>` | `<dato/resultat>` |
+
+Ved felles identitet i prod og historisk base settes `IdentityServer:ReadOnly`
+til `true` i hist (`IdentityServer__ReadOnly=true` som miljøvariabel). Standard
+er `false`. Se [felles identitet](/userapi_identity_and_access.html#felles-identitet-i-produksjon-og-historisk-base)
+for opprettelsesflyt og begrensninger.

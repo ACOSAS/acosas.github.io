@@ -55,6 +55,12 @@ UserAPI er adapteren mellom standardiserte HTTP-kontrakter og WebSaks
 brukeradministrasjon. SCIM har ikke et eget datalager. Operasjoner som berører
 både WebSak og IdentityServer er derfor ikke atomiske på tvers av systemene.
 
+For REST-installasjoner uten konfigurert `Apis:IdServerInternal` lagres
+loginmapping direkte i WebSaks `GLM_LoginMapping`. Se
+[REST-guiden](/userapi_rest_guide.html#loginmapping-med-identityserver-eller-glm)
+og [konfigurasjonsmalen](/userapi_configuration_template.html#rest-med-glm-uten-identityserver).
+SCIM-brukeroppretting og -oppdatering krever fortsatt IdentityServer.
+
 ## Start her
 
 - [Identitet, autentisering og tilgang](/userapi_identity_and_access.html)

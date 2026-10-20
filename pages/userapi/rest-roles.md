@@ -65,7 +65,7 @@ før POST og håndhev ønsket tilstand i integrasjonen.
 
 Tilgangsfunksjoner vedlikeholdes gjennom brukerens access-code-ruter i den
 genererte REST-referansen. De skal ikke blandes med `userAccesses`, som er
-loginmapping mot IdentityServer. Følgende begreper er ulike:
+loginmapping mot IdentityServer eller `GLM_LoginMapping`. Følgende begreper er ulike:
 
 | Begrep | Betydning |
 |---|---|

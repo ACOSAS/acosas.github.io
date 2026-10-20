@@ -8,7 +8,7 @@ permalink: /userapi_identity_and_access.html
 SCIM-delene i denne guiden beskriver en beta for kontrollert pilot og er ikke
 godkjenning for full produksjon. REST UserAPI er ikke beta.
 
-UserAPI skiller mellom autentisering av API-klienten, WebSak-brukerens moderne
+UserAPI skiller mellom autentisering av API-klienten, WebSak-brukerens
 loginmapping og autorisasjonen brukeren får inne i WebSak. Disse tre nivåene må
 konfigureres hver for seg.
 
@@ -42,7 +42,9 @@ Entra ID kan ha to roller i løsningen:
 
 IdentityServer formidler innlogging til WebSak. UserAPI bruker IdentityServers
 intern-API når en REST- eller SCIM-operasjon skal opprette eller erstatte en
-moderne loginmapping. WebSak lagrer brukerprofilen, organisatorisk tilhørighet,
+moderne loginmapping. REST kan også forvalte loginmapping direkte i WebSaks
+`GLM_LoginMapping` når `Apis:IdServerInternal` er tom eller ikke satt.
+WebSak lagrer brukerprofilen, organisatorisk tilhørighet,
 roller, tilgangsfunksjoner og tilgangsgrupper.
 
 ## Identifikatorer
@@ -66,10 +68,10 @@ I REST er `userAccesses` en liste over loginmappinger. Hvert element inneholder:
 
 | Felt | Betydning |
 |---|---|
-| `provider` | IdentityServer-scheme, for eksempel `AzureAD`; må samsvare eksakt |
+| `provider` | IdentityServer-scheme som må samsvare eksakt, for eksempel `AzureAD`, eller kundens GLM-provider |
 | `key` | identifikator hos provideren |
-| `domain` | valgfritt domene for providere som bruker dette |
-| `isPrimary` | om mappingen er primær |
+| `domain` | domene for GLM; send `""` når koblingen ikke har et domene |
+| `isPrimary` | om GLM-mappingen er primær |
 
 SCIM bruker `userName` som loginmappingens nøkkel for konfigurert provider;
 mappingen er også kilden til `userName` ved lesing. Acos `userCode` er separat
@@ -85,9 +87,48 @@ For ordinært REST API gjelder følgende livssyklus:
 | `GET /api/Users/{id}/useraccesses` | leser eksisterende mappinger |
 | `PUT /api/Users/{id}/useraccesses` | erstatter mappingene for en eksisterende bruker |
 
-Det siste endepunktet er også reparasjonsruten når en eksisterende REST-bruker
-mangler IdentityServers interne `externalId` (`Gid_EksternID`). Klienten skal
-beholde brukerens GID-ID og skal ikke sende en ny bruker-POST.
+Rutene bruker IdentityServer når `Apis:IdServerInternal` er konfigurert,
+ellers `GLM_LoginMapping`. GLM-erstatning skjer i én transaksjon og bruker
+ikke `Gid_EksternID`. Se [REST-guiden](/userapi_rest_guide.html#loginmapping-med-identityserver-eller-glm)
+for eksempel og feilkoder. SCIM-brukeroppretting og -oppdatering krever fortsatt
+IdentityServer.
+
+Ved bruk av IdentityServer er det siste endepunktet også reparasjonsruten når
+en eksisterende REST-bruker mangler IdentityServers interne `externalId`
+(`Gid_EksternID`). Klienten skal beholde brukerens GID-ID og skal ikke sende
+en ny bruker-POST.
+
+## Felles identitet i produksjon og historisk base
+
+To UserAPI-instanser kan bruke samme IdentityServer-bruker. De lokale brukerne
+har hver sin GID-ID, mens `Gid_EksternID` er lik i begge baser.
+
+1. Opprett primærbrukeren i prod med `userAccesses`, og hent `externalId` fra responsen.
+2. Opprett en ny primærbruker i hist med samme ID i
+   `existingIdentityServerUserId`. Send øvrige vanlige opprettelsesfelt, men ingen
+   `userAccesses`.
+3. Sett `IdentityServer:ReadOnly` til `true` i hist og behold `false` i prod.
+   Begge instansene må bruke samme `Tenant:Id` og ha tilgang til den felles
+   identiteten gjennom IdentityServers interne API.
+
+Feltet støttes bare ved nyopprettelse gjennom `POST /api/Users`. UserAPI
+validerer ID og tenant før opprettelse og lagrer koblingen i samme transaksjon
+som brukeren. Feltet kan ikke kombineres med `isSecondaryUser=true`, brukes på
+PUT eller koble en allerede eksisterende hist-bruker. Slike forespørsler gir
+`400`; vanlig duplikatopprettelse gir fortsatt `409`. Klienten må selv velge
+riktig persons prod-ID. ID-en er IdentityServers bruker-ID, ikke SCIM
+`externalId`.
+
+I lesemodus kan hist lese loginmappinger og administrere lokale profiler,
+roller og aktivstatus. Mappingendringer gir `400`; lokal aktivering,
+deaktivering og sletting synkroniseres ikke til IdentityServer. Prod eier den
+felles identitetens mappinger og globale aktivstatus. Deaktivering fra prod
+påvirker derfor også hist-innloggingen.
+
+SCIM-brukeroppretting og -oppdatering skriver loginmappinger og avvises med
+`400 / invalidValue` i lesemodus før lokale endringer. SCIM-lesing og lokal
+sletting/deaktivering gjennom DELETE kan fortsatt brukes. Konfigurasjonen
+gjelder alle brukere i hist-instansen, ikke bare brukere med delt ID.
 
 ## Roller, tilgangsfunksjoner og maler
 
