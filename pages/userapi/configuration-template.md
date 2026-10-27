@@ -61,6 +61,24 @@ Mappingen må være entydig begge veier.
 | `<application-role-source>` | Acos `applicationRole` | `<ja/nei>` | rettighetsmalmapping |
 | `userType` | ikke mappet | `nei` | member og guest behandles likt |
 
+## OpenTelemetry
+
+UserAPI eksporterer telemetri med OTLP gjennom Acos.Extensions.Web.
+Sett disse miljøvariablene i deployment-konfigurasjonen, for eksempel i Octopus:
+
+| Miljøvariabel | Verdi |
+|---|---|
+| `OTEL_SERVICE_NAME` | `acos-websak-userapi` (allerede satt i containerbildene) |
+| `OTEL_EXPORTER_OTLP_ENDPOINT` | Påkrevd: adressen til miljøets OTLP-collector |
+| `OTEL_EXPORTER_OTLP_PROTOCOL` | Ved behov: protokollen collectoren støtter, `grpc` eller `http/protobuf` |
+| `OTEL_EXPORTER_OTLP_HEADERS` | Ved behov: autentisering fra godkjent secret store |
+
+`Log:OpenTelemetry:OTLPEnabled` er aktivert i standardkonfigurasjonen.
+Testing-konfigurasjonen og ordinær e2e-compose deaktiverer eksport eksplisitt. For lokal
+kjøring uten collector kan `Log__OpenTelemetry__OTLPEnabled=false` settes i miljøet.
+Ikke konfigurer Azure Monitor eller Application Insights som eksportør.
+Verifiser mottak av telemetri og riktig `service.name` etter deployment.
+
 ## Ikke-hemmelig appsettings-mal
 
 Verdiene nedenfor er plassholdere. Hemmelige verdier leveres gjennom godkjent
@@ -68,6 +86,11 @@ secret store eller service connection.
 
 ```json
 {
+  "Log": {
+    "OpenTelemetry": {
+      "OTLPEnabled": true
+    }
+  },
   "IdentityServer": {
     "ReadOnly": false
   },
