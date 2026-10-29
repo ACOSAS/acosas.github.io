@@ -1,0 +1,10 @@
+[
+  {
+    "version": "3.3.106",
+    "commit": "efd97b454480b3ccb566e164a6543cdf3287376f",
+    "date": "2026-10-29",
+    "notes": [
+      "Publiser en akkumulerende endringslogg for UserAPI på acosas.github.io. Hvert vellykkede master-bygg får en kort oppføring basert på PR-notatene."
+    ]
+  }
+]
