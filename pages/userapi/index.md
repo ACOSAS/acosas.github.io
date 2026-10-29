@@ -63,6 +63,7 @@ SCIM-brukeroppretting og -oppdatering krever fortsatt IdentityServer.
 
 ## Start her
 
+- [Endringslogg](/userapi_changelog.html)
 - [Identitet, autentisering og tilgang](/userapi_identity_and_access.html)
 - [SCIM-provisjonering fra Entra ID (beta)](/userapi_scim_guide.html)
 - [REST UserAPI](/userapi_rest_guide.html)

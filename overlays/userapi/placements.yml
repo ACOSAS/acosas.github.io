@@ -91,6 +91,10 @@ guides:
     url: /userapi_build_metadata.html
     folder: Guider
     order: 100
+  - title: Endringslogg
+    url: /userapi_changelog.html
+    folder: Guider
+    order: 95
 legacy_guides:
   - title: Migreringsguide
     url: /userapi_legacy.html
