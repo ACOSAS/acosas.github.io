@@ -37,6 +37,9 @@ entries:
         - title: "Konfigurasjonsmal"
           url: "/userapi_configuration_template.html"
           output: web, pdf
+        - title: "Endringslogg"
+          url: "/userapi_changelog.html"
+          output: web, pdf
         - title: "Publiseringsmetadata"
           url: "/userapi_build_metadata.html"
           output: web, pdf
