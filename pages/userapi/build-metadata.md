@@ -9,8 +9,8 @@ Denne dokumentasjonsleveransen ble generert fra samme bygg som OpenAPI-filen.
 
 | Felt | Verdi |
 |---|---|
-| Versjon | `3.3.106` |
-| Commit SHA | `efd97b454480b3ccb566e164a6543cdf3287376f` |
-| Generert (UTC) | `2026-10-29T09:53:52Z` |
+| Versjon | `3.3.110` |
+| Commit SHA | `3aaa4faf8bce51fb53658aa12344b4046bf61346` |
+| Generert (UTC) | `2026-11-03T15:23:18Z` |
 
 REST-referansen er generert fra OpenAPI-JSON med `build_pages.sh`. Overlay-innhold under `overlays/` er den autoritative kundeteksten som compose setter inn etterpå.

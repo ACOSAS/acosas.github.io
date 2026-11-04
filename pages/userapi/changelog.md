@@ -9,6 +9,13 @@ Oppføringene viser vellykkede bygg fra `master`. Endringer i én eller flere PR
 
 <!-- BUILD_ENTRIES -->
 
+## 3.3.110 – 2026-11-03
+
+- Rettet en feil som hindret brukeroppretting uten brukernavn via det eldre bruker-API-et.
+- Rettet en feil som kunne stoppe publisering av kundedokumentasjon når dokumentasjonsbranchen skulle oppdateres fra master.
+
+Commit: `3aaa4faf8bce51fb53658aa12344b4046bf61346`.
+
 ## 3.3.106 – 2026-10-29
 
 - Publiser en akkumulerende endringslogg for UserAPI på acosas.github.io. Hvert vellykkede master-bygg får en kort oppføring basert på PR-notatene.
