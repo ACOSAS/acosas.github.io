@@ -15,5 +15,13 @@
       "Rettet en feil som hindret brukeroppretting uten brukernavn via det eldre bruker-API-et.",
       "Rettet en feil som kunne stoppe publisering av kundedokumentasjon når dokumentasjonsbranchen skulle oppdateres fra master."
     ]
+  },
+  {
+    "version": "3.3.114",
+    "commit": "1d63942c4353d6d112b1c8568588a6992f10cc4a",
+    "date": "2026-11-05",
+    "notes": [
+      "Ingen kundeorienterte endringsnotater er registrert for dette bygget."
+    ]
   }
 ]
