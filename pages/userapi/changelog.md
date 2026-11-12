@@ -9,6 +9,12 @@ Oppføringene viser vellykkede bygg fra `master`. Endringer i én eller flere PR
 
 <!-- BUILD_ENTRIES -->
 
+## 3.3.119 – 2026-11-12
+
+- Forenklet dokumentasjonens oversiktsside og flyttet endringsloggen fra Guider til samme navigasjonsnivå som Oversikt.
+
+Commit: `38a88ca4db942783ccd625100feaf6dde0f26794`.
+
 ## 3.3.118 – 2026-11-12
 
 - Ingen kundeorienterte endringsnotater er registrert for dette bygget.

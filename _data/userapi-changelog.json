@@ -55,5 +55,13 @@
     "notes": [
       "Ingen kundeorienterte endringsnotater er registrert for dette bygget."
     ]
+  },
+  {
+    "version": "3.3.119",
+    "commit": "38a88ca4db942783ccd625100feaf6dde0f26794",
+    "date": "2026-11-12",
+    "notes": [
+      "Forenklet dokumentasjonens oversiktsside og flyttet endringsloggen fra Guider til samme navigasjonsnivå som Oversikt."
+    ]
   }
 ]
