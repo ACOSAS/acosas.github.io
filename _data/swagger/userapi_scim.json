@@ -805,11 +805,11 @@
     },
     "description": "BETA: ACOS WebSak UserAPI SCIM 2.0 provisioning reference. Not ready for full production.",
     "title": "User API SCIM",
-    "version": "3.3.115",
+    "version": "3.3.116",
     "x-acos-publication": {
-      "commitSha": "6745895da57a44a75a51d74edb5cb8b56e4a2f8f",
-      "generatedAt": "2026-11-12T00:29:22Z",
-      "userApiVersion": "3.3.115"
+      "commitSha": "142e57e68a32b7c47e8853a8843a559bb20d8efe",
+      "generatedAt": "2026-11-12T00:31:41Z",
+      "userApiVersion": "3.3.116"
     },
     "x-acos-status": "beta"
   },
