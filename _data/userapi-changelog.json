@@ -63,5 +63,13 @@
     "notes": [
       "Forenklet dokumentasjonens oversiktsside og flyttet endringsloggen fra Guider til samme navigasjonsnivå som Oversikt."
     ]
+  },
+  {
+    "version": "3.3.120",
+    "commit": "76d93453033312ac4942e51fef7e43b45dc4295f",
+    "date": "2026-11-19",
+    "notes": [
+      "Ingen kundeorienterte endringsnotater er registrert for dette bygget."
+    ]
   }
 ]
