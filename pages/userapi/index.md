@@ -14,20 +14,6 @@ Dokumentasjonen er skrevet for identitetsforvaltere, WebSak-forvaltere,
 integrasjonsutviklere og teknisk drift. Norsk Markdown i denne mappen er den
 autoritative kundedokumentasjonen.
 
-## Versjon og gyldighet
-
-Dokumentasjonsversjon: 1.0, sist faglig oppdatert 2026-09-01. Den beskriver
-UserAPI 3.3 og SCIM-kontrakten på `master`. Publiserte sider viser eksakt
-UserAPI-versjon, commit SHA og genereringstidspunkt fra bygget som produserte
-OpenAPI-referansen.
-
-Ved motstrid gjelder denne prioriteten:
-
-1. implementasjon og automatiserte tester
-2. OpenAPI-dokumentet generert fra samme commit
-3. Markdown i `docs/customer/`
-4. historiske dokumenter i `docs/archive/`
-
 ## Komponenter og dataflyt
 
 Kundens integrasjonsflate består av det produksjonsklare REST UserAPI-et og en
