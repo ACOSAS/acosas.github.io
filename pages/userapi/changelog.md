@@ -9,6 +9,12 @@ Oppføringene viser vellykkede bygg fra `master`. Endringer i én eller flere PR
 
 <!-- BUILD_ENTRIES -->
 
+## 3.3.122 – 2026-11-26
+
+- Ingen kundeorienterte endringsnotater er registrert for dette bygget.
+
+Commit: `9427685e5d7a6ad4aa1d960b502ee89af2741046`.
+
 ## 3.3.121 – 2026-11-26
 
 - Ingen kundeorienterte endringsnotater er registrert for dette bygget.
