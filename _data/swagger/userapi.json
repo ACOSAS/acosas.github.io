@@ -1598,11 +1598,11 @@
     },
     "description": "ACOS WebSak UserAPI REST reference.",
     "title": "User API",
-    "version": "3.3.120",
+    "version": "3.3.121",
     "x-acos-publication": {
-      "commitSha": "76d93453033312ac4942e51fef7e43b45dc4295f",
-      "generatedAt": "2026-11-19T00:17:31Z",
-      "userApiVersion": "3.3.120"
+      "commitSha": "b1db0dd348655365c0c437f1de2bc84fa71f9551",
+      "generatedAt": "2026-11-26T00:18:32Z",
+      "userApiVersion": "3.3.121"
     }
   },
   "openapi": "3.0.4",
